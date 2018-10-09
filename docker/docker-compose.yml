@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  app:
+    image: pablofmorales/apache-php7
+    container_name: pizza-orders
+    ports:
+    - 8080:80
+    volumes:
+    - ../:/var/www/html
+    - ./apache.conf:/etc/apache2/sites-enabled/pizza-orders-web.conf
+    - ../var/log:/var/log/apache2
+    links:
+    - database
+    environment:
+    - DB_PORT=33061
+    - DB_HOST=database
+    - DB_USERNAME=root
+    - DB_PASSWORD=secret
+    - DB_DATABASE=pizza-orders
+
+  database:
+    container_name: database
+    image: mysql:5.6
+    environment:
+    - MYSQL_DATABASE=pizza-orders
+    - MYSQL_USER=root
+    - MYSQL_PASSWORD=secret
+    - MYSQL_ROOT_PASSWORD=secret
+    ports:
+    - 33061:3306
+
+
