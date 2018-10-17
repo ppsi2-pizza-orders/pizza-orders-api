@@ -56,14 +56,5 @@ php artisan db:seed
 localhost:8080
 ```
 
-**A baza danych na:**
-```
-HOST=127.0.0.1
-PORT=33061
-DATABASE=pizza-orders
-USERNAME=root
-PASSWORD=secret
-```
-
 
 
