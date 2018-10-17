@@ -14,7 +14,7 @@ services:
     links:
     - database
     environment:
-    - DB_PORT=33061
+    - DB_PORT=3306
     - DB_HOST=database
     - DB_USERNAME=root
     - DB_PASSWORD=secret
