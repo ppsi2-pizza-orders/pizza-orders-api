@@ -2,18 +2,13 @@
 
 namespace App\Helpers;
 
+use Illuminate\Http\JsonResponse;
+
 class ApiResponse
 {
     protected $message = '';
     protected $data = [];
-
-    public function get(): array
-    {
-        return [
-            'message' => $this->message,
-            'data' => $this->data
-        ];
-    }
+    protected $code = 200;
 
     public function setMessage(string $message): self
     {
@@ -27,4 +22,25 @@ class ApiResponse
         return $this;
     }
 
+    public function setCode(int $code): self
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    public function get(): JsonResponse
+    {
+        return response()->json(
+            $this->getArray(),
+            $this->code
+        );
+    }
+
+     public function getArray(): array
+     {
+         return [
+             'message' => $this->message,
+             'data' => $this->data
+         ];
+     }
 }

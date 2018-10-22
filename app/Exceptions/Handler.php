@@ -10,36 +10,36 @@ use App\Helpers\APIResponse;
 
 class Handler extends ExceptionHandler
 {
-    protected $response;
-
-    public function __construct(APIResponse $response) {
-        $this->response = $response;
-    }
-
-    protected $dontReport = [
-        //
-    ];
-
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
 
     public function report(Exception $exception)
     {
         parent::report($exception);
     }
 
-
     public function render($request, Exception $exception)
     {
+        $response = new ApiResponse();
+
         if($exception instanceof NotFoundHttpException) {
-            return response()->json(
-                $this->response->setMessage('Resource not found')->get(),
-                404
-            );
+            return $response
+                ->setMessage('Resource not found')
+                ->setCode(404)
+                ->get();
+        }
+        if($exception instanceof ApiException) {
+            return $response
+                ->setMessage($exception->getMessage())
+                ->setCode($exception->getErrorCode())
+                ->get();
         }
 
-        return parent::render($request, $exception);
+        if(config('app.debug')) {
+            return parent::render($request, $exception);
+        } else {
+            return $response
+                ->setMessage($exception->getMessage())
+                ->setCode(500)
+                ->get();
+        }
     }
 }

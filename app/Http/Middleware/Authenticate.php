@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Http\Request;
 
 use App\Helpers\ApiResponse;
+use App\Exceptions\NotAuthorizedHttpException;
 
 class Authenticate
 {
@@ -22,9 +23,7 @@ class Authenticate
     public function handle(Request $request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response()->json(
-                $this->response->setMessage('User unauthorized')->get(),
-                401);
+            throw new NotAuthorizedHttpException();
         }
 
         return $next($request);
