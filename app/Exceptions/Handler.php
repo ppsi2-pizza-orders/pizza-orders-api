@@ -36,7 +36,8 @@ class Handler extends ExceptionHandler
         if($exception instanceof NotFoundHttpException) {
             return response()->json(
                 $this->response->setMessage('Resource not found')->get(),
-                404);
+                404
+            );
         }
 
         return parent::render($request, $exception);
