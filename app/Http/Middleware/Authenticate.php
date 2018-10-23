@@ -2,18 +2,30 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Closure;
+use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
-class Authenticate extends Middleware
+use App\Helpers\ApiResponse;
+use App\Exceptions\NotAuthorizedHttpException;
+
+class Authenticate
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string
-     */
-    protected function redirectTo($request)
+    protected $auth;
+    protected $response;
+
+    public function __construct(Auth $auth, ApiResponse $response)
     {
-        return route('login');
+        $this->auth = $auth;
+        $this->response = $response;
+    }
+
+    public function handle(Request $request, Closure $next, $guard = null)
+    {
+        if ($this->auth->guard($guard)->guest()) {
+            throw new NotAuthorizedHttpException();
+        }
+
+        return $next($request);
     }
 }
