@@ -33,13 +33,55 @@ class Handler extends ExceptionHandler
                 ->get();
         }
 
-        if(config('app.debug')) {
-            return parent::render($request, $exception);
+
+        return $this->returnJsonException($exception);
+    }
+
+    private function returnJsonException(Exception $exception)
+    {
+        $response = new ApiResponse();
+
+        if (method_exists($exception, 'getStatusCode')) {
+            $statusCode = $exception->getStatusCode();
         } else {
+            $statusCode = 500;
+        }
+
+        switch ($statusCode) {
+            case 401:
+                $message = 'Unauthorized';
+                break;
+            case 403:
+                $message = 'Forbidden';
+                break;
+            case 404:
+                $message = 'Not Found';
+                break;
+            case 405:
+                $message = 'Method Not Allowed';
+                break;
+            case 422:
+                $message = $exception->original['message'];
+                break;
+            default:
+                $message = ($statusCode == 500) ? 'Whoops, looks like something went wrong' : $exception->getMessage();
+                break;
+        }
+
+        if (config('app.debug')) {
             return $response
-                ->setMessage($exception->getMessage())
-                ->setCode(500)
+                ->setMessage($message)
+                ->setCode($statusCode)
+                ->setData([
+                    'trace' => $exception->getTrace(),
+                    'code' => $exception->getCode()
+                ])
                 ->get();
         }
+
+        return $response
+            ->setMessage($message)
+            ->setCode($statusCode)
+            ->get();
     }
 }

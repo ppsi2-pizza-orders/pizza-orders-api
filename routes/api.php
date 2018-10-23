@@ -7,3 +7,5 @@ Route::middleware('auth:api')->group(function () {
         echo 'Auth works!';
     });
 });
+
+Route::post('auth/facebook', 'Auth\AuthController@handleFacebookAuth');
