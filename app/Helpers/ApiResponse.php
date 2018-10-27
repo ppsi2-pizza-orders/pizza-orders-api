@@ -8,6 +8,7 @@ class ApiResponse
 {
     protected $message = '';
     protected $data = [];
+    protected $errors = [];
     protected $code = 200;
 
     public function setMessage(string $message): self
@@ -28,6 +29,12 @@ class ApiResponse
         return $this;
     }
 
+    public function setErrors(array $errors): self
+    {
+        $this->errors = $errors;
+        return $this;
+    }
+
     public function get(): JsonResponse
     {
         return response()->json(
@@ -38,9 +45,20 @@ class ApiResponse
 
      public function getArray(): array
      {
-         return [
+         $data = [
              'message' => $this->message,
-             'data' => $this->data
+             'data' => $this->data,
+             'errors' => $this->errors
          ];
+
+         if (empty($data['data'])) {
+            unset($data['data']);
+         }
+
+         if (empty($data['errors'])) {
+             unset($data['errors']);
+         }
+
+         return $data;
      }
 }

@@ -30,9 +30,7 @@ class Handler extends ExceptionHandler
             return $response
                 ->setMessage($exception->getMessage())
                 ->setCode($exception->getErrorCode())
-                ->setData([
-                    'errors' => $exception->getErrors()
-                ])
+                ->setErrors($exception->getErrors())
                 ->get();
         }
 

@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Auth;
 use Socialite;
 use Exception;
 use Hash;
@@ -16,10 +15,11 @@ class AuthService
 {
     public function registerUser(array $data): User
     {
+        $data['password'] = Hash::make($data['password']);
         return User::create($data);
     }
 
-    public function facebookAuth(string $fb_access_token): string
+    public function facebookAuth(string $fb_access_token): User
     {
         if (!$fb_access_token) {
             throw (new ApiException())->setMessage('Access token not provided');
@@ -35,8 +35,7 @@ class AuthService
         }
 
         $user = $this->findOrCreateUser($fb_user, 'facebook');
-
-        return $user->createToken('Api Token')->accessToken;
+        return $user;
     }
 
     private function findOrCreateUser(SocialUser $social_user, string $provider): User
@@ -45,6 +44,14 @@ class AuthService
 
         if ($already_created_user) {
             return $already_created_user;
+        }
+
+        $already_created_user = User::where('email', $social_user->email)->first();
+
+        if ($already_created_user) {
+            throw (new ApiException())
+                ->setErrorCode(400)
+                ->setMessage('User with email provided in Facebook already is registered');
         }
 
         $data = [

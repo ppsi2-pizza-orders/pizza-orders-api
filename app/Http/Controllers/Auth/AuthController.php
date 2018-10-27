@@ -35,6 +35,7 @@ class AuthController
         return $this->response
             ->setMessage('User successfully registered')
             ->setData([
+                'access_token' => $user->createToken('Api Token')->accessToken,
                 'user' => new UserResource($user)
             ])
             ->get();
@@ -44,12 +45,13 @@ class AuthController
     {
         $fb_access_token = $request->get('access_token');
 
-        $access_token = $this->auth_service->facebookAuth($fb_access_token);
+        $user = $this->auth_service->facebookAuth($fb_access_token);
 
         return $this->response
-            ->setMessage('Access token granted')
+            ->setMessage('User successfully authenticated through Facebook')
             ->setData([
-                'access_token' => $access_token
+                'access_token' => $user->createToken('Api Token')->accessToken,
+                'user' => new UserResource($user),
             ])
             ->get();
     }
