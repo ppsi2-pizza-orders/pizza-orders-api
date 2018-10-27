@@ -9,6 +9,7 @@ class ApiException extends Exception implements ThrowableApiException
 {
     protected $message = 'Something is broken';
     protected $error_code = 500;
+    protected $errors = [];
 
     public function getErrorCode(): int
     {
@@ -25,5 +26,16 @@ class ApiException extends Exception implements ThrowableApiException
     {
         $this->error_code = $error_code;
         return $this;
+    }
+
+    public function setErrors(array $errors): self
+    {
+        $this->errors = $errors;
+        return $this;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }

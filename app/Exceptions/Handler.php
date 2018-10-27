@@ -20,19 +20,25 @@ class Handler extends ExceptionHandler
     {
         $response = new ApiResponse();
 
-        if($exception instanceof NotFoundHttpException) {
+        if ($exception instanceof NotFoundHttpException) {
             return $response
                 ->setMessage('Resource not found')
                 ->setCode(404)
                 ->get();
         }
-        if($exception instanceof ApiException) {
+        if ($exception instanceof ApiException) {
             return $response
                 ->setMessage($exception->getMessage())
                 ->setCode($exception->getErrorCode())
+                ->setData([
+                    'errors' => $exception->getErrors()
+                ])
                 ->get();
         }
 
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
 
         return $this->returnJsonException($exception);
     }

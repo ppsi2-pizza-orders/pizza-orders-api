@@ -14,9 +14,14 @@ use App\Exceptions\ApiException;
 
 class AuthService
 {
+    public function registerUser(array $data): User
+    {
+        return User::create($data);
+    }
+
     public function facebookAuth(string $fb_access_token): string
     {
-        if(!$fb_access_token) {
+        if (!$fb_access_token) {
             throw (new ApiException())->setMessage('Access token not provided');
         }
 
@@ -42,13 +47,15 @@ class AuthService
             return $already_created_user;
         }
 
-        return User::create([
+        $data = [
             'name' => $social_user->name,
             'email' => $social_user->email,
-            'password' => Hash::make(str_random(64)),
+            'password' => str_random(64),
             'provider' => $provider,
             'provider_id' => $social_user->id
-        ]);
+        ];
+
+        return $this->registerUser($data);
     }
 
 
