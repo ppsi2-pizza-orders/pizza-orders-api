@@ -9,7 +9,10 @@
         "barryvdh/laravel-ide-helper": "^2.5",
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "5.7.*",
+        "laravel/passport": "^7.0",
+        "laravel/socialite": "^3.1",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
