@@ -1,0 +1,142 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pizza Orders",
+        "description": "Pizza orders api documentation",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Registering new user",
+                "description": "Registering new user",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "example": {
+                                    "email": "example@example.com",
+                                    "password": "secret",
+                                    "password_confirmation": "secret"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "message": "User successfully registered",
+                                        "data": {
+                                            "access_token": "VALID_JWT_TOKEN",
+                                            "user": {
+                                                "name": "Example user",
+                                                "email": "example@example.com",
+                                                "roles": [
+                                                    "admin",
+                                                    "manager"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/facebook": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Facebook login",
+                "description": "Returns app access_token by FB access_token",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "example": {
+                                    "access_token": "VALID_FB_ACCESS_TOKEN"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "message": "User successfully authenticated through Facebook",
+                                        "data": {
+                                            "access_token": "VALID_JWT_TOKEN",
+                                            "user": {
+                                                "name": "Example user",
+                                                "email": "example@example.com",
+                                                "roles": [
+                                                    "admin",
+                                                    "manager"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/oauth/token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Returns access token",
+                "description": "Returns login access token",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "example": {
+                                    "grant_type": "password",
+                                    "client_secret": "VALID_OAUTH_CLIENT_SECRET",
+                                    "client_id": 2,
+                                    "username": "example@example.com",
+                                    "password": "secret"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "token_type": "Bearer",
+                                        "expires_in": "2138",
+                                        "access_token": "VALID_ACCESS_TOKEN"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
