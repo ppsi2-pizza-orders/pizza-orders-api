@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App;
 use Hash;
 
 use GuzzleHttp\Client as ProxyClient;
@@ -44,13 +45,19 @@ class OauthProxy
     public function proxy($grantType, array $login_credentials = []): array
     {
         $data['form_params'] = array_merge($login_credentials, [
-            'client_id'     => env('PASSWORD_CLIENT_ID'),
-            'client_secret' => env('PASSWORD_CLIENT_SECRET'),
+            'client_id'     => config('oauth.client_id'),
+            'client_secret' => config('oauth.client_secret'),
             'grant_type'    => $grantType
         ]);
 
+        if (App::environment() === 'dev') {
+            $url = 'localhost' . '/oauth/token';
+        } else {
+            $url = url('/oauth/token');
+        }
+
         try {
-            $response = $this->proxy_client->post($_SERVER['SERVER_NAME'] . '/oauth/token', $data);
+            $response = $this->proxy_client->post($url, $data);
         }
         catch (BadResponseException $exception) {
             throw (new ApiException())
