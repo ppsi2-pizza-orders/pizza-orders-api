@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\OauthProxy;
 use Socialite;
 use Exception;
 use Hash;
@@ -13,18 +14,29 @@ use App\Exceptions\ApiException;
 
 class AuthService
 {
-    public function registerUser(array $data): User
+    protected $oauth_proxy;
+
+    public function __construct(OauthProxy $oauth_proxy)
     {
-        $data['password'] = Hash::make($data['password']);
-        return User::create($data);
+        $this->oauth_proxy = $oauth_proxy;
     }
 
-    public function facebookAuth(string $fb_access_token): User
+    public function loginUser(array $data): array
     {
-        if (!$fb_access_token) {
-            throw (new ApiException())->setMessage('Access token not provided');
-        }
+        return $this->oauth_proxy->attemptLogin($data['email'], $data['password']);
+    }
 
+    public function registerUser(array $data): array
+    {
+        $not_hashed_password = $data['password'];
+        $data['password'] = Hash::make($not_hashed_password);
+        $user = User::create($data);
+
+        return $this->oauth_proxy->attemptLogin($user->email, $not_hashed_password);
+    }
+
+    public function facebookLogin(string $fb_access_token = null): array
+    {
         try {
             $fb_user = Socialite::driver('facebook')
                 ->userFromToken($fb_access_token);
@@ -34,11 +46,18 @@ class AuthService
                 ->setMessage('Could not fetch Facebook account');
         }
 
-        $user = $this->findOrCreateUser($fb_user, 'facebook');
-        return $user;
+        $user = $this->findOrNewUser($fb_user, 'facebook');
+
+        $email = $user->email;
+        $not_hashed_password = $user->password;
+
+        $user->password = Hash::make($not_hashed_password);
+        $user->save();
+
+        return $this->oauth_proxy->attemptLogin($email, $not_hashed_password);
     }
 
-    private function findOrCreateUser(SocialUser $social_user, string $provider): User
+    private function findOrNewUser(SocialUser $social_user, string $provider): User
     {
         $already_created_user = User::where('provider_id', $social_user->id)->first();
 
@@ -62,7 +81,8 @@ class AuthService
             'provider_id' => $social_user->id
         ];
 
-        return $this->registerUser($data);
+        $user = new User($data);
+        return $user;
     }
 
 

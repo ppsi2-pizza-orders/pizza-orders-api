@@ -7,5 +7,6 @@ Route::middleware('auth:api')->group(function () {
     });
 });
 
-Route::post('auth/facebook', 'Auth\AuthController@handleFacebookAuth');
+Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
 Route::post('auth/register', 'Auth\AuthController@register');
+Route::post('auth/login', 'Auth\AuthController@login');

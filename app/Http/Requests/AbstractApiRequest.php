@@ -12,7 +12,7 @@ abstract class AbstractApiRequest extends FormRequest
     protected function failedValidation(Validator $validator) {
         $errors = $validator->getMessageBag()->all();
         throw (new ApiException())
-            ->setMessage('User was not registered')
+            ->setMessage('Bad request')
             ->setErrors($errors)
             ->setErrorCode(400);
     }

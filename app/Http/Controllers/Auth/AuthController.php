@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Services\AuthService;
 use App\Helpers\ApiResponse;
-use App\Http\Resources\UserResource;
 use App\Http\Requests\RegisterUser;
+use App\Http\Requests\LoginUser;
+use App\Http\Requests\FacebookLoginUser;
 
 class AuthController
 {
@@ -20,6 +21,21 @@ class AuthController
         $this->response = $response;
     }
 
+    public function login(LoginUser $request)
+    {
+        $data = [
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+        ];
+
+        $response = $this->auth_service->loginUser($data);
+
+        return $this->response
+            ->setMessage('User successfully authenticated')
+            ->setData($response)
+            ->get();
+    }
+
     public function register(RegisterUser $request)
     {
         $data = [
@@ -30,29 +46,23 @@ class AuthController
             'provider_id' => null
         ];
 
-        $user = $this->auth_service->registerUser($data);
+        $response = $this->auth_service->registerUser($data);
 
         return $this->response
             ->setMessage('User successfully registered')
-            ->setData([
-                'access_token' => $user->createToken('Api Token')->accessToken,
-                'user' => new UserResource($user)
-            ])
+            ->setData($response)
             ->get();
     }
 
-    public function handleFacebookAuth(Request $request)
+    public function facebookLogin(FacebookLoginUser $request)
     {
         $fb_access_token = $request->get('access_token');
 
-        $user = $this->auth_service->facebookAuth($fb_access_token);
+        $response = $this->auth_service->facebookLogin($fb_access_token);
 
         return $this->response
             ->setMessage('User successfully authenticated through Facebook')
-            ->setData([
-                'access_token' => $user->createToken('Api Token')->accessToken,
-                'user' => new UserResource($user),
-            ])
+            ->setData($response)
             ->get();
     }
 }
