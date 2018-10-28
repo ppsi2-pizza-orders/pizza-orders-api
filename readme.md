@@ -50,6 +50,20 @@ php artisan migrate
 php artisan db:seed
 ```
 
+4. **Wygenerowanie kluczy potrzebnych do generowania tokenów uwierzytelniania**
+
+```
+php artisan passport:install
+```
+
+**Drugą wygenerowaną parę należy zapisać w pliku .env**
+
+```
+OAUTH_CLIENT_ID=2
+OAUTH_CLIENT_SECRET=RalkHuuvqZpGt7B94hLU3DuCSAciib138ZRfz0px
+```
+
+
 **Aplikacja powinna być dostępna na:**
 
 ```
