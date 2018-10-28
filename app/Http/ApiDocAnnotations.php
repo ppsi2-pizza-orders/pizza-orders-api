@@ -10,7 +10,7 @@
 
 /**
  * @OA\Post(
- *      path="/api/auth/register",
+ *      path="/auth/register",
  *      tags={"Auth"},
  *      summary="Registering new user",
  *      description="Registering new user",
@@ -44,7 +44,7 @@
 
 /**
  * @OA\Post(
- *      path="/api/auth/facebook",
+ *      path="/auth/facebook",
  *      tags={"Auth"},
  *      summary="Facebook login",
  *      description="Returns app access_token by FB access_token",
@@ -76,19 +76,16 @@
 
 /**
  * @OA\Post(
- *      path="/oauth/token",
+ *      path="/auth/login",
  *      tags={"Auth"},
- *      summary="Returns access token",
+ *      summary="App login",
  *      description="Returns login access token",
  *      @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="multipart/form-data",
  *             @OA\Schema(
  *                 example={
- *                   "grant_type": "password",
- *                   "client_secret": "VALID_OAUTH_CLIENT_SECRET",
- *                   "client_id": 2,
- *                   "username": "example@example.com",
+ *                   "email": "example@example.com",
  *                   "password": "secret",
  *                 }
  *             )
@@ -101,9 +98,8 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                   "token_type":"Bearer",
- *                   "expires_in":"2138",
- *                   "access_token": "VALID_ACCESS_TOKEN"
+ *                   "message":"User successfully authenticated",
+ *                   "data":{"access_token": "VALID_JWT_TOKEN", "user": {"name":"Example user", "email":"example@example.com", "roles":{"admin","manager"}}}
  *                 }
  *             )
  *         )
