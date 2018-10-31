@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/debug/check_auth', function () {
@@ -10,3 +10,9 @@ Route::middleware('auth:api')->group(function () {
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
 Route::post('auth/register', 'Auth\AuthController@register');
 Route::post('auth/login', 'Auth\AuthController@login');
+
+Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
+Route::get('restaurant/{id}', 'MainRestaurant\RestaurantController@show');
+Route::post('restaurant', 'MainRestaurant\RestaurantController@store');
+Route::post('restaurant/{id}', 'MainRestaurant\RestaurantController@update');
+Route::delete('restaurant/{id}', 'MainRestaurant\RestaurantController@destroy');
