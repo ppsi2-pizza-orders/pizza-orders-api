@@ -39,7 +39,7 @@ class AuthController
     public function register(RegisterUser $request)
     {
         $data = [
-            'name' => $request->get('email'),
+            'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
             'provider' => 'app',
