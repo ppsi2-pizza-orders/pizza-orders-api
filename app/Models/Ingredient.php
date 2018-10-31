@@ -12,4 +12,8 @@ class Ingredient extends Model
         'image',
         'available'
     ];
+
+    public function pizzas(){
+        return $this->belongsToMany('App\Models\Pizza');
+    }
 }

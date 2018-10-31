@@ -14,4 +14,12 @@ class Restaurant extends Model
         'photo',
         'description'
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
+    public function pizzas(){
+        return $this->belongsToMany('App\Models\Pizza');
+    }
 }

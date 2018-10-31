@@ -10,4 +10,12 @@ class Pizza extends Model
         'name',
         'price'
     ];
+
+    public function restaurants(){
+        return $this->belongsToMany('App\Models\Restaurant');
+    }
+    public function ingredients()
+    {
+        return $this->belongsToMany('App\Models\Ingredient');
+    }
 }

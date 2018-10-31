@@ -12,4 +12,13 @@ class Review extends Model
         'delivery_time_rating',
         'comment'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+    public function restaurant()
+    {
+        return $this->belongsTo('App\Models\Restaurant');
+    }
 }
