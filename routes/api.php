@@ -14,5 +14,5 @@ Route::post('auth/login', 'Auth\AuthController@login');
 Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
 Route::get('restaurant/{id}', 'MainRestaurant\RestaurantController@show');
 Route::post('restaurant', 'MainRestaurant\RestaurantController@store');
-Route::post('restaurant/{id}', 'MainRestaurant\RestaurantController@update');
+Route::patch('restaurant/{id}', 'MainRestaurant\RestaurantController@update');
 Route::delete('restaurant/{id}', 'MainRestaurant\RestaurantController@destroy');
