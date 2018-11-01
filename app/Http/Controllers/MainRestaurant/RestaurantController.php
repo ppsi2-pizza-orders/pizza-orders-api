@@ -11,9 +11,19 @@ use App\Http\Resources\RestaurantListResource as ListRestaurant;
 
 class RestaurantController extends Controller
 {
-    public function index()
+    public function search(Request $request)
     {
-        $restaurant = Restaurant::get();
+        $restaurantName = $request->input('searchName');
+        $restaurantCity = $request->input('searchCity');
+
+        $restaurant = Restaurant::where
+        (
+            [
+                ['name', 'like', "%{$restaurantName}%"],
+                ['city', 'like', "%{$restaurantCity}%"],
+            ]
+        )
+            ->get();
         return ListRestaurant::collection($restaurant);
     }
 
