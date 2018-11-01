@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\PizzaListResource as ListPizza;
 
-class RestaurantListResource extends JsonResource
+class PizzaFullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +15,9 @@ class RestaurantListResource extends JsonResource
     public function toArray($request)
     {
         return [
-        'id' => $this->id,
-        'name' => $this->name,
-        'city' => $this->city,
-            'pizzas' => ListPizza::collection($this->pizzas),
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => $this->price,
         ];
     }
 }
