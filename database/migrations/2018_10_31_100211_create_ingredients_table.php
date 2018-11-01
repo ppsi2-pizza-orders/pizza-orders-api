@@ -19,6 +19,7 @@ class CreateIngredientsTable extends Migration
             $table->float ('price');
             $table->string ('image')->nullable();
             $table->boolean('available')->default(false);
+            $table->timestamps();
         });
     }
 
