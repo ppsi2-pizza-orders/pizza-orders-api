@@ -11,6 +11,16 @@ use App\Http\Resources\RestaurantListResource as ListRestaurant;
 
 class RestaurantController extends Controller
 {
+    public function index()
+    {
+        $restaurant = Restaurant::all();
+        $pluckedName = $restaurant->pluck('name');
+        $pluckedName->all();
+        $pluckedCity = $restaurant->pluck('city')->unique();
+        $pluckedCity->all();
+        return ['names'=>$pluckedName,'cities'=>$pluckedCity];
+    }
+
     public function search(Request $request)
     {
         $restaurantName = $request->input('searchName');
