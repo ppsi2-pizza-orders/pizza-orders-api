@@ -27,8 +27,8 @@ class AddStateToRestaurantsTable extends Migration
     public function down()
     {
         Schema::table('restaurants', function($table){
-        $table->boolean('visible')->default(false);
-        $table->boolean('confirmed')->default(false);
+            $table->dropColumn('visible');
+            $table->dropColumn('confirmed');
         });
     }
 }

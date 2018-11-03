@@ -27,8 +27,8 @@ class AddUserRestaurantToReviewsTable extends Migration
     public function down()
     {
         Schema::table('reviews', function ($table) {
-            $table->integer('user_id');
-            $table->integer('restaurant_id');
+            $table->dropColumn('user_id');
+            $table->dropColumn('restaurant_id');
         });
     }
 }
