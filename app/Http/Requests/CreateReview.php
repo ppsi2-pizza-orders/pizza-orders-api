@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class CreateReview extends FormRequest
+class CreateReview extends AbstractApiRequest
 {
     public function rules()
     {

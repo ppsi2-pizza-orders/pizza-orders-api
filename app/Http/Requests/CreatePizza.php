@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class CreatePizza extends FormRequest
+class CreatePizza extends AbstractApiRequest
 {
     public function rules()
     {
