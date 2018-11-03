@@ -9,7 +9,8 @@ use App\Exceptions\ApiException;
 
 abstract class AbstractApiRequest extends FormRequest
 {
-    protected function failedValidation(Validator $validator) {
+    protected function failedValidation(Validator $validator)
+    {
         $errors = $validator->getMessageBag()->all();
         throw (new ApiException())
             ->setMessage('Bad request')

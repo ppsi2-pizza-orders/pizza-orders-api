@@ -2,28 +2,38 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Contracts\Auth\Factory as Auth;
-use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
-use App\Helpers\ApiResponse;
-use App\Exceptions\NotAuthorizedHttpException;
+use App\Exceptions\ApiException;
 
 class Authenticate
 {
-    protected $auth;
-    protected $response;
-
-    public function __construct(Auth $auth, ApiResponse $response)
+    public function handle($request, \Closure $next)
     {
-        $this->auth = $auth;
-        $this->response = $response;
-    }
+        try {
+            JWTAuth::setRequest($request);
+            $user = JWTAuth::parseToken()->authenticate();
+        } catch (TokenExpiredException  $exception) {
+            throw (new ApiException)
+                ->setMessage('Token expired')
+                ->setErrorCode(401);
+        } catch (TokenInvalidException $exception) {
+            throw (new ApiException)
+                ->setMessage('Token invalid')
+                ->setErrorCode(401);
+        } catch (JWTException $exception) {
+            throw (new ApiException)
+                ->setMessage('Token absent')
+                ->setErrorCode(401);
+        }
 
-    public function handle(Request $request, Closure $next, $guard = null)
-    {
-        if ($this->auth->guard($guard)->guest()) {
-            throw new NotAuthorizedHttpException();
+        if (!$user) {
+            throw (new ApiException)
+                ->setMessage('User not found')
+                ->setErrorCode(401);
         }
 
         return $next($request);

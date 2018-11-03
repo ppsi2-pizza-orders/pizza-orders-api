@@ -12,27 +12,24 @@ use App\Http\Requests\FacebookLoginUser;
 
 class AuthController
 {
-    protected $auth_service;
+    protected $authService;
     protected $response;
 
-    public function __construct(AuthService $auth_service, ApiResponse $response)
+    public function __construct(AuthService $authService, ApiResponse $response)
     {
-        $this->auth_service = $auth_service;
+        $this->authService = $authService;
         $this->response = $response;
     }
 
     public function login(LoginUser $request)
     {
-        $data = [
-            'email' => $request->get('email'),
-            'password' => $request->get('password'),
-        ];
+        $credentials = $request->only('email', 'password');
 
-        $response = $this->auth_service->loginUser($data);
+        $token = $this->authService->attemptLogin($credentials);
 
         return $this->response
-            ->setMessage('User successfully authenticated')
-            ->setData($response)
+            ->setMessage('User logged in successfully')
+            ->setData($token)
             ->get();
     }
 
@@ -46,19 +43,19 @@ class AuthController
             'provider_id' => null
         ];
 
-        $response = $this->auth_service->registerUser($data);
+        $token = $this->authService->registerUser($data);
 
         return $this->response
             ->setMessage('User successfully registered')
-            ->setData($response)
+            ->setData($token)
             ->get();
     }
 
     public function facebookLogin(FacebookLoginUser $request)
     {
-        $fb_access_token = $request->get('access_token');
+        $fbAccessToken = $request->get('access_token');
 
-        $response = $this->auth_service->facebookLogin($fb_access_token);
+        $response = $this->authService->facebookLogin($fbAccessToken);
 
         return $this->response
             ->setMessage('User successfully authenticated through Facebook')

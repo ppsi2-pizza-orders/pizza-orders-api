@@ -8,12 +8,12 @@ use App\Interfaces\ThrowableApiException;
 class ApiException extends Exception implements ThrowableApiException
 {
     protected $message = 'Something is broken';
-    protected $error_code = 500;
+    protected $errorCode = 500;
     protected $errors = [];
 
     public function getErrorCode(): int
     {
-        return $this->error_code;
+        return $this->errorCode;
     }
 
     public function setMessage(string $message): self
@@ -22,9 +22,9 @@ class ApiException extends Exception implements ThrowableApiException
         return $this;
     }
 
-    public function setErrorCode(int $error_code): self
+    public function setErrorCode(int $errorCode): self
     {
-        $this->error_code = $error_code;
+        $this->errorCode = $errorCode;
         return $this;
     }
 
