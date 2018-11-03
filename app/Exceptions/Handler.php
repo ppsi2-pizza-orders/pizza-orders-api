@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use App\Helpers\APIResponse;
+use App\Helpers\ApiResponse;
 
 class Handler extends ExceptionHandler
 {
