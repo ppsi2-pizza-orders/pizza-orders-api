@@ -8,9 +8,9 @@ class Ingredient extends Model
 {
     protected $fillable = [
         'name',
-        'price',
+        //'price',
         'image',
-        'available'
+        //'available'
     ];
 
     public function pizzas(){
