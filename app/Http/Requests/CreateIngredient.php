@@ -8,7 +8,6 @@ class CreateIngredient extends AbstractApiRequest
     {
         return [
             "name" => "required",
-            "price" => "required",
         ];
     }
 }

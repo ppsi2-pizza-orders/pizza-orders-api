@@ -7,9 +7,9 @@ class CreateReview extends AbstractApiRequest
     public function rules()
     {
         return [
-            "base_rating" => "required",
-            "ingredients_rating" => "required",
-            "delivery_time_rating" => "required",
+            "base_rating" => "required|integer|between:1,5",
+            "ingredients_rating" => "required|integer|between:1,5",
+            "delivery_time_rating" => "required|integer|between:1,5",
         ];
     }
 }
