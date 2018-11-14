@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePizza;
 use App\Models\Restaurant;
