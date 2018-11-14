@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MainRestaurant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePizza;
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Pizza;
 use App\Http\Resources\PizzaFullResource as PizzaResource;
 
