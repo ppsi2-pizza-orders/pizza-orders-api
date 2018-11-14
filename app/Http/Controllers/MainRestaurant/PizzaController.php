@@ -59,7 +59,7 @@ class PizzaController extends Controller
     {
         $pizza = Pizza::findOrFail($id);
         if($pizza->delete()) {
-            if($ingredient->image != 'noimage.jpg'){
+            if($pizza->image != 'noimage.jpg'){
                 Storage::delete('public/pizza_images/'.$pizza->image);
             }
             return new PizzaResource($pizza);
