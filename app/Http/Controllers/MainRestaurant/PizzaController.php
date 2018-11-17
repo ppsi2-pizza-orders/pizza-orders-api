@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePizza;
 use App\Models\Restaurant;
@@ -18,11 +19,7 @@ class PizzaController extends Controller
         $pizza->price = $request->input('price');
         if($request->hasFile('image'))
         {
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'_'.$extension;
-            $path = $request->file('image')->storeAs('public/pizza_images', $fileNameToStore);
+            $fileNameToStore = $this->uploadFile($request);
         }
         else
         {
@@ -42,14 +39,7 @@ class PizzaController extends Controller
         $pizza->price = $request->input('price');
         if($request->hasFile('image'))
         {
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'_'.$extension;
-            $path = $request->file('image')->storeAs('public/pizza_images', $fileNameToStore);
-        }
-        if($request->hasFile('image'))
-        {
+            $fileNameToStore = $this->uploadFile($request);
             $pizza->image = $fileNameToStore;
         }
         $pizza->update();
@@ -65,5 +55,15 @@ class PizzaController extends Controller
             }
             return new PizzaResource($pizza);
         }
+    }
+
+    public function uploadFile(Request $request)
+    {
+        $filenameWithExt = $request->file('image')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('image')->getClientOriginalExtension();
+        $fileNameToStore = $filename.'_'.time().'_'.$extension;
+        $path = $request->file('image')->storeAs('public/pizza_images', $fileNameToStore);
+        return $fileNameToStore;
     }
 }

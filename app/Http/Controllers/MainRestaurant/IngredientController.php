@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateIngredient;
 use App\Http\Controllers\Controller;
 use App\Models\Ingredient;
@@ -16,11 +17,7 @@ class IngredientController extends Controller
         $ingredient->name = $request->input('name');
         if($request->hasFile('image'))
         {
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'_'.$extension;
-            $path = $request->file('image')->storeAs('public/ingredient_images', $fileNameToStore);
+            $fileNameToStore = $this->uploadFile($request);
         }
         else
         {
@@ -37,17 +34,9 @@ class IngredientController extends Controller
         $ingredient->name = $request->input('name');
         if($request->hasFile('image'))
         {
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'_'.$extension;
-            $path = $request->file('image')->storeAs('public/ingredient_images', $fileNameToStore);
-        }
-        if($request->hasFile('image'))
-        {
+            $fileNameToStore = $this->uploadFile($request);
             $ingredient->image = $fileNameToStore;
         }
-
         $ingredient->update();
         return new IngredientResource($ingredient);
     }
@@ -61,4 +50,15 @@ class IngredientController extends Controller
             return new IngredientResource($ingredient);
         }
     }
+
+    public function uploadFile(Request $request)
+    {
+        $filenameWithExt = $request->file('image')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('image')->getClientOriginalExtension();
+        $fileNameToStore = $filename.'_'.time().'_'.$extension;
+        $path = $request->file('image')->storeAs('public/ingredient_images', $fileNameToStore);
+        return $fileNameToStore;
+    }
+
 }

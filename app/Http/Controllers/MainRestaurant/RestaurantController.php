@@ -54,11 +54,7 @@ class RestaurantController extends Controller
         $restaurant->phone = $request->input('phone');
         if($request->hasFile('photo'))
         {
-            $filenameWithExt = $request->file('photo')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('photo')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'_'.$extension;
-            $path = $request->file('photo')->storeAs('public/restaurant_photos', $fileNameToStore);
+            $fileNameToStore = $this->uploadFile($request);
         }
         else
         {
@@ -77,17 +73,10 @@ class RestaurantController extends Controller
         $restaurant->city = $request->input('city');
         $restaurant->address = $request->input('address');
         $restaurant->phone = $request->input('phone');
-        if($request->hasFile('image'))
-        {
-            $filenameWithExt = $request->file('photo')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('photo')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'_'.$extension;
-            $path = $request->file('photo')->storeAs('public/restaurant_photos', $fileNameToStore);
-        }
         if($request->hasFile('photo'))
         {
-            $ingredient->image = $fileNameToStore;
+            $fileNameToStore = $this->uploadFile($request);
+            $restaurant->photo = $fileNameToStore;
         }
         $restaurant->description = $request->input('description');
         $restaurant->update();
@@ -103,5 +92,15 @@ class RestaurantController extends Controller
             }
             return new FullRestaurant($restaurant);
         }
+    }
+
+    public function uploadFile(Request $request)
+    {
+        $filenameWithExt = $request->file('photo')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('photo')->getClientOriginalExtension();
+        $fileNameToStore = $filename.'_'.time().'_'.$extension;
+        $path = $request->file('photo')->storeAs('public/restaurant_photos', $fileNameToStore);
+        return $fileNameToStore;
     }
 }
