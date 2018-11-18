@@ -34,8 +34,7 @@ class RestaurantController extends Controller
                 ['name', 'like', "%{$restaurantName}%"],
                 ['city', 'like', "%{$restaurantCity}%"],
             ]
-        )
-            ->get();
+        )->get();
         return ListRestaurant::collection($restaurant);
     }
 
@@ -52,17 +51,17 @@ class RestaurantController extends Controller
         $restaurant->city = $request->input('city');
         $restaurant->address = $request->input('address');
         $restaurant->phone = $request->input('phone');
-        if($request->hasFile('photo'))
-        {
+
+        if ($request->hasFile('photo')) {
             $fileNameToStore = $this->uploadFile($request);
-        }
-        else
-        {
+        } else {
             $fileNameToStore = 'noimage.png';
         }
+
         $restaurant->photo = $fileNameToStore;
         $restaurant->owner_id = Auth::guard('api')->id();
         $restaurant->save();
+
         return new FullRestaurant($restaurant);
     }
 
@@ -73,13 +72,15 @@ class RestaurantController extends Controller
         $restaurant->city = $request->input('city');
         $restaurant->address = $request->input('address');
         $restaurant->phone = $request->input('phone');
-        if($request->hasFile('photo'))
-        {
+
+        if ($request->hasFile('photo')) {
             $fileNameToStore = $this->uploadFile($request);
             $restaurant->photo = $fileNameToStore;
         }
+
         $restaurant->description = $request->input('description');
         $restaurant->update();
+
         return new FullRestaurant($restaurant);
     }
 
@@ -87,7 +88,7 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         if($restaurant->delete()) {
-            if($restaurant->image != 'noimage.jpg'){
+            if ($restaurant->image != 'noimage.jpg') {
                 Storage::delete('public/restaurant_photos/'.$restaurant->photo);
             }
             return new FullRestaurant($restaurant);

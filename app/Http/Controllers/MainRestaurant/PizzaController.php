@@ -17,18 +17,19 @@ class PizzaController extends Controller
         $pizza = new Pizza();
         $pizza->name = $request->input('name');
         $pizza->price = $request->input('price');
-        if($request->hasFile('image'))
-        {
+
+        if ($request->hasFile('image')) {
             $fileNameToStore = $this->uploadFile($request);
-        }
-        else
-        {
+        } else {
             $fileNameToStore = 'noimage.png';
         }
+
         $pizza->image = $fileNameToStore;
         $pizza->save();
+
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->pizzas()->attach($pizza);
+
         return new PizzaResource($pizza);
     }
 
@@ -37,11 +38,12 @@ class PizzaController extends Controller
         $pizza = Pizza::findOrFail($id);
         $pizza->name = $request->input('name');
         $pizza->price = $request->input('price');
-        if($request->hasFile('image'))
-        {
+
+        if($request->hasFile('image')) {
             $fileNameToStore = $this->uploadFile($request);
             $pizza->image = $fileNameToStore;
         }
+
         $pizza->update();
         return new PizzaResource($pizza);
     }
@@ -49,8 +51,8 @@ class PizzaController extends Controller
     public function destroy($id)
     {
         $pizza = Pizza::findOrFail($id);
-        if($pizza->delete()) {
-            if($pizza->image != 'noimage.jpg'){
+        if ($pizza->delete()) {
+            if ($pizza->image != 'noimage.jpg') {
                 Storage::delete('public/pizza_images/'.$pizza->image);
             }
             return new PizzaResource($pizza);

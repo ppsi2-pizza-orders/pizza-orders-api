@@ -16,9 +16,9 @@ class RestaurantListResource extends JsonResource
     public function toArray($request)
     {
         return [
-        'id' => $this->id,
-        'name' => $this->name,
-        'city' => $this->city,
+            'id' => $this->id,
+            'name' => $this->name,
+            'city' => $this->city,
             'pizzas' => ListPizza::collection($this->pizzas),
         ];
     }

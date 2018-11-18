@@ -13,7 +13,6 @@ class ReviewController extends Controller
 {
     public function store(CreateReview $request, $id)
     {
-
         $restaurant = Restaurant::findOrFail($id);
         $review = new Review();
         $review->restaurant_id = $restaurant->id;
@@ -31,10 +30,8 @@ class ReviewController extends Controller
         $review = Review::findOrFail($id);
         $commentUser = $review->user_id;
         $currentUser = Auth::id();
-        if ($currentUser == $commentUser)
-        {
-            if ($review->delete())
-            {
+        if ($currentUser == $commentUser) {
+            if ($review->delete()) {
                 return new FullReview($review);
             }
         }
