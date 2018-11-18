@@ -39,7 +39,7 @@ class PizzaController extends Controller
         $pizza->name = $request->input('name');
         $pizza->price = $request->input('price');
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $fileNameToStore = $this->uploadFile($request);
             $pizza->image = $fileNameToStore;
         }

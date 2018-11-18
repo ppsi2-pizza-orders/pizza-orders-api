@@ -14,6 +14,6 @@ class Ingredient extends Model
     ];
 
     public function pizzas(){
-        return $this->belongsToMany('App\Models\Pizza');
+        return $this->belongsToMany('App\Models\Pizza')->withPivot('pizza_ingredient');
     }
 }

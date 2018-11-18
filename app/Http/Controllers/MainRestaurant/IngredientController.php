@@ -16,7 +16,7 @@ class IngredientController extends Controller
         $ingredient = new Ingredient();
         $ingredient->name = $request->input('name');
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $fileNameToStore = $this->uploadFile($request);
         } else {
             $fileNameToStore = 'noimage.png';
@@ -33,7 +33,7 @@ class IngredientController extends Controller
         $ingredient = Ingredient::findOrFail($id);
         $ingredient->name = $request->input('name');
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $fileNameToStore = $this->uploadFile($request);
             $ingredient->image = $fileNameToStore;
         }
@@ -45,7 +45,7 @@ class IngredientController extends Controller
     public function destroy($id)
     {
         $ingredient = Ingredient::findOrFail($id);
-        if($ingredient->delete()) {
+        if ($ingredient->delete()) {
             if ($ingredient->image != 'noimage.jpg') {
                 Storage::delete('public/ingredient_images/'.$ingredient->image);
             }

@@ -9,12 +9,22 @@ class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = new User();
-        $user->password = Hash::make('test123');
-        $user->name = 'exampleuser';
-        $user->email = 'example@example.com';
-        $user->provider = 'app';
-        $user->save();
+        $data = [
+            [
+                'id' => 1,
+                'password' => Hash::make('test123'),
+                'name' => 'Jan Kowalski',
+                'email' => 'example@example.com',
+                'provider' => 'app',
+                'is_admin' => true,
+            ],
+        ];
+
+        foreach($data as $row) {
+            $model = User::firstOrNew(["id" => $row["id"]]);
+            $model->fill($row);
+            $model->save();
+        }
     }
 
 }
