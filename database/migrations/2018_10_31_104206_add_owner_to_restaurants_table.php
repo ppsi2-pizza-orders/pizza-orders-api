@@ -14,7 +14,7 @@ class AddOwnerToRestaurantsTable extends Migration
     public function up()
     {
         Schema::table('restaurants', function ($table) {
-            $table->integer('owner_id')->nullable();
+            $table->integer('owner_id');
         });
     }
 

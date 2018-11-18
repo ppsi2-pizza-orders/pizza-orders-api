@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\RestaurantResource as FullRestaurant;
 use App\Http\Resources\RestaurantListResource as ListRestaurant;
 
@@ -37,11 +39,29 @@ class RestaurantController extends Controller
         return ListRestaurant::collection($restaurant);
     }
 
+    public function show($id)
+    {
+        $restaurant = Restaurant::findOrFail($id);
+        return new FullRestaurant($restaurant);
+    }
+
     public function store(CreateRestaurant $request)
     {
         $restaurant = new Restaurant();
         $restaurant->name = $request->input('name');
         $restaurant->city = $request->input('city');
+        $restaurant->address = $request->input('address');
+        $restaurant->phone = $request->input('phone');
+        if($request->hasFile('photo'))
+        {
+            $fileNameToStore = $this->uploadFile($request);
+        }
+        else
+        {
+            $fileNameToStore = 'noimage.png';
+        }
+        $restaurant->photo = $fileNameToStore;
+        $restaurant->owner_id = Auth::guard('api')->id();
         $restaurant->save();
         return new FullRestaurant($restaurant);
     }
@@ -53,15 +73,13 @@ class RestaurantController extends Controller
         $restaurant->city = $request->input('city');
         $restaurant->address = $request->input('address');
         $restaurant->phone = $request->input('phone');
-        $restaurant->photo = $request->input('photo');
+        if($request->hasFile('photo'))
+        {
+            $fileNameToStore = $this->uploadFile($request);
+            $restaurant->photo = $fileNameToStore;
+        }
         $restaurant->description = $request->input('description');
         $restaurant->update();
-        return new FullRestaurant($restaurant);
-    }
-
-    public function show($id)
-    {
-        $restaurant = Restaurant::findOrFail($id);
         return new FullRestaurant($restaurant);
     }
 
@@ -69,7 +87,20 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         if($restaurant->delete()) {
+            if($restaurant->image != 'noimage.jpg'){
+                Storage::delete('public/restaurant_photos/'.$restaurant->photo);
+            }
             return new FullRestaurant($restaurant);
         }
+    }
+
+    public function uploadFile(Request $request)
+    {
+        $filenameWithExt = $request->file('photo')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('photo')->getClientOriginalExtension();
+        $fileNameToStore = $filename.'_'.time().'_'.$extension;
+        $path = $request->file('photo')->storeAs('public/restaurant_photos', $fileNameToStore);
+        return $fileNameToStore;
     }
 }

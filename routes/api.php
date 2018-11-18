@@ -24,3 +24,6 @@ Route::delete('pizza/{id}', 'MainRestaurant\PizzaController@destroy');
 Route::post('ingredient', 'MainRestaurant\IngredientController@store');
 Route::patch('ingredient/{id}', 'MainRestaurant\IngredientController@update');
 Route::delete('ingredient/{id}', 'MainRestaurant\IngredientController@destroy');
+
+Route::post('restaurant/{id}/review', 'MainRestaurant\ReviewController@store');
+Route::delete('review/{id}', 'MainRestaurant\ReviewController@destroy');
