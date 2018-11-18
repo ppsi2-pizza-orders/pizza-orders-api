@@ -15,12 +15,13 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurant = Restaurant::all();
-        $pluckedName = $restaurant->pluck('name');
-        $pluckedName->all();
-        $pluckedCity = $restaurant->pluck('city')->unique();
-        $pluckedCity->all();
-        return ['names'=>$pluckedName,'cities'=>$pluckedCity];
+        $restaurants = Restaurant::pluck('name');
+        $cities = Restaurant::pluck('city')->unique()->values();
+
+        return response()->json([
+            'names' => $restaurants,
+            'cities'=> $cities
+        ]);
     }
 
     public function search(Request $request)
@@ -28,13 +29,11 @@ class RestaurantController extends Controller
         $restaurantName = $request->input('searchName');
         $restaurantCity = $request->input('searchCity');
 
-        $restaurant = Restaurant::where
-        (
-            [
-                ['name', 'like', "%{$restaurantName}%"],
-                ['city', 'like', "%{$restaurantCity}%"],
-            ]
-        )->get();
+        $restaurant = Restaurant::where([
+            ['name', 'like', "%{$restaurantName}%"],
+            ['city', 'like', "%{$restaurantCity}%"],
+        ])->get();
+
         return ListRestaurant::collection($restaurant);
     }
 
@@ -87,7 +86,7 @@ class RestaurantController extends Controller
     public function destroy($id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        if($restaurant->delete()) {
+        if ($restaurant->delete()) {
             if ($restaurant->image != 'noimage.jpg') {
                 Storage::delete('public/restaurant_photos/'.$restaurant->photo);
             }
