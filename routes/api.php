@@ -27,3 +27,5 @@ Route::delete('ingredient/{id}', 'MainRestaurant\IngredientController@destroy');
 
 Route::post('restaurant/{id}/review', 'MainRestaurant\ReviewController@store');
 Route::delete('review/{id}', 'MainRestaurant\ReviewController@destroy');
+
+Route::get('admin/restaurants', 'Admin\RestaurantController@index');
