@@ -20,14 +20,14 @@ class RestaurantsTable extends AbstractAdminTable
     public function getColumns(): array
     {
         return [
-            [ "name" => "id", "label" => __("id"), "sortable" => true, "searchable" => false ],
-            [ "name" => "name", "label" => __("name"), "sortable" => true, "searchable" => true ],
-            [ "name" => "city", "label" => __("city"), "sortable" => true, "searchable" => true ],
-            [ "name" => "address", "label" => __("address"), "sortable" => true, "searchable" => true ],
-            [ "name" => "phone", "label" => __("phone"), "searchable" => true ],
-            [ "name" => "description", "label" => __("description"), "searchable" => true ],
-            [ "name" => "created_at", "label" => __("created_at"), "sortable" => true ],
-            [ "name" => "owner", "label" => __("owner") ],
+            [ 'name' => 'id', 'label' => __('id'), 'sortable' => true, 'searchable' => false ],
+            [ 'name' => 'name', 'label' => __('name'), 'sortable' => true, 'searchable' => true ],
+            [ 'name' => 'city', 'label' => __('city'), 'sortable' => true, 'searchable' => true ],
+            [ 'name' => 'address', 'label' => __('address'), 'sortable' => true, 'searchable' => true ],
+            [ 'name' => 'phone', 'label' => __('phone'), 'searchable' => true ],
+            [ 'name' => 'description', 'label' => __('description'), 'searchable' => true ],
+            [ 'name' => 'created_at', 'label' => __('created_at'), 'sortable' => true ],
+            [ 'name' => 'owner', 'label' => __('owner') ],
         ];
     }
 

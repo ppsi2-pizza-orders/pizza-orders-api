@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\RestaurantsTable;
+use App\Http\Resources\Admin\IngredientsTable;
 
-class RestaurantController extends Controller
+class IngredientController extends Controller
 {
     protected $resource;
 
-    public function __construct(RestaurantsTable $resource)
+    public function __construct(IngredientsTable $resource)
     {
         $this->resource = $resource;
     }

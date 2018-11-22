@@ -29,3 +29,4 @@ Route::post('restaurant/{id}/review', 'MainRestaurant\ReviewController@store');
 Route::delete('review/{id}', 'MainRestaurant\ReviewController@destroy');
 
 Route::get('admin/restaurants', 'Admin\RestaurantController@index');
+Route::get('admin/ingredients', 'Admin\IngredientController@index');
