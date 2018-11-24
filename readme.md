@@ -47,21 +47,21 @@ cd ..
 3. **Migracja tabel w bazie danych i seed początkowych danych**
 
 ```
-php artisan migrate --database=mysql_testing
-```
-
-```
-php artisan db:seed --database=mysql_testing
-```
-
-3.a **Migracja tabel i seed początkowych danych w testowej bazie danych**
-
-```
 php artisan migrate
 ```
 
 ```
 php artisan db:seed
+```
+
+3.a **Migracja tabel i seed początkowych danych w testowej bazie danych**
+
+```
+php artisan migrate --database=mysql_testing
+```
+
+```
+php artisan db:seed --database=mysql_testing
 ```
 
 4. **Wygenerowanie klucza JWT AUTH**
