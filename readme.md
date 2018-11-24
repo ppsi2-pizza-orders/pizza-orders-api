@@ -47,6 +47,16 @@ cd ..
 3. **Migracja tabel w bazie danych i seed początkowych danych**
 
 ```
+php artisan migrate --database=mysql_testing
+```
+
+```
+php artisan db:seed --database=mysql_testing
+```
+
+3.a **Migracja tabel i seed początkowych danych w testowej bazie danych**
+
+```
 php artisan migrate
 ```
 
@@ -65,6 +75,11 @@ php artisan jwt:secret
 
 ```
 localhost:8080
+```
+
+**Odpalenie testów PHPunit:**
+```
+php vendor/phpunit/phpunit/phpunit
 ```
 
 
