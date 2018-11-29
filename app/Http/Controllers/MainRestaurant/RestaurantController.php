@@ -58,7 +58,7 @@ class RestaurantController extends Controller
         }
 
         $restaurant->photo = $fileNameToStore;
-        $restaurant->owner_id = Auth::guard('api')->id();
+        $restaurant->owner_id = Auth::id();
         $restaurant->save();
 
         return new FullRestaurant($restaurant);
