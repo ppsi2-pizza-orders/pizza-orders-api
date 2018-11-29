@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
+use JWTAuth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\RestaurantResource as FullRestaurant;
 use App\Http\Resources\RestaurantListResource as ListRestaurant;
 
@@ -58,7 +59,7 @@ class RestaurantController extends Controller
         }
 
         $restaurant->photo = $fileNameToStore;
-        $restaurant->owner_id = Auth::id();
+        $restaurant->owner_id = JWTAuth::parseToken()->authenticate()->id();
         $restaurant->save();
 
         return new FullRestaurant($restaurant);
