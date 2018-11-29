@@ -59,7 +59,7 @@ class RestaurantController extends Controller
         }
 
         $restaurant->photo = $fileNameToStore;
-        $restaurant->owner_id = JWTAuth::parseToken()->authenticate()->id();
+        $restaurant->owner_id = JWTAuth::parseToken()->authenticate()->id;
         $restaurant->save();
 
         return new FullRestaurant($restaurant);
