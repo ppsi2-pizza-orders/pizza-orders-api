@@ -19,7 +19,7 @@ class AuthService
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 throw (new ApiException())
-                    ->setErrorCode(401)
+                    ->setErrorCode(400)
                     ->setMessage('Invalid login credentials');
             }
         } catch (JWTException $e) {
