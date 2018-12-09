@@ -54,6 +54,16 @@ php artisan migrate
 php artisan db:seed
 ```
 
+3.a **Migracja tabel i seed początkowych danych w testowej bazie danych**
+
+```
+php artisan migrate --database=mysql_testing
+```
+
+```
+php artisan db:seed --database=mysql_testing
+```
+
 4. **Wygenerowanie klucza JWT AUTH**
 
 ```
@@ -65,6 +75,11 @@ php artisan jwt:secret
 
 ```
 localhost:8080
+```
+
+**Odpalenie testów PHPunit:**
+```
+php vendor/phpunit/phpunit/phpunit
 ```
 
 

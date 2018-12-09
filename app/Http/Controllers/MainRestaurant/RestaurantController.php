@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateRestaurant;
+use App\Models\Restaurant;
+use App\Http\Resources\RestaurantResource as FullRestaurant;
+use App\Http\Resources\RestaurantListResource as ListRestaurant;
+
 use App\Http\Controllers\ApiResourceController;
 use App\Models\Restaurant;
 use App\Http\Requests\CreateRestaurant;
