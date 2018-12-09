@@ -26,6 +26,7 @@ class ReviewController extends ApiResourceController
 
         return $this->apiResource
             ->resource($review)
+            ->pushMessage('Restaurant reviewed')
             ->response();
     }
 

@@ -15,6 +15,9 @@
 
     "Restaurant created": "Restauracja została stworzona",
     "Restaurant updated": "Restauracja została zaktualizowana",
+    "Restaurant deleted": "Restauracja usunięta",
+    "Restaurant reviewed": "Restauracja oceniona",
+    "Review deleted": "Ocena została usunięta",
 
     "Ingredient added": "Składnik został dodany",
     "Ingredient deleted": "Składnik został usunięty",

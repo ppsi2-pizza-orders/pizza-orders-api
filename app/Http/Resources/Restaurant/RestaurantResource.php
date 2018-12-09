@@ -21,8 +21,8 @@ class RestaurantResource extends AbstractApiResource
             'description' => $this->resource->description,
             'created_at' => $this->resource->created_at,
             'owner_id' => User::find($this->resource->owner_id, ['id', 'name']),
-            'pizzas' => FullPizza::collection($this->resource->pizzas),
-            'reviews' => FullReview::collection($this->resource->reviews),
+            'pizzas' => (new FullPizza)->collect($this->resource->pizzas),
+            'reviews' => (new FullReview)->collect($this->resource->reviews),
         ];
     }
 }
