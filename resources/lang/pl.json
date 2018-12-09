@@ -1,0 +1,27 @@
+{
+    "Resource not found": "Zasób nie został znaleziony",
+    "Method not allowed": "Metoda niedozwolona",
+
+    "User logged in successfully": "Zalogowano pomyślnie",
+    "User successfully registered": "Zarejestrowano pomyślnie",
+    "User successfully authenticated through Facebook": "Pomyślnie zalogowano przez Facebooka",
+    "Could not fetch Facebook account": "Wystąpił błąd przy pobieraniu użytkownika Facebooka",
+    "Invalid login credentials": "Nieprawidłowe dane logowania",
+    "Could not create JWT Token": "Wystąpił błąd przy tworzeniu tokenu JWT",
+    "Token expired": "Token wygasł",
+    "Token invalid": "Nieprawidłowy token",
+    "Token absent": "Nie znaleziono tokenu",
+    "User not found": "Użytkownik nie znaleziony",
+
+    "Restaurant created": "Restauracja została stworzona",
+    "Restaurant updated": "Restauracja została zaktualizowana",
+
+    "Ingredient added": "Składnik został dodany",
+    "Ingredient deleted": "Składnik został usunięty",
+    "Ingredient updated": "Składnik został zaktualizowany",
+
+    "Pizza added": "Pizza dodana",
+    "Pizza updated": "Pizza zaktualizowana",
+    "Pizza deleted": "Pizza usunięta",
+    "Could not delete pizza": "Pizza nie mogła zostać usunięta"
+}

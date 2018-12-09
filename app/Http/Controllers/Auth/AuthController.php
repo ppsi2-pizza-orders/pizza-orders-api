@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-
 use App\Services\AuthService;
 use App\Helpers\ApiResponse;
 use App\Http\Requests\RegisterUser;
@@ -28,9 +26,9 @@ class AuthController
         $token = $this->authService->attemptLogin($credentials);
 
         return $this->response
-            ->setMessage('User logged in successfully')
+            ->pushMessage('User logged in successfully')
             ->setData($token)
-            ->get();
+            ->response();
     }
 
     public function register(RegisterUser $request)
@@ -46,9 +44,9 @@ class AuthController
         $token = $this->authService->registerUser($data);
 
         return $this->response
-            ->setMessage('User successfully registered')
+            ->pushMessage('User successfully registered')
             ->setData($token)
-            ->get();
+            ->response();
     }
 
     public function facebookLogin(FacebookLoginUser $request)
@@ -58,8 +56,8 @@ class AuthController
         $response = $this->authService->facebookLogin($fbAccessToken);
 
         return $this->response
-            ->setMessage('User successfully authenticated through Facebook')
+            ->pushMessage('User successfully authenticated through Facebook')
             ->setData($response)
-            ->get();
+            ->response();
     }
 }

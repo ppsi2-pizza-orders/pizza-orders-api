@@ -2,20 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
-class PizzaListResource extends JsonResource
+class PizzaListResource extends AbstractApiResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
+    public function toArray(): array
     {
         return [
-            'name' => $this->name,
+            'name' => $this->resource->name,
         ];
     }
 }

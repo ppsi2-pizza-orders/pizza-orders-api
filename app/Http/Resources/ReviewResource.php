@@ -7,24 +7,18 @@ use App\Models\User;
 use App\Models\Restaurant;
 
 
-class ReviewResource extends JsonResource
+class ReviewResource extends AbstractApiResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
+    public function toArray(): array
     {
         return [
-            'id' => $this->id,
-            'base_rating' => $this->base_rating,
-            'ingredients_rating' => $this->ingredients_rating,
-            'delivery_time_rating' => $this->delivery_time_rating,
-            'comment' => $this->comment,
-            'created_at' => $this->created_at,
-            'user_id' => User::find($this->user_id, ['id', 'name'])
+            'id' => $this->resource->id,
+            'base_rating' => $this->resource->base_rating,
+            'ingredients_rating' => $this->resource->ingredients_rating,
+            'delivery_time_rating' => $this->resource->delivery_time_rating,
+            'comment' => $this->resource->comment,
+            'created_at' => $this->resource->created_at,
+            'user_id' => User::find($this->resource->user_id, ['id', 'name'])
         ];
     }
 }

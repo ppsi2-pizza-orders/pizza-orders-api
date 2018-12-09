@@ -3,39 +3,38 @@
 namespace App\Exceptions;
 
 use Exception;
-use App\Interfaces\ThrowableApiException;
+use App\Interfaces\ApiExceptionInterface;
 
-class ApiException extends Exception implements ThrowableApiException
+class ApiException extends Exception implements ApiExceptionInterface
 {
-    protected $message = 'Something is broken';
-    protected $errorCode = 500;
-    protected $errors = [];
+    protected $messages = [];
+    protected $statusCode = 500;
 
-    public function getErrorCode(): int
+    public function pushMessage(string $message): ApiExceptionInterface
     {
-        return $this->errorCode;
-    }
-
-    public function setMessage(string $message): self
-    {
-        $this->message = $message;
+        $this->messages[] = __($message);
         return $this;
     }
 
-    public function setErrorCode(int $errorCode): self
+    public function setMessages(array $messages): ApiExceptionInterface
     {
-        $this->errorCode = $errorCode;
+        $this->messages = $messages;
         return $this;
     }
 
-    public function setErrors(array $errors): self
+    public function getMessages(): array
     {
-        $this->errors = $errors;
+        return $this->messages;
+    }
+
+    public function setStatusCode(int $statusCode): ApiExceptionInterface
+    {
+        $this->statusCode = $statusCode;
         return $this;
     }
 
-    public function getErrors(): array
+    public function getStatusCode(): int
     {
-        return $this->errors;
+        return $this->statusCode;
     }
 }

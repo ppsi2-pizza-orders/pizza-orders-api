@@ -2,17 +2,15 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class IngredientResource extends JsonResource
+class IngredientResource extends AbstractApiResource
 {
-
-    public function toArray($request)
+    public function toArray(): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'image' => $this->image,
+            'id' => $this->resource->id,
+            'name' => $this->resource->name,
+            'image' => $this->resource->image,
         ];
     }
 }

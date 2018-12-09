@@ -3,22 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\ApiResourceController;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\IngredientsTable;
-
-class IngredientController extends Controller
+class IngredientController extends ApiResourceController
 {
-    protected $resource;
-
-    public function __construct(IngredientsTable $resource)
-    {
-        $this->resource = $resource;
-    }
-
     public function index(Request $request)
     {
-        return $this->resource->tableResponse($request);
+        return $this->apiResource->response($request);
     }
 }
 

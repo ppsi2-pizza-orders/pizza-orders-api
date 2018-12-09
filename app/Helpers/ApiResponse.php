@@ -6,16 +6,10 @@ use Illuminate\Http\JsonResponse;
 
 class ApiResponse
 {
-    protected $message = '';
     protected $data = [];
-    protected $errors = [];
-    protected $code = 200;
-
-    public function setMessage(string $message): self
-    {
-        $this->message = $message;
-        return $this;
-    }
+    protected $meta = [];
+    protected $messages = [];
+    protected $statusCode = 200;
 
     public function setData(array $data): self
     {
@@ -23,42 +17,38 @@ class ApiResponse
         return $this;
     }
 
-    public function setCode(int $code): self
+    public function setMeta(array $meta): self
     {
-        $this->code = $code;
+        $this->meta = $meta;
         return $this;
     }
 
-    public function setErrors(array $errors): self
+    public function setMessages(array $messages): self
     {
-        $this->errors = $errors;
+        $this->messages = $messages;
         return $this;
     }
 
-    public function get(): JsonResponse
+    public function pushMessage(string $message): self
     {
-        return response()->json(
-            $this->getArray(),
-            $this->code
-        );
+        $this->messages[] = __($message);
+        return $this;
     }
 
-     public function getArray(): array
-     {
-         $data = [
-             'message' => $this->message,
-             'data' => $this->data,
-             'errors' => $this->errors
-         ];
+    public function setStatusCode(int $statusCode): self
+    {
+        $this->statusCode = $statusCode;
+        return $this;
+    }
 
-         if (empty($data['data'])) {
-            unset($data['data']);
-         }
+    public function response(): JsonResponse
+    {
+        $responseData = [
+            'data' => $this->data,
+            'meta' => $this->meta,
+            'messages' => $this->messages,
+        ];
 
-         if (empty($data['errors'])) {
-             unset($data['errors']);
-         }
-
-         return $data;
-     }
+        return new JsonResponse($responseData, $this->statusCode);
+    }
 }

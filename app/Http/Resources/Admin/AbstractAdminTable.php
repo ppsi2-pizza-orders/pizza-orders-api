@@ -3,22 +3,16 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Interfaces\AdminTableInterface;
+use App\Http\Resources\AbstractApiResource;
 
-abstract class AbstractAdminTable implements AdminTableInterface
+abstract class AbstractAdminTable extends AbstractApiResource
 {
     protected $resource;
     protected $query;
     protected $paginator = [];
 
-    public function __construct()
-    {
-        $this->resource = new JsonResource(null);
-    }
-
-    public function tableResponse($request = null): JsonResponse
+    public function response($request = null): JsonResponse
     {
         $response = new JsonResponse();
         $this->query = $this->getModelClass()::query();
@@ -37,32 +31,24 @@ abstract class AbstractAdminTable implements AdminTableInterface
             $this->setPagination();
         }
 
-        $this->collect(
+        $this->resource(
             $this->query->get()
         );
 
         $data = $this->getData();
 
-        $response->setData([
-            'data' => $data,
-            'meta' => $this->with()
-        ]);
-
-        return $response;
-    }
-
-    public function collect($resource): AdminTableInterface
-    {
-        $this->resource->resource = $resource;
-        return $this;
-    }
-
-    public function with(): array
-    {
-        return [
+        $this->meta = [
             'columns' => $this->getColumns(),
             'paginator' => $this->paginator
         ];
+
+        $response->setData([
+            'data' => $data,
+            'meta' => $this->meta,
+            'messages' => $this->messages
+        ]);
+
+        return $response;
     }
 
     public function getPagination(): int
