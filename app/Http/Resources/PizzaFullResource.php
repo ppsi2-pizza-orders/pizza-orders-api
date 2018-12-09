@@ -2,23 +2,15 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
-class PizzaFullResource extends JsonResource
+class PizzaFullResource extends AbstractApiResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
+    public function toArray(): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'price' => $this->price,
-            'image' => $this->image,
+            'id' => $this->resource->id,
+            'name' => $this->resource->name,
+            'price' => $this->resource->price,
+            'image' => $this->resource->image,
         ];
     }
 }

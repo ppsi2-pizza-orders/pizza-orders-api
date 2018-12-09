@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use JWTAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRestaurant;
@@ -12,36 +12,34 @@ use App\Models\Restaurant;
 use App\Http\Resources\RestaurantResource as FullRestaurant;
 use App\Http\Resources\RestaurantListResource as ListRestaurant;
 
-class RestaurantController extends Controller
+use App\Http\Controllers\ApiResourceController;
+use App\Models\Restaurant;
+use App\Http\Requests\CreateRestaurant;
+
+class RestaurantController extends ApiResourceController
 {
     public function index()
     {
         $restaurants = Restaurant::pluck('name');
         $cities = Restaurant::pluck('city')->unique()->values();
 
-        return response()->json([
+        $data = [
             'names' => $restaurants,
             'cities'=> $cities
-        ]);
-    }
+        ];
 
-    public function search(Request $request)
-    {
-        $restaurantName = $request->input('searchName');
-        $restaurantCity = $request->input('searchCity');
-
-        $restaurant = Restaurant::where([
-            ['name', 'like', "%{$restaurantName}%"],
-            ['city', 'like', "%{$restaurantCity}%"],
-        ])->get();
-
-        return ListRestaurant::collection($restaurant);
+        return $this->apiResponse
+            ->setData($data)
+            ->response();
     }
 
     public function show($id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        return new FullRestaurant($restaurant);
+
+        return $this->apiResource
+            ->resource($restaurant)
+            ->response();
     }
 
     public function store(CreateRestaurant $request)
@@ -59,10 +57,13 @@ class RestaurantController extends Controller
         }
 
         $restaurant->photo = $fileNameToStore;
-        $restaurant->owner_id = JWTAuth::parseToken()->authenticate()->id;
+        $restaurant->owner_id = JWTAuth::user()->id;
         $restaurant->save();
 
-        return new FullRestaurant($restaurant);
+        return $this->apiResource
+            ->resource($restaurant)
+            ->pushMessage('Restaurant created')
+            ->response();
     }
 
     public function update(CreateRestaurant $request, $id)
@@ -81,18 +82,29 @@ class RestaurantController extends Controller
         $restaurant->description = $request->input('description');
         $restaurant->update();
 
-        return new FullRestaurant($restaurant);
+        return $this->apiResource
+            ->resource($restaurant)
+            ->pushMessage('Restaurant updated')
+            ->response();
     }
 
     public function destroy($id)
     {
         $restaurant = Restaurant::findOrFail($id);
+
         if ($restaurant->delete()) {
             if ($restaurant->image != 'noimage.jpg') {
-                Storage::delete('public/restaurant_photos/'.$restaurant->photo);
+              Storage::delete('public/restaurant_photos/'.$restaurant->photo);
             }
-            return new FullRestaurant($restaurant);
+
+            return $this->apiResponse
+                ->pushMessage('Restaurant deleted')
+                ->response();
         }
+
+        throw $this->apiException
+            ->setStatusCode(400)
+            ->pushMessage('Could not delete restaurant');
     }
 
     public function uploadFile(Request $request)

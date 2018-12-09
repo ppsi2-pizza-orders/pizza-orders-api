@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreatePizza;
 use App\Models\Restaurant;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Pizza;
-use App\Http\Resources\PizzaFullResource as PizzaResource;
 
-class PizzaController extends Controller
+class PizzaController extends ApiResourceController
 {
     public function store(CreatePizza $request, $id)
     {
@@ -30,7 +30,10 @@ class PizzaController extends Controller
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->pizzas()->attach($pizza);
 
-        return new PizzaResource($pizza);
+        return $this->apiResource
+            ->resource($pizza)
+            ->pushMessage('Pizza added')
+            ->response();
     }
 
     public function update(CreatePizza $request, $id)
@@ -45,7 +48,11 @@ class PizzaController extends Controller
         }
 
         $pizza->update();
-        return new PizzaResource($pizza);
+
+        return $this->apiResource
+            ->resource($pizza)
+            ->pushMessage('Pizza updated')
+            ->response();
     }
 
     public function destroy($id)
@@ -55,8 +62,15 @@ class PizzaController extends Controller
             if ($pizza->image != 'noimage.jpg') {
                 Storage::delete('public/pizza_images/'.$pizza->image);
             }
-            return new PizzaResource($pizza);
+
+            return $this->apiResponse
+                ->pushMessage('Pizza deleted')
+                ->response();
         }
+
+        throw $this->apiException
+            ->setStatusCode(400)
+            ->pushMessage('Could not delete pizza');
     }
 
     public function uploadFile(Request $request)

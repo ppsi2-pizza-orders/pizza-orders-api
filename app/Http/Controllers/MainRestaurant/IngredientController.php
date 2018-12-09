@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
+use App\Http\Controllers\ApiResourceController;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateIngredient;
-use App\Http\Controllers\Controller;
 use App\Models\Ingredient;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\IngredientResource as IngredientResource;
 
-class IngredientController extends Controller
+class IngredientController extends ApiResourceController
 {
     public function store(CreateIngredient $request)
     {
@@ -25,7 +25,10 @@ class IngredientController extends Controller
         $ingredient->image = $fileNameToStore;
         $ingredient->save();
 
-        return new IngredientResource($ingredient);
+        return $this->apiResource
+            ->resource($ingredient)
+            ->pushMessage('Ingredient added')
+            ->response();
     }
 
     public function update(CreateIngredient $request, $id)
@@ -40,17 +43,29 @@ class IngredientController extends Controller
 
         $ingredient->update();
 
-        return new IngredientResource($ingredient);
+        return $this->apiResource
+            ->resource($ingredient)
+            ->pushMessage('Ingredient updated')
+            ->response();
     }
-    public function destroy($id)
+
+    public function destroy(int $id)
     {
         $ingredient = Ingredient::findOrFail($id);
+
         if ($ingredient->delete()) {
             if ($ingredient->image != 'noimage.jpg') {
                 Storage::delete('public/ingredient_images/'.$ingredient->image);
             }
-            return new IngredientResource($ingredient);
+
+            return $this->apiResponse
+                ->pushMessage('Ingredient deleted')
+                ->response();
         }
+
+        throw $this->apiException
+            ->setStatusCode(400)
+            ->pushMessage('Could not delete ingredient');
     }
 
     public function uploadFile(Request $request)

@@ -19,13 +19,13 @@ class AuthService
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 throw (new ApiException())
-                    ->setErrorCode(400)
-                    ->setMessage('Invalid login credentials');
+                    ->setStatusCode(400)
+                    ->pushMessage('Invalid login credentials');
             }
         } catch (JWTException $e) {
             throw (new ApiException())
-                ->setErrorCode(500)
-                ->setMessage('Could not create JWT Token');
+                ->setStatusCode(500)
+                ->pushMessage('Could not create JWT Token');
         }
 
         return compact('token');
@@ -51,8 +51,8 @@ class AuthService
                 ->userFromToken($fbAccessToken);
         } catch (Exception $exception) {
             throw (new ApiException())
-                ->setErrorCode(400)
-                ->setMessage('Could not fetch Facebook account');
+                ->setStatusCode(400)
+                ->pushMessage('Could not fetch Facebook account');
         }
 
         $user = $this->findOrNewUser($fbUser, 'facebook');
@@ -79,8 +79,8 @@ class AuthService
 
         if ($alreadyCreatedUser) {
             throw (new ApiException())
-                ->setErrorCode(400)
-                ->setMessage('User with email provided in Facebook already is registered');
+                ->setStatusCode(400)
+                ->pushMessage('User with email provided in Facebook already is registered');
         }
 
         $data = [

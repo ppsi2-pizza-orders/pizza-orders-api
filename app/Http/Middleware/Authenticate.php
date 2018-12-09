@@ -18,22 +18,22 @@ class Authenticate
             $user = JWTAuth::parseToken()->authenticate();
         } catch (TokenExpiredException  $exception) {
             throw (new ApiException)
-                ->setMessage('Token expired')
-                ->setErrorCode(401);
+                ->pushMessage('Token expired')
+                ->setStatusCode(401);
         } catch (TokenInvalidException $exception) {
             throw (new ApiException)
-                ->setMessage('Token invalid')
-                ->setErrorCode(401);
+                ->pushMessage('Token invalid')
+                ->setStatusCode(401);
         } catch (JWTException $exception) {
             throw (new ApiException)
-                ->setMessage('Token absent')
-                ->setErrorCode(401);
+                ->pushMessage('Token absent')
+                ->setStatusCode(401);
         }
 
         if (!$user) {
             throw (new ApiException)
-                ->setMessage('User not found')
-                ->setErrorCode(401);
+                ->pushMessage('User not found')
+                ->setStatusCode(401);
         }
 
         return $next($request);

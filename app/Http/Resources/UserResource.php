@@ -2,17 +2,15 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-
-class UserResource extends JsonResource
+class UserResource extends AbstractApiResource
 {
-    public function toArray($request)
+    public function toArray(): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'admin' => $this->is_admin,
+            'id' => $this->resource->id,
+            'name' => $this->resource->name,
+            'email' => $this->resource->email,
+            'admin' => $this->resource->is_admin,
         ];
     }
 }

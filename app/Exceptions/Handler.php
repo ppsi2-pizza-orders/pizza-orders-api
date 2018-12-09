@@ -4,7 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 use App\Helpers\ApiResponse;
 
@@ -13,79 +15,34 @@ class Handler extends ExceptionHandler
 
     public function report(Exception $exception)
     {
-        parent::report($exception);
+       parent::report($exception);
     }
 
     public function render($request, Exception $exception)
     {
         $response = new ApiResponse();
 
-        if ($exception instanceof NotFoundHttpException) {
+        if ($exception instanceof NotFoundHttpException || $exception instanceof ModelNotFoundException) {
             return $response
-                ->setMessage('Resource not found')
-                ->setCode(404)
-                ->get();
+                ->pushMessage('Resource not found')
+                ->setStatusCode(404)
+                ->response();
         }
+
+        if($exception instanceof MethodNotAllowedHttpException) {
+            return $response
+                ->pushMessage('Method not allowed')
+                ->setStatusCode(404)
+                ->response();
+        }
+
         if ($exception instanceof ApiException) {
             return $response
-                ->setMessage($exception->getMessage())
-                ->setCode($exception->getErrorCode())
-                ->setErrors($exception->getErrors())
-                ->get();
+                ->setMessages($exception->getMessages())
+                ->setStatusCode($exception->getStatusCode())
+                ->response();
         }
 
-        if (config('app.debug')) {
-            return parent::render($request, $exception);
-        }
-
-        return $this->returnJsonException($exception);
-    }
-
-    private function returnJsonException(Exception $exception)
-    {
-        $response = new ApiResponse();
-
-        if (method_exists($exception, 'getStatusCode')) {
-            $statusCode = $exception->getStatusCode();
-        } else {
-            $statusCode = 500;
-        }
-
-        switch ($statusCode) {
-            case 401:
-                $message = 'Unauthorized';
-                break;
-            case 403:
-                $message = 'Forbidden';
-                break;
-            case 404:
-                $message = 'Not Found';
-                break;
-            case 405:
-                $message = 'Method Not Allowed';
-                break;
-            case 422:
-                $message = $exception->original['message'];
-                break;
-            default:
-                $message = ($statusCode == 500) ? 'Whoops, looks like something went wrong' : $exception->getMessage();
-                break;
-        }
-
-        if (config('app.debug')) {
-            return $response
-                ->setMessage($message)
-                ->setCode($statusCode)
-                ->setData([
-                    'trace' => $exception->getTrace(),
-                    'code' => $exception->getCode()
-                ])
-                ->get();
-        }
-
-        return $response
-            ->setMessage($message)
-            ->setCode($statusCode)
-            ->get();
+        return parent::render($request, $exception);
     }
 }
