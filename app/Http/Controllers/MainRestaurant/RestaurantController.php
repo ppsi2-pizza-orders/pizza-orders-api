@@ -13,8 +13,6 @@ use App\Http\Resources\RestaurantResource as FullRestaurant;
 use App\Http\Resources\RestaurantListResource as ListRestaurant;
 
 use App\Http\Controllers\ApiResourceController;
-use App\Models\Restaurant;
-use App\Http\Requests\CreateRestaurant;
 
 class RestaurantController extends ApiResourceController
 {
