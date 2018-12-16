@@ -12,6 +12,9 @@ use App\Http\Resources\Restaurant\RestaurantResource;
 use App\Http\Controllers\MainRestaurant\RestaurantListController;
 use App\Http\Resources\Restaurant\RestaurantListResource;
 
+use App\Http\Controllers\MainRestaurant\RestaurantOwnerController;
+use App\Http\Resources\Restaurant\RestaurantPermissionsResource;
+
 use App\Http\Controllers\Admin\RestaurantController as RestaurantAdminController;
 use App\Http\Resources\Admin\RestaurantsTable;
 
@@ -42,10 +45,24 @@ class ApiResourceServiceProvider extends ServiceProvider
             });
 
         $this->app
+            ->when(RestaurantRatingController::class)
+            ->needs(ApiResource::class)
+            ->give(function() {
+                return new RestaurantRatingResource();
+            });
+
+        $this->app
             ->when(RestaurantListController::class)
             ->needs(ApiResource::class)
             ->give(function() {
                 return new RestaurantListResource();
+            });
+
+        $this->app
+            ->when(RestaurantOwnerController::class)
+            ->needs(ApiResource::class)
+            ->give(function() {
+                return new RestaurantPermissionsResource();
             });
 
         $this->app
