@@ -22,4 +22,11 @@ class Restaurant extends Model
     public function pizzas(){
         return $this->belongsToMany('App\Models\Pizza');
     }
+    public function users(){
+        return $this->belongsToMany('App\Models\User');
+    }
+    public function ingredients()
+    {
+        return $this->belongsToMany('App\Models\Ingredient', 'pizza_ingredient');
+    }
 }
