@@ -22,4 +22,5 @@ class RestaurantListController extends ApiResourceController
             ->resource($restaurants)
             ->response();
     }
+
 }
