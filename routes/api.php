@@ -34,4 +34,3 @@ Route::post('auth/login', 'Auth\AuthController@login');
 Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
 Route::post('restaurants', 'MainRestaurant\RestaurantListController@search');
 Route::get('restaurant/{id}', 'MainRestaurant\RestaurantController@show');
-Route::get('restaurant/{id}/rating', 'MainRestaurant\RestaurantRatingController@average');
