@@ -45,13 +45,6 @@ class ApiResourceServiceProvider extends ServiceProvider
             });
 
         $this->app
-            ->when(RestaurantRatingController::class)
-            ->needs(ApiResource::class)
-            ->give(function() {
-                return new RestaurantRatingResource();
-            });
-
-        $this->app
             ->when(RestaurantListController::class)
             ->needs(ApiResource::class)
             ->give(function() {
