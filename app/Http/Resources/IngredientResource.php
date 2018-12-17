@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Config;
 
 class IngredientResource extends AbstractApiResource
 {
@@ -10,7 +11,7 @@ class IngredientResource extends AbstractApiResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'image' => $this->resource->image,
+            'image' => Config::get('constants.links.ingredient_images').$this->resource->image,
         ];
     }
 }
