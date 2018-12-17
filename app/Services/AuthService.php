@@ -14,6 +14,12 @@ use App\Exceptions\ApiException;
 
 class AuthService
 {
+    public function refreshToken(): array
+    {
+        $token = JWTAuth::refresh();
+        return compact('token');
+    }
+
     public function attemptLogin(array $credentials): array
     {
         try {

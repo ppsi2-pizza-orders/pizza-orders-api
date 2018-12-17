@@ -10,7 +10,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use App\Helpers\ApiResponse;
 use App\Interfaces\ApiResourceInterface;
 
-abstract class AbstractApiResource implements ApiResourceInterface
+class ApiResource implements ApiResourceInterface
 {
     protected $resource;
     protected $data = [];
@@ -20,6 +20,11 @@ abstract class AbstractApiResource implements ApiResourceInterface
     public function __construct()
     {
         $this->resource = new JsonResource(null);
+    }
+
+    public function toArray(): array
+    {
+        return [];
     }
 
     public function response($request = null): JsonResponse

@@ -19,7 +19,15 @@ class Restaurant extends Model
     {
         return $this->hasMany('App\Models\Review');
     }
-    public function pizzas(){
+
+    public function pizzas()
+    {
         return $this->belongsToMany('App\Models\Pizza');
     }
+
+    public function getReviewStars(): float
+    {
+       return floor($this->reviews()->avg('average_rating') * 2) / 2;
+    }
+
 }

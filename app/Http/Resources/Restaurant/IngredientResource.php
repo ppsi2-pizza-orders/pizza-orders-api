@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Restaurant;
 
-class PizzaFullResource extends AbstractApiResource
+use App\Http\Resources\ApiResource;
+
+class IngredientResource extends ApiResource
 {
     public function toArray(): array
     {
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'price' => $this->resource->price,
             'image' => $this->resource->image,
         ];
     }

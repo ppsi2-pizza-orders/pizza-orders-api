@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Broadcasting\BroadcastException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -33,6 +34,13 @@ class Handler extends ExceptionHandler
             return $response
                 ->pushMessage('Method not allowed')
                 ->setStatusCode(404)
+                ->response();
+        }
+
+        if($exception instanceof BroadcastException) {
+            return $response
+                ->pushMessage('Could not broadcast event')
+                ->setStatusCode(500)
                 ->response();
         }
 

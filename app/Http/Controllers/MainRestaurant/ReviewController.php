@@ -15,14 +15,14 @@ class ReviewController extends ApiResourceController
     {
         $restaurant = Restaurant::findOrFail($id);
 
-        $review = new Review();
-        $review->restaurant_id = $restaurant->id;
-        $review->user_id = JWTAuth::user()->id;
-        $review->base_rating = $request->input('base_rating');
-        $review->ingredients_rating = $request->input('ingredients_rating');
-        $review->delivery_time_rating = $request->input('delivery_time_rating');
-        $review->comment = $request->input('comment');
-        $review->save();
+        $review = Review::create([
+            'restaurant_id' => $restaurant->id,
+            'user_id' => JWTAuth::user()->id,
+            'base_rating' => $request->input('base_rating'),
+            'ingredients_rating' => $request->input('ingredients_rating'),
+            'delivery_time_rating' => $request->input('delivery_time_rating'),
+            'comment' => $request->input('comment')
+        ]);
 
         return $this->apiResource
             ->resource($review)

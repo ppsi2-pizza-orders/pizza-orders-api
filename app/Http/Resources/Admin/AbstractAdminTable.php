@@ -4,9 +4,9 @@ namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\JsonResponse;
 
-use App\Http\Resources\AbstractApiResource;
+use App\Http\Resources\ApiResource;
 
-abstract class AbstractAdminTable extends AbstractApiResource
+abstract class AbstractAdminTable extends ApiResource
 {
     protected $resource;
     protected $query;

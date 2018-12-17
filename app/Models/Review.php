@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     protected $fillable = [
+        'restaurant_id',
+        'user_id',
         'base_rating',
         'ingredients_rating',
         'delivery_time_rating',
@@ -17,6 +19,7 @@ class Review extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
     public function restaurant()
     {
         return $this->belongsTo('App\Models\Restaurant');

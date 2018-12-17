@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-class UserResource extends AbstractApiResource
+class UserResource extends ApiResource
 {
     public function toArray(): array
     {

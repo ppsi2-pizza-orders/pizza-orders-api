@@ -49,6 +49,16 @@ class AuthController
             ->response();
     }
 
+    public function refreshToken()
+    {
+        $token = $this->authService->refreshToken();
+
+        return $this->response
+            ->pushMessage('Token refreshed')
+            ->setData($token)
+            ->response();
+    }
+
     public function facebookLogin(FacebookLoginUser $request)
     {
         $fbAccessToken = $request->get('access_token');

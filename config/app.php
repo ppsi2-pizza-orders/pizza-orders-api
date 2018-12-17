@@ -159,10 +159,12 @@ return [
 
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ObserverServiceProvider::class,
         App\Providers\ApiResourceServiceProvider::class,
+        App\Providers\OrderServiceProvider::class,
     ],
 
     /*

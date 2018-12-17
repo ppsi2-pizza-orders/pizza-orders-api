@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/debug/check_auth', function () {
@@ -22,6 +25,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/restaurants', 'Admin\RestaurantController@index');
     Route::get('admin/ingredients', 'Admin\IngredientController@index');
     Route::get('admin/users', 'Admin\UserController@index');
+
+    Route::post('auth/refresh', 'Auth\AuthController@refreshToken');
+
+    Route::post('order', 'Order\OrderController@placeOrder');
+    Route::post('order/{token}/status/next', 'Order\OrderController@setNextStatus');
 });
 
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
