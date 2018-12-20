@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     protected $fillable = [
-        'name',
-        'image',
+        'name', 'image',
     ];
 
-    public function pizzas(){
-        return $this->belongsToMany('App\Models\Pizza')->withPivot('pizza_ingredient');
+    public function pizzas()
+    {
+        return $this->belongsToMany(Pizza::class)->withPivot('pizza_ingredient');
     }
-    public function restaurants(){
-        return $this->belongsToMany('App\Models\Restaurant');
+
+    public function restaurants()
+    {
+        return $this->belongsToMany(Restaurant::class);
     }
 }

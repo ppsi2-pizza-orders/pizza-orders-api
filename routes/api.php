@@ -1,5 +1,6 @@
 <?php
 
+
 Route::middleware('auth:api')->group(function () {
     Route::get('/debug/check_auth', function () {
         echo 'Auth works!';
@@ -34,3 +35,4 @@ Route::post('auth/login', 'Auth\AuthController@login');
 Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
 Route::post('restaurants', 'MainRestaurant\RestaurantListController@search');
 Route::get('restaurant/{id}', 'MainRestaurant\RestaurantController@show');
+

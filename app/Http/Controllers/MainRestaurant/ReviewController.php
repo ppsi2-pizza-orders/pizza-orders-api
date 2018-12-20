@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use App\Http\Controllers\ApiResourceController;
-use Tymon\JWTAuth\Facades\JWTAuth;
-
+use JWTAuth;
 use App\Models\Restaurant;
 use App\Models\Review;
 use App\Http\Requests\CreateReview;
+use App\Http\Controllers\ApiResourceController;
 
 class ReviewController extends ApiResourceController
 {
@@ -15,13 +14,15 @@ class ReviewController extends ApiResourceController
     {
         $restaurant = Restaurant::findOrFail($id);
 
-        $review = new Review();
-        $review->restaurant_id = $restaurant->id;
-        $review->user_id = JWTAuth::user()->id;
-        $review->base_rating = $request->input('base_rating');
-        $review->ingredients_rating = $request->input('ingredients_rating');
-        $review->delivery_time_rating = $request->input('delivery_time_rating');
-        $review->comment = $request->input('comment');
+        $review = new Review([
+            'restaurant_id' => $restaurant->id,
+            'user_id' => JWTAuth::user()->id,
+            'base_rating' => $request->input('base_rating'),
+            'ingredients_rating' => $request->input('ingredients_rating'),
+            'delivery_time_rating' => $request->input('delivery_time_rating'),
+            'comment' => $request->input('comment'),
+        ]);
+
         $review->save();
 
         return $this->apiResource
@@ -36,12 +37,10 @@ class ReviewController extends ApiResourceController
         $commentUser = $review->user_id;
         $currentUser = JWTAuth::user()->id;
 
-        if ($currentUser == $commentUser) {
-            if ($review->delete()) {
-                return $this->apiResponse
-                    ->pushMessage('Review deleted')
-                    ->response();
-            }
+        if ($currentUser == $commentUser && $review->delete()) {
+            return $this->apiResponse
+                ->pushMessage('Review deleted')
+                ->response();
         }
 
         throw $this->apiException

@@ -14,18 +14,14 @@ class RestaurantOwnerController extends ApiResourceController
         $restaurant = Restaurant::findOrFail($id);
         $userEmail = $request->input('email');
         $userRole = $request->input('role');
-        $user = User::where('email', 'like', $userEmail)->first();
 
-        if ($user) {
-            $user->restaurants()->attach($restaurant, ['role' => $userRole]);
+        $user = User::where('email', 'like', $userEmail)->firstOrFail();
 
-            return $this->apiResponse
-                ->pushMessage('User added to restaurant')
-                ->response();
-        }
-        throw $this->apiException
-            ->setStatusCode(400)
-            ->pushMessage('Could not find user');
+        $user->restaurants()->attach($restaurant, ['role' => $userRole]);
+
+        return $this->apiResponse
+            ->pushMessage('User added to restaurant')
+            ->response();
     }
 
     public function revoke($id, $user_id)
@@ -33,6 +29,7 @@ class RestaurantOwnerController extends ApiResourceController
         $restaurant = Restaurant::findOrFail($id);
         $user = User::findOrFail($user_id);
         $user->restaurants()->detach($restaurant);
+
         return $this->apiResponse
             ->pushMessage('User removed from restaurant')
             ->response();
