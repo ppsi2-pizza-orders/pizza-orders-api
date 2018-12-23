@@ -14,6 +14,26 @@
  * )
  */
 
+/**
+ * @OA\Post(
+ *      path="/auth/refresh",
+ *      tags={"Auth"},
+ *      security={{"Authorization header": {}}},
+ *      description="Refreshing expired token",
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                      "data":{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9waXp6YS1vcmRlcnMtYXBpLnRlc3RcL2F1dGhcL3JlZnJlc2giLCJpYXQiOjE1NDU1ODUwNzIsImV4cCI6MTU0NTU4NTY5MywibmJmIjoxNTQ1NTg1NjMzLCJqdGkiOiJFd0kxQ0Q4TWFVWWJmbkxuIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwidXNlciI6eyJpZCI6MSwibmFtZSI6IkphbiBLb3dhbHNraSIsImVtYWlsIjoiZXhhbXBsZUBleGFtcGxlLmNvbSIsImFkbWluIjoxLCJyZXN0YXVyY[]W50cyI6W119fQ.y--F2lcPvl1QnNVHH3951xKHRYzWNjIZtE3f8VfntII"},"meta":{},"messages":{"Token refreshed"}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
 
 /**
  * @OA\Post(

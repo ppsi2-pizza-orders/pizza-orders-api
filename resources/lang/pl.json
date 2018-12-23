@@ -11,6 +11,7 @@
     "Token expired": "Token wygasł",
     "Token invalid": "Nieprawidłowy token",
     "Token absent": "Nie znaleziono tokenu",
+    "Token not expired": "Token jeszcze nie wygasł",
     "User not found": "Użytkownik nie znaleziony",
 
     "Restaurant created": "Restauracja została stworzona",

@@ -6,6 +6,39 @@
         "version": "0.1.0"
     },
     "paths": {
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Refreshing expired token",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": {
+                                            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9waXp6YS1vcmRlcnMtYXBpLnRlc3RcL2F1dGhcL3JlZnJlc2giLCJpYXQiOjE1NDU1ODUwNzIsImV4cCI6MTU0NTU4NTY5MywibmJmIjoxNTQ1NTg1NjMzLCJqdGkiOiJFd0kxQ0Q4TWFVWWJmbkxuIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwidXNlciI6eyJpZCI6MSwibmFtZSI6IkphbiBLb3dhbHNraSIsImVtYWlsIjoiZXhhbXBsZUBleGFtcGxlLmNvbSIsImFkbWluIjoxLCJyZXN0YXVyY[]W50cyI6W119fQ.y--F2lcPvl1QnNVHH3951xKHRYzWNjIZtE3f8VfntII"
+                                        },
+                                        "meta": [],
+                                        "messages": [
+                                            "Token refreshed"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
         "/auth/register": {
             "post": {
                 "tags": [

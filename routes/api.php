@@ -31,6 +31,7 @@ Route::middleware('auth:api')->group(function () {
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
 Route::post('auth/register', 'Auth\AuthController@register');
 Route::post('auth/login', 'Auth\AuthController@login');
+Route::post('auth/refresh', 'Auth\AuthController@refreshToken');
 
 Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
 Route::post('restaurants', 'MainRestaurant\RestaurantListController@search');

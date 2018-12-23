@@ -7,6 +7,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
 use App\Helpers\ApiResponse;
 
@@ -33,6 +34,13 @@ class Handler extends ExceptionHandler
             return $response
                 ->pushMessage('Method not allowed')
                 ->setStatusCode(404)
+                ->response();
+        }
+
+        if ($exception instanceof TokenBlacklistedException) {
+            return $response
+                ->pushMessage('Token blacklisted')
+                ->setStatusCode(401)
                 ->response();
         }
 
