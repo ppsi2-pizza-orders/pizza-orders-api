@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\MainRestaurant;
 
 use Storage;
+use App\Interfaces\ImageUploaderInterface as ImageUploader;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreateIngredient;
 use App\Models\Ingredient;
 
 class IngredientController extends ApiResourceController
 {
+    protected $imageUploader;
+
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    {
+        $this->imageUploader = $imageUploader;
+        parent::__construct($apiResource);
+    }
+
     public function store(CreateIngredient $request)
     {
         $ingredient = new Ingredient([

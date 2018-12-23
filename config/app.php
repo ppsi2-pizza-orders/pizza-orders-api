@@ -163,6 +163,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ApiResourceServiceProvider::class,
+        App\Providers\ImageUploaderServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
     ],

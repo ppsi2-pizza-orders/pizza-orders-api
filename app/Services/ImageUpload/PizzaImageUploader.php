@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-class PizzaImageUploadService extends ImageUploadService
+class PizzaImageUploader extends ImageUploader
 {
-    protected function getSize(): ?array
+    protected function getResolution(): ?array
     {
         return ['200', '200'];
     }

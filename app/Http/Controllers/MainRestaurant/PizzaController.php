@@ -4,6 +4,8 @@ namespace App\Http\Controllers\MainRestaurant;
 
 
 use Storage;
+use App\Interfaces\ImageUploaderInterface as ImageUploader;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreatePizza;
 use App\Models\Restaurant;
@@ -11,11 +13,20 @@ use App\Models\Pizza;
 
 class PizzaController extends ApiResourceController
 {
+    protected $imageUploader;
+
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    {
+        $this->imageUploader = $imageUploader;
+        parent::__construct($apiResource);
+    }
+
     public function store(CreatePizza $request, $id)
     {
         $pizza = new Pizza([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
+            'image' => 'public/restaurants/noimage.jpg',
         ]);
 
         if ($request->hasFile('image')) {

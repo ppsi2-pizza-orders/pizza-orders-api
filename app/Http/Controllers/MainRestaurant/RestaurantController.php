@@ -4,12 +4,22 @@ namespace App\Http\Controllers\MainRestaurant;
 
 use Storage;
 use JWTAuth;
+use App\Interfaces\ImageUploaderInterface as ImageUploader;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
 use App\Http\Controllers\ApiResourceController;
 
 class RestaurantController extends ApiResourceController
 {
+    protected $imageUploader;
+
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    {
+        $this->imageUploader = $imageUploader;
+        parent::__construct($apiResource);
+    }
+
     public function index()
     {
         $restaurants = Restaurant::pluck('name');
@@ -42,12 +52,12 @@ class RestaurantController extends ApiResourceController
             'city' => $request->input('city'),
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
-            'photo' => 'public/restaurants/noimage.png',
+            'photo' => 'public/restaurants/noimage.jpg',
             'owner_id' => JWTAuth::user()->id,
         ]);
 
         if ($request->hasFile('photo')) {
-            $restaurant->photo = $this->fileUploader->store($request->photo);
+            $restaurant->photo = $this->imageUploader->store($request->photo);
         }
 
         $restaurant->save();

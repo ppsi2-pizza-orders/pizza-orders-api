@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AddUserToRestaurant;
 use App\Http\Controllers\ApiResourceController;
 use App\Models\Restaurant;
 use App\Models\User;
 
 class RestaurantOwnerController extends ApiResourceController
 {
-    public function grant($id, Request $request)
+    public function grant($id, AddUserToRestaurant $request)
     {
         $restaurant = Restaurant::findOrFail($id);
         $userEmail = $request->input('email');
         $userRole = $request->input('role');
 
         $user = User::where('email', 'like', $userEmail)->firstOrFail();
+
+        $userRestaurant = $user->restaurants()->wherePivot('role', $userRole)->first();
+
+        if ($userRestaurant) {
+            throw $this->apiException
+                ->pushMessage('User role already added');
+        }
 
         $user->restaurants()->attach($restaurant, ['role' => $userRole]);
 

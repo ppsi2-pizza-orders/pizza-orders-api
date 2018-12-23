@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-class IngredientImageUploadService extends ImageUploadService
+class IngredientImageUploader extends ImageUploader
 {
-    protected function getSize(): ?array
+    protected function getResolution(): ?array
     {
         return ['200', '200'];
     }

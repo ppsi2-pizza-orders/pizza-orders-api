@@ -25,7 +25,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/users', 'Admin\UserController@index');
 
     Route::post('restaurant/{id}/grant', 'MainRestaurant\RestaurantOwnerController@grant');
-    Route::post('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke');
+    Route::delete('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke');
 });
 
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
