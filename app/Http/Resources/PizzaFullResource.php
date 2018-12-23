@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Support\Facades\Config;
+use Storage;
 
 class PizzaFullResource extends AbstractApiResource
 {
@@ -12,7 +12,7 @@ class PizzaFullResource extends AbstractApiResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'price' => $this->resource->price,
-            'image' => Config::get('constants.links.pizza_images').$this->resource->image,
+            'image' => Storage::url($this->resource->image),
         ];
     }
 }

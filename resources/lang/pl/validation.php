@@ -73,6 +73,7 @@ return [
         'address' => 'adres',
         'phone' => 'numer telefonu',
         'password' => 'hasło',
-        'price' => 'cena'
+        'price' => 'cena',
+        'role' => 'rola'
     ],
 ];

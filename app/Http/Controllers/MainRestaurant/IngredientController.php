@@ -2,27 +2,34 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
+use Storage;
+use App\Interfaces\ImageUploaderInterface as ImageUploader;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Controllers\ApiResourceController;
-use Illuminate\Http\Request;
 use App\Http\Requests\CreateIngredient;
 use App\Models\Ingredient;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Resources\IngredientResource as IngredientResource;
 
 class IngredientController extends ApiResourceController
 {
+    protected $imageUploader;
+
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    {
+        $this->imageUploader = $imageUploader;
+        parent::__construct($apiResource);
+    }
+
     public function store(CreateIngredient $request)
     {
-        $ingredient = new Ingredient();
-        $ingredient->name = $request->input('name');
+        $ingredient = new Ingredient([
+            'name' => $request->input('name'),
+            'image' => 'public/ingredients/noimage.jpg'
+        ]);
 
         if ($request->hasFile('image')) {
-            $fileNameToStore = $this->uploadFile($request);
-        } else {
-            $fileNameToStore = 'noimage.png';
+            $ingredient->image = $this->imageUploader->store($request->image);
         }
 
-        $ingredient->image = $fileNameToStore;
         $ingredient->save();
 
         return $this->apiResource
@@ -37,8 +44,7 @@ class IngredientController extends ApiResourceController
         $ingredient->name = $request->input('name');
 
         if ($request->hasFile('image')) {
-            $fileNameToStore = $this->uploadFile($request);
-            $ingredient->image = $fileNameToStore;
+            $ingredient->image = $this->imageUploader->store($request->image);
         }
 
         $ingredient->update();
@@ -55,7 +61,7 @@ class IngredientController extends ApiResourceController
 
         if ($ingredient->delete()) {
             if ($ingredient->image != 'noimage.jpg') {
-                Storage::delete('public/ingredient_images/'.$ingredient->image);
+                Storage::delete($ingredient->image);
             }
 
             return $this->apiResponse
@@ -67,15 +73,4 @@ class IngredientController extends ApiResourceController
             ->setStatusCode(400)
             ->pushMessage('Could not delete ingredient');
     }
-
-    public function uploadFile(Request $request)
-    {
-        $filenameWithExt = $request->file('image')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $fileNameToStore = $filename.'_'.time().'_'.$extension;
-        $path = $request->file('image')->storeAs('public/ingredient_images', $fileNameToStore);
-        return $fileNameToStore;
-    }
-
 }

@@ -26,5 +26,9 @@
     "Pizza added": "Pizza dodana",
     "Pizza updated": "Pizza zaktualizowana",
     "Pizza deleted": "Pizza usunięta",
-    "Could not delete pizza": "Pizza nie mogła zostać usunięta"
+    "Could not delete pizza": "Pizza nie mogła zostać usunięta",
+
+    "User added to restaurant": "Użytkownik dodany do restauracji",
+    "User role already added": "Taka rola użytkownika jest już ustawiona",
+    "User removed from restaurant": "Użytkownik usunięty z restauracji"
 }

@@ -1,5 +1,6 @@
 <?php
 
+
 Route::middleware('auth:api')->group(function () {
     Route::get('/debug/check_auth', function () {
         echo 'Auth works!';
@@ -24,7 +25,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/users', 'Admin\UserController@index');
 
     Route::post('restaurant/{id}/grant', 'MainRestaurant\RestaurantOwnerController@grant');
-    Route::post('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke');
+    Route::delete('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke');
 });
 
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
@@ -34,3 +35,4 @@ Route::post('auth/login', 'Auth\AuthController@login');
 Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
 Route::post('restaurants', 'MainRestaurant\RestaurantListController@search');
 Route::get('restaurant/{id}', 'MainRestaurant\RestaurantController@show');
+

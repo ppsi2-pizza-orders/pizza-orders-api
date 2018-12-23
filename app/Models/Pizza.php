@@ -7,16 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Pizza extends Model
 {
     protected $fillable = [
-        'name',
-        'price',
-        'image'
+        'name', 'price', 'image'
     ];
 
-    public function restaurants(){
-        return $this->belongsToMany('App\Models\Restaurant');
+    public function restaurants()
+    {
+        return $this->belongsToMany(Restaurant::class);
     }
+
     public function ingredients()
     {
-        return $this->belongsToMany('App\Models\Ingredient', 'pizza_ingredient');
+        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient');
     }
 }
+

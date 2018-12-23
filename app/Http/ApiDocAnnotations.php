@@ -203,7 +203,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                      "data":{{"id":1,"name":"Accusamus.","city":"East Godfreytown","address":"874 Hauck Rapids Suite 231","phone":"(403) 486-2122","photo":null,"description":"Dignissimos explicabo sunt eos vel magnam ipsa consequatur quam tenetur autem est sunt in occaecati rerum dignissimos suscipit temporibus exercitationem et inventore eos consequatur.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":2,"name":"Aut pariatur autem.","city":"New Katarina","address":"29270 Leslie Meadow Suite 032","phone":"(427) 568-9666 x11272","photo":null,"description":"Numquam reprehenderit nihil doloribus iusto voluptatem quidem nostrum aliquid totam officiis.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":3,"name":"Similique.","city":"Coltonmouth","address":"17892 Kuphal Turnpike Apt. 220","phone":"265-410-3833","photo":null,"description":"Beatae nemo veniam rerum ratione officia dolores quia possimus soluta dolore aperiam qui vero quo placeat reprehenderit veniam libero at ratione.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":4,"name":"Debitis pariatur illum.","city":"East Darrenstad","address":"749 Vaughn Islands Suite 098","phone":"(774) 715-7847 x11469","photo":null,"description":"At ea atque perferendis voluptatem exercitationem libero enim placeat quia quia illum.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":5,"name":"Dolore.","city":"Lake Michaleland","address":"6452 Larson Square","phone":"(358) 397-5629 x1850","photo":null,"description":"Asperiores iure est repellendus voluptatem est quae aliquam sit nam.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":6,"name":"Incidunt et ad.","city":"Judyside","address":"26763 Aubree Passage Suite 705","phone":"(903) 707-6084","photo":null,"description":"Quod aut deleniti non hic in aut corporis maiores unde occaecati nemo atque fuga labore.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":7,"name":"Quaerat.","city":"West Karen","address":"353 Heidenreich Plain","phone":"+1 (809) 863-6615","photo":null,"description":"Et et delectus numquam quisquam vel voluptas sed quisquam at culpa quia iste non esse laboriosam non aperiam molestiae eveniet rerum incidunt.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":8,"name":"Eum et.","city":"New Clemmiechester","address":"64550 Rolfson Highway Suite 712","phone":"(813) 613-7120 x98422","photo":null,"description":"In nihil libero tenetur voluptatem rerum quia fugiat dicta architecto quis non consequatur ut nam quia illo distinctio.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":9,"name":"Vitae enim.","city":"New Octavia","address":"335 Alexzander Extension Suite 773","phone":"883-753-7723 x74325","photo":null,"description":"Ea optio ut cupiditate at eius aut et facilis vel culpa odio qui iusto et eveniet.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":10,"name":"Sed soluta.","city":"Port Daphne","address":"863 Bonnie Mission Suite 511","phone":"+1-730-941-5041","photo":null,"description":"Enim autem eum laboriosam dolores necessitatibus tempore quae minima est libero.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":11,"name":"Aut et.","city":"Skilesville","address":"777 Josh Pines","phone":"512.683.0476 x9657","photo":null,"description":"Ducimus adipisci rerum qui fuga est quam velit architecto est voluptas tenetur ut molestiae veniam excepturi eos distinctio error id et.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":12,"name":"Ratione sint minus.","city":"Romainestad","address":"181 Kessler Forks","phone":"614-903-7705 x32162","photo":null,"description":"Sed magni est tempora porro sit tempore repellendus rerum ratione id veritatis saepe aperiam aliquam quidem.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":13,"name":"Quasi natus.","city":"Amandaport","address":"180 Jerome Forge","phone":"398-201-2229","photo":null,"description":"Nostrum enim qui atque laudantium quam a consequuntur quas maxime possimus repellat consequatur doloribus et a deserunt rerum ut minima.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":14,"name":"Nisi soluta.","city":"South Carlee","address":"393 Funk Manors","phone":"(309) 431-6344 x28655","photo":null,"description":"Nam hic voluptas aliquam quo corrupti quam excepturi eveniet sit quae illo magni asperiores laboriosam quam dolor deleniti assumenda.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":15,"name":"Nisi aperiam et.","city":"Schmidtstad","address":"26570 Rempel Rapid","phone":"+1-239-269-9792","photo":null,"description":"Aut maiores sint maiores sunt dolor quibusdam officiis blanditiis voluptates alias occaecati inventore quia qui qui voluptatem iusto ipsa voluptatum qui.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":16,"name":"Modi molestiae beatae.","city":"Aydenville","address":"23936 Jerome Way Suite 511","phone":"+17358267346","photo":null,"description":"Molestias rem sit praesentium itaque est qui aut iste minima soluta qui nihil sunt hic eum itaque.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":17,"name":"Blanditiis.","city":"East Erick","address":"811 Rory Plain Suite 735","phone":"(374) 341-0505","photo":null,"description":"Qui ea ad magnam quam inventore quam deleniti ducimus qui labore minus.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":18,"name":"Expedita laudantium.","city":"West Bessie","address":"7383 Winston Tunnel Apt. 591","phone":"297-808-8125 x37117","photo":null,"description":"Repellendus nesciunt sunt quibusdam dolores repellendus necessitatibus quia molestiae commodi quia quod a et eum fugit iure.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":19,"name":"Praesentium eius dolores est.","city":"Parisianborough","address":"6927 Parker Point","phone":"1-598-627-8046 x94237","photo":null,"description":"Ut ut pariatur veniam fugit qui provident quo atque doloribus aut reprehenderit debitis repudiandae.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":20,"name":"In.","city":"Derickhaven","address":"735 Doyle Fields Suite 517","phone":"825-369-9198 x69342","photo":null,"description":"Laboriosam optio corrupti accusamus aliquid sed totam fugiat illo sit natus molestiae inventore.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":21,"name":"Voluptatem assumenda nisi.","city":"Abeborough","address":"9575 Feil Route","phone":"606-523-6679 x085","photo":null,"description":"Sed et amet voluptatem vel consequatur esse voluptatum.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":22,"name":"Ut tenetur soluta.","city":"Elroyburgh","address":"14473 Cronin Meadow Suite 499","phone":"518.779.0361 x3898","photo":null,"description":"Ea eum sunt tempore et explicabo asperiores voluptatem saepe.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":23,"name":"Voluptatum molestiae sit harum.","city":"Kreigerchester","address":"683 Schiller Islands Apt. 742","phone":"1-346-271-6206","photo":null,"description":"Nostrum quam reiciendis soluta enim totam qui harum doloremque.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":24,"name":"Ut sint.","city":"South Lilianshire","address":"8309 Block Street Suite 320","phone":"(986) 200-2265","photo":null,"description":"Sint nesciunt praesentium accusamus quia molestiae qui facere molestias rem reiciendis dolorem.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":25,"name":"Aspernatur aperiam et est.","city":"Effertzchester","address":"81863 Christy Highway","phone":"1-221-917-5880","photo":null,"description":"Magni aliquid delectus atque aut occaecati ea placeat fuga odio hic dolores et error.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}}},"meta":{"columns":{{"name":"id","label":"id","sortable":true,"searchable":false},{"name":"name","label":"name","sortable":true,"searchable":true},{"name":"city","label":"city","sortable":true,"searchable":true},{"name":"address","label":"address","sortable":true,"searchable":true},{"name":"phone","label":"phone","searchable":true},{"name":"description","label":"description","searchable":true},{"name":"created_at","label":"created_at","sortable":true},{"name":"owner","label":"owner"}},"paginator":{"current_page":1,"last_page":2}},"messages":{}
+ *                      "data":{{"id":1,"name":"Accusamus.","city":"East Godfreytown","address":"874 Hauck Rapids Suite 231","phone":"(403) 486-2122","photo":"storage/restaurants/noimage.jpg","description":"Dignissimos explicabo sunt eos vel magnam ipsa consequatur quam tenetur autem est sunt in occaecati rerum dignissimos suscipit temporibus exercitationem et inventore eos consequatur.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":2,"name":"Aut pariatur autem.","city":"New Katarina","address":"29270 Leslie Meadow Suite 032","phone":"(427) 568-9666 x11272","photo":"storage/restaurants/noimage.jpg","description":"Numquam reprehenderit nihil doloribus iusto voluptatem quidem nostrum aliquid totam officiis.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":3,"name":"Similique.","city":"Coltonmouth","address":"17892 Kuphal Turnpike Apt. 220","phone":"265-410-3833","photo":null,"description":"Beatae nemo veniam rerum ratione officia dolores quia possimus soluta dolore aperiam qui vero quo placeat reprehenderit veniam libero at ratione.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":4,"name":"Debitis pariatur illum.","city":"East Darrenstad","address":"749 Vaughn Islands Suite 098","phone":"(774) 715-7847 x11469","photo":null,"description":"At ea atque perferendis voluptatem exercitationem libero enim placeat quia quia illum.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":5,"name":"Dolore.","city":"Lake Michaleland","address":"6452 Larson Square","phone":"(358) 397-5629 x1850","photo":null,"description":"Asperiores iure est repellendus voluptatem est quae aliquam sit nam.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":6,"name":"Incidunt et ad.","city":"Judyside","address":"26763 Aubree Passage Suite 705","phone":"(903) 707-6084","photo":null,"description":"Quod aut deleniti non hic in aut corporis maiores unde occaecati nemo atque fuga labore.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":7,"name":"Quaerat.","city":"West Karen","address":"353 Heidenreich Plain","phone":"+1 (809) 863-6615","photo":null,"description":"Et et delectus numquam quisquam vel voluptas sed quisquam at culpa quia iste non esse laboriosam non aperiam molestiae eveniet rerum incidunt.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":8,"name":"Eum et.","city":"New Clemmiechester","address":"64550 Rolfson Highway Suite 712","phone":"(813) 613-7120 x98422","photo":null,"description":"In nihil libero tenetur voluptatem rerum quia fugiat dicta architecto quis non consequatur ut nam quia illo distinctio.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":9,"name":"Vitae enim.","city":"New Octavia","address":"335 Alexzander Extension Suite 773","phone":"883-753-7723 x74325","photo":null,"description":"Ea optio ut cupiditate at eius aut et facilis vel culpa odio qui iusto et eveniet.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":10,"name":"Sed soluta.","city":"Port Daphne","address":"863 Bonnie Mission Suite 511","phone":"+1-730-941-5041","photo":null,"description":"Enim autem eum laboriosam dolores necessitatibus tempore quae minima est libero.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":11,"name":"Aut et.","city":"Skilesville","address":"777 Josh Pines","phone":"512.683.0476 x9657","photo":null,"description":"Ducimus adipisci rerum qui fuga est quam velit architecto est voluptas tenetur ut molestiae veniam excepturi eos distinctio error id et.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":12,"name":"Ratione sint minus.","city":"Romainestad","address":"181 Kessler Forks","phone":"614-903-7705 x32162","photo":null,"description":"Sed magni est tempora porro sit tempore repellendus rerum ratione id veritatis saepe aperiam aliquam quidem.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":13,"name":"Quasi natus.","city":"Amandaport","address":"180 Jerome Forge","phone":"398-201-2229","photo":null,"description":"Nostrum enim qui atque laudantium quam a consequuntur quas maxime possimus repellat consequatur doloribus et a deserunt rerum ut minima.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":14,"name":"Nisi soluta.","city":"South Carlee","address":"393 Funk Manors","phone":"(309) 431-6344 x28655","photo":null,"description":"Nam hic voluptas aliquam quo corrupti quam excepturi eveniet sit quae illo magni asperiores laboriosam quam dolor deleniti assumenda.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":15,"name":"Nisi aperiam et.","city":"Schmidtstad","address":"26570 Rempel Rapid","phone":"+1-239-269-9792","photo":null,"description":"Aut maiores sint maiores sunt dolor quibusdam officiis blanditiis voluptates alias occaecati inventore quia qui qui voluptatem iusto ipsa voluptatum qui.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":16,"name":"Modi molestiae beatae.","city":"Aydenville","address":"23936 Jerome Way Suite 511","phone":"+17358267346","photo":null,"description":"Molestias rem sit praesentium itaque est qui aut iste minima soluta qui nihil sunt hic eum itaque.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":17,"name":"Blanditiis.","city":"East Erick","address":"811 Rory Plain Suite 735","phone":"(374) 341-0505","photo":null,"description":"Qui ea ad magnam quam inventore quam deleniti ducimus qui labore minus.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":18,"name":"Expedita laudantium.","city":"West Bessie","address":"7383 Winston Tunnel Apt. 591","phone":"297-808-8125 x37117","photo":null,"description":"Repellendus nesciunt sunt quibusdam dolores repellendus necessitatibus quia molestiae commodi quia quod a et eum fugit iure.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":19,"name":"Praesentium eius dolores est.","city":"Parisianborough","address":"6927 Parker Point","phone":"1-598-627-8046 x94237","photo":null,"description":"Ut ut pariatur veniam fugit qui provident quo atque doloribus aut reprehenderit debitis repudiandae.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":20,"name":"In.","city":"Derickhaven","address":"735 Doyle Fields Suite 517","phone":"825-369-9198 x69342","photo":null,"description":"Laboriosam optio corrupti accusamus aliquid sed totam fugiat illo sit natus molestiae inventore.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":21,"name":"Voluptatem assumenda nisi.","city":"Abeborough","address":"9575 Feil Route","phone":"606-523-6679 x085","photo":null,"description":"Sed et amet voluptatem vel consequatur esse voluptatum.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":22,"name":"Ut tenetur soluta.","city":"Elroyburgh","address":"14473 Cronin Meadow Suite 499","phone":"518.779.0361 x3898","photo":null,"description":"Ea eum sunt tempore et explicabo asperiores voluptatem saepe.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":23,"name":"Voluptatum molestiae sit harum.","city":"Kreigerchester","address":"683 Schiller Islands Apt. 742","phone":"1-346-271-6206","photo":null,"description":"Nostrum quam reiciendis soluta enim totam qui harum doloremque.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":24,"name":"Ut sint.","city":"South Lilianshire","address":"8309 Block Street Suite 320","phone":"(986) 200-2265","photo":null,"description":"Sint nesciunt praesentium accusamus quia molestiae qui facere molestias rem reiciendis dolorem.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}},{"id":25,"name":"Aspernatur aperiam et est.","city":"Effertzchester","address":"81863 Christy Highway","phone":"1-221-917-5880","photo":null,"description":"Magni aliquid delectus atque aut occaecati ea placeat fuga odio hic dolores et error.","created_at":"2018-12-09 21:14:09","owner":{"id":1,"name":"Jan Kowalski"}}},"meta":{"columns":{{"name":"id","label":"id","sortable":true,"searchable":false},{"name":"name","label":"name","sortable":true,"searchable":true},{"name":"city","label":"city","sortable":true,"searchable":true},{"name":"address","label":"address","sortable":true,"searchable":true},{"name":"phone","label":"phone","searchable":true},{"name":"description","label":"description","searchable":true},{"name":"created_at","label":"created_at","sortable":true},{"name":"owner","label":"owner"}},"paginator":{"current_page":1,"last_page":2}},"messages":{}
  *                 }
  *             )
  *         )
@@ -361,7 +361,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                      "data":{"id":52,"name":"Super Pizza","city":"Sosnowiec","address":"Długa 21","phone":"997","photo":"noimage.png","description":null,"created_at":{"date":"2018-12-09 22:02:25.000000","timezone_type":3,"timezone":"UTC"},"owner_id":{"id":1,"name":"Jan Kowalski"},"pizzas":{},"reviews":{}},"meta":{},"messages":{"Restauracja została stworzona"}
+ *                      "data":{"id":52,"name":"Super Pizza","city":"Sosnowiec","address":"Długa 21","phone":"997","photo":"storage/restaurants/noimage.jpg","description":null,"created_at":{"date":"2018-12-09 22:02:25.000000","timezone_type":3,"timezone":"UTC"},"owner_id":{"id":1,"name":"Jan Kowalski"},"pizzas":{},"reviews":{}},"meta":{},"messages":{"Restauracja została stworzona"}
  *                 }
  *             )
  *         )
@@ -399,7 +399,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                      "data":{"id":1,"name":"Super Pizza","city":"Katowice","address":"Długa 21","phone":"997","photo":"noimage.png","description":null,"created_at":{"date":"2018-12-09 22:02:25.000000","timezone_type":3,"timezone":"UTC"},"owner_id":{"id":1,"name":"Jan Kowalski"},"pizzas":{},"reviews":{}},"meta":{},"messages":{"Restauracja została zaktualizowana"}
+ *                      "data":{"id":1,"name":"Super Pizza","city":"Katowice","address":"Długa 21","phone":"997","photo":"storage/restaurants/noimage.jpg","description":null,"created_at":{"date":"2018-12-09 22:02:25.000000","timezone_type":3,"timezone":"UTC"},"owner_id":{"id":1,"name":"Jan Kowalski"},"pizzas":{},"reviews":{}},"meta":{},"messages":{"Restauracja została zaktualizowana"}
  *                 }
  *             )
  *         )
@@ -468,7 +468,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                     "data":{"id":8,"name":"Funghi","price":21,"image":"noimage.png"},"meta":{},"messages":{"Pizza dodana"}
+ *                     "data":{"id":8,"name":"Funghi","price":21,"image":"storage/ingredients/noimage.jpg"},"meta":{},"messages":{"Pizza dodana"}
  *                 }
  *             )
  *         )
@@ -506,7 +506,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                     "data":{"id":1,"name":"Funghi","price":25,"image":"noimage.png"},"meta":{},"messages":{"Pizza zaktualizowana"}
+ *                     "data":{"id":1,"name":"Funghi","price":25,"image":"/storage/pizzas/noimage.jpg"},"meta":{},"messages":{"Pizza zaktualizowana"}
  *                 }
  *             )
  *         )
@@ -565,7 +565,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                     "data":{"id":1,"name":"Ser","image":"noimage.png"},"meta":{},"messages":{"Składnik został dodany"}
+ *                     "data":{"id":1,"name":"Ser","image":"storage/ingredients/noimage.jpg"},"meta":{},"messages":{"Składnik został dodany"}
  *                 }
  *             )
  *         )
@@ -603,7 +603,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                     "data":{"id":1,"name":"Serek","image":"noimage.png"},"meta":{},"messages":{"Składnik został zaktualizowany"}
+ *                     "data":{"id":1,"name":"Serek","image":"storage/ingredients/noimage.jpg"},"meta":{},"messages":{"Składnik został zaktualizowany"}
  *                 }
  *             )
  *         )
@@ -702,6 +702,84 @@
  *             @OA\Schema(
  *                 example={
  *                     "data":{},"meta":{},"messages":{"Pizza została usunięta"}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+
+/**
+ * @OA\Post(
+ *      path="/restaurant/{id}/grant",
+ *      tags={"Owner"},
+ *      description="Add user to restaurant",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"email":"janusz@example.com", "role":"1-3"}
+ *             )
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                     "data":{},"meta":{},"messages":{"Użytkownik dodany do restauracji"}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Delete(
+ *      path="/restaurant/{id}/revoke/{user_id}",
+ *      tags={"Owner"},
+ *      description="Remove user from restaurant",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Parameter(
+ *         name="user_id",
+ *         in="path",
+ *         description="Id of user",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                     "data":{},"meta":{},"messages":{"Użytkownik został usunięty z restauracji"}
  *                 }
  *             )
  *         )

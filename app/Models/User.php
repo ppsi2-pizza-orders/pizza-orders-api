@@ -38,7 +38,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Models\Review');
     }
 
-    public function restaurants(){
-        return $this->belongsToMany('App\Models\Restaurant')->withPivot('role');
+    public function restaurants()
+    {
+        return $this->belongsToMany(Restaurant::class)->withPivot('role');
     }
 }

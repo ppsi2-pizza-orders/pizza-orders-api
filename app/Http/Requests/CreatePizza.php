@@ -7,8 +7,8 @@ class CreatePizza extends AbstractApiRequest
     public function rules()
     {
         return [
-            "name" => "required",
-            "price" => "required",
+            'name' => 'required',
+            'price' => 'required',
         ];
     }
 }

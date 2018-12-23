@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 
+use Storage;
+use App\Interfaces\ImageUploaderInterface as ImageUploader;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreatePizza;
 use App\Models\Restaurant;
@@ -12,19 +13,26 @@ use App\Models\Pizza;
 
 class PizzaController extends ApiResourceController
 {
+    protected $imageUploader;
+
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    {
+        $this->imageUploader = $imageUploader;
+        parent::__construct($apiResource);
+    }
+
     public function store(CreatePizza $request, $id)
     {
-        $pizza = new Pizza();
-        $pizza->name = $request->input('name');
-        $pizza->price = $request->input('price');
+        $pizza = new Pizza([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'image' => 'public/restaurants/noimage.jpg',
+        ]);
 
         if ($request->hasFile('image')) {
-            $fileNameToStore = $this->uploadFile($request);
-        } else {
-            $fileNameToStore = 'noimage.png';
+            $pizza->image = $this->imageUploader->store($request->image);
         }
 
-        $pizza->image = $fileNameToStore;
         $pizza->save();
 
         $restaurant = Restaurant::findOrFail($id);
@@ -39,12 +47,15 @@ class PizzaController extends ApiResourceController
     public function update(CreatePizza $request, $id)
     {
         $pizza = Pizza::findOrFail($id);
-        $pizza->name = $request->input('name');
-        $pizza->price = $request->input('price');
+
+        $pizza->fill([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'image' => 'public/pizzas/noimage.jpg'
+        ]);
 
         if ($request->hasFile('image')) {
-            $fileNameToStore = $this->uploadFile($request);
-            $pizza->image = $fileNameToStore;
+            $pizza->image = $this->imageUploader->store($request->image);
         }
 
         $pizza->update();
@@ -58,9 +69,10 @@ class PizzaController extends ApiResourceController
     public function destroy($id)
     {
         $pizza = Pizza::findOrFail($id);
+
         if ($pizza->delete()) {
             if ($pizza->image != 'noimage.jpg') {
-                Storage::delete('public/pizza_images/'.$pizza->image);
+                Storage::delete($pizza->image);
             }
 
             return $this->apiResponse
@@ -71,15 +83,5 @@ class PizzaController extends ApiResourceController
         throw $this->apiException
             ->setStatusCode(400)
             ->pushMessage('Could not delete pizza');
-    }
-
-    public function uploadFile(Request $request)
-    {
-        $filenameWithExt = $request->file('image')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $fileNameToStore = $filename.'_'.time().'_'.$extension;
-        $path = $request->file('image')->storeAs('public/pizza_images', $fileNameToStore);
-        return $fileNameToStore;
     }
 }

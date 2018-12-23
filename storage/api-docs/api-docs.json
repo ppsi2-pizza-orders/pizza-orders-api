@@ -294,7 +294,7 @@
                                                 "city": "East Godfreytown",
                                                 "address": "874 Hauck Rapids Suite 231",
                                                 "phone": "(403) 486-2122",
-                                                "photo": null,
+                                                "photo": "storage/restaurants/noimage.jpg",
                                                 "description": "Dignissimos explicabo sunt eos vel magnam ipsa consequatur quam tenetur autem est sunt in occaecati rerum dignissimos suscipit temporibus exercitationem et inventore eos consequatur.",
                                                 "created_at": "2018-12-09 21:14:09",
                                                 "owner": {
@@ -308,7 +308,7 @@
                                                 "city": "New Katarina",
                                                 "address": "29270 Leslie Meadow Suite 032",
                                                 "phone": "(427) 568-9666 x11272",
-                                                "photo": null,
+                                                "photo": "storage/restaurants/noimage.jpg",
                                                 "description": "Numquam reprehenderit nihil doloribus iusto voluptatem quidem nostrum aliquid totam officiis.",
                                                 "created_at": "2018-12-09 21:14:09",
                                                 "owner": {
@@ -2149,7 +2149,7 @@
                                                 {
                                                     "id": 5,
                                                     "name": "Chicken",
-                                                    "price": 21.379999999999999,
+                                                    "price": 21.38,
                                                     "image": null
                                                 }
                                             ],
@@ -2376,7 +2376,7 @@
                                             "city": "Katowice",
                                             "address": "Długa 21",
                                             "phone": "997",
-                                            "photo": "noimage.png",
+                                            "photo": "storage/restaurants/noimage.jpg",
                                             "description": null,
                                             "created_at": {
                                                 "date": "2018-12-09 22:02:25.000000",
@@ -2440,7 +2440,7 @@
                                             "city": "Sosnowiec",
                                             "address": "Długa 21",
                                             "phone": "997",
-                                            "photo": "noimage.png",
+                                            "photo": "storage/restaurants/noimage.jpg",
                                             "description": null,
                                             "created_at": {
                                                 "date": "2018-12-09 22:02:25.000000",
@@ -2511,7 +2511,7 @@
                                             "id": 8,
                                             "name": "Funghi",
                                             "price": 21,
-                                            "image": "noimage.png"
+                                            "image": "storage/ingredients/noimage.jpg"
                                         },
                                         "meta": [],
                                         "messages": [
@@ -2610,7 +2610,7 @@
                                             "id": 1,
                                             "name": "Funghi",
                                             "price": 25,
-                                            "image": "noimage.png"
+                                            "image": "/storage/pizzas/noimage.jpg"
                                         },
                                         "meta": [],
                                         "messages": [
@@ -2656,7 +2656,7 @@
                                         "data": {
                                             "id": 1,
                                             "name": "Ser",
-                                            "image": "noimage.png"
+                                            "image": "storage/ingredients/noimage.jpg"
                                         },
                                         "meta": [],
                                         "messages": [
@@ -2753,7 +2753,7 @@
                                         "data": {
                                             "id": 1,
                                             "name": "Serek",
-                                            "image": "noimage.png"
+                                            "image": "storage/ingredients/noimage.jpg"
                                         },
                                         "meta": [],
                                         "messages": [
@@ -2871,6 +2871,111 @@
                                         "meta": [],
                                         "messages": [
                                             "Pizza została usunięta"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
+        "/restaurant/{id}/grant": {
+            "post": {
+                "tags": [
+                    "Owner"
+                ],
+                "description": "Add user to restaurant",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "email": "janusz@example.com",
+                                    "role": "1-3"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Użytkownik dodany do restauracji"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
+        "/restaurant/{id}/revoke/{user_id}": {
+            "delete": {
+                "tags": [
+                    "Owner"
+                ],
+                "description": "Remove user from restaurant",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "Id of user",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Użytkownik został usunięty z restauracji"
                                         ]
                                     }
                                 }
