@@ -11,6 +11,6 @@ class RestaurantImageUploader extends ImageUploader
 
     protected function getPath(): string
     {
-        return 'storage/restaurants';
+        return 'public/restaurants';
     }
 }

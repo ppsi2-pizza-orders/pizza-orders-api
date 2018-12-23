@@ -11,6 +11,6 @@ class PizzaImageUploader extends ImageUploader
 
     protected function getPath(): string
     {
-        return 'storage/pizzas';
+        return 'public/pizzas';
     }
 }

@@ -23,7 +23,7 @@ class IngredientController extends ApiResourceController
     {
         $ingredient = new Ingredient([
             'name' => $request->input('name'),
-            'image' => 'storage/ingredients/noimage.jpg'
+            'image' => 'public/ingredients/noimage.jpg'
         ]);
 
         if ($request->hasFile('image')) {
@@ -60,7 +60,7 @@ class IngredientController extends ApiResourceController
         $ingredient = Ingredient::findOrFail($id);
 
         if ($ingredient->delete()) {
-            if ($ingredient->image != 'storage/ingredients/noimage.jpg') {
+            if ($ingredient->image != 'public/ingredients/noimage.jpg') {
                 Storage::delete($ingredient->image);
             }
 

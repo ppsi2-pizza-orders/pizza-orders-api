@@ -52,7 +52,7 @@ class RestaurantController extends ApiResourceController
             'city' => $request->input('city'),
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
-            'photo' => 'storage/restaurants/noimage.jpg',
+            'photo' => 'public/restaurants/noimage.jpg',
             'owner_id' => JWTAuth::user()->id,
         ]);
 
@@ -97,7 +97,7 @@ class RestaurantController extends ApiResourceController
         $restaurant = Restaurant::findOrFail($id);
 
         if ($restaurant->delete()) {
-            if ($restaurant->image != 'storage/restaurants/noimage.jpg') {
+            if ($restaurant->image != 'public/restaurants/noimage.jpg') {
                 Storage::delete($restaurant->photo);
             }
 
