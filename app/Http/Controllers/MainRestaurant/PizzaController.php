@@ -26,7 +26,7 @@ class PizzaController extends ApiResourceController
         $pizza = new Pizza([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
-            'image' => 'public/restaurants/noimage.jpg',
+            'image' => 'storage/restaurants/noimage.jpg',
         ]);
 
         if ($request->hasFile('image')) {
@@ -51,7 +51,6 @@ class PizzaController extends ApiResourceController
         $pizza->fill([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
-            'image' => 'public/pizzas/noimage.jpg'
         ]);
 
         if ($request->hasFile('image')) {
@@ -71,7 +70,7 @@ class PizzaController extends ApiResourceController
         $pizza = Pizza::findOrFail($id);
 
         if ($pizza->delete()) {
-            if ($pizza->image != 'noimage.jpg') {
+            if ($pizza->image != 'storage/pizzas/noimage.jpg') {
                 Storage::delete($pizza->image);
             }
 

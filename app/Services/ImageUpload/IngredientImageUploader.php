@@ -11,6 +11,6 @@ class IngredientImageUploader extends ImageUploader
 
     protected function getPath(): string
     {
-        return 'public/ingredients';
+        return 'storage/ingredients';
     }
 }
