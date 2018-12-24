@@ -13,6 +13,7 @@ $factory->define(Restaurant::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber(),
         'description' => $faker->sentence(rand(10, 20)),
         'owner_id' => User::inRandomOrder()->first()->id,
+        'photo' => 'public/restaurants/noimage.jpg',
         'visible' => true,
         'confirmed' => true,
     ];

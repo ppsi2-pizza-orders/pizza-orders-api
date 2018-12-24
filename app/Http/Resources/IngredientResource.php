@@ -11,7 +11,7 @@ class IngredientResource extends AbstractApiResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'image' => Storage::url($this->resource->image),
+            'image' => url(Storage::url($this->resource->image)),
         ];
     }
 }

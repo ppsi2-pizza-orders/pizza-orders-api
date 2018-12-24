@@ -19,7 +19,7 @@ class RestaurantResource extends AbstractApiResource
             'city' => $this->resource->city,
             'address' => $this->resource->address,
             'phone' => $this->resource->phone,
-            'photo' => Storage::url($this->resource->photo),
+            'photo' => url(Storage::url($this->resource->photo)),
             'description' => $this->resource->description,
             'created_at' => $this->resource->created_at,
             'owner_id' => User::find($this->resource->owner_id, ['id', 'name']),

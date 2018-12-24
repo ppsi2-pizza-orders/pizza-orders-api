@@ -12,7 +12,7 @@ class PizzaFullResource extends AbstractApiResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'price' => $this->resource->price,
-            'image' => Storage::url($this->resource->image),
+            'image' => url(Storage::url($this->resource->image)),
         ];
     }
 }

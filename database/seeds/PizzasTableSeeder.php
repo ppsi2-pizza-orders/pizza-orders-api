@@ -13,26 +13,31 @@ class PizzasTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Margherita',
                 'price' => 14,
+                'image' => 'public/pizzas/noimage.jpg',
             ],
             [
                 'id' => 2,
                 'name' => 'Fungi',
                 'price' => 18,
+                'image' => 'public/ingredients/noimage.jpg',
             ],
             [
                 'id' => 3,
                 'name' => 'Salami',
                 'price' => 20,
+                'image' => 'public/ingredients/noimage.jpg',
             ],
             [
                 'id' => 4,
                 'name' => 'Capriciosa',
                 'price' => 23,
+                'image' => 'public/ingredients/noimage.jpg',
             ],
             [
                 'id' => 5,
                 'name' => 'Chicken',
-                'price' => 21.38,
+                'price' => 22,
+                'image' => 'public/ingredients/noimage.jpg',
             ],
         ];
 

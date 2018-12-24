@@ -40,7 +40,7 @@ class RestaurantsTable extends AbstractAdminTable
             'city' => $this->resource->city,
             'address' => $this->resource->address,
             'phone' => $this->resource->phone,
-            'photo' => Storage::url($this->resource->photo),
+            'photo' => asset($this->resource->photo),
             'description' => $this->resource->description,
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
             'owner' => User::find($this->resource->owner_id, ['id', 'name']),
