@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Restaurant;
 
-class PizzaListResource extends AbstractApiResource
+use App\Http\Resources\ApiResource;
+
+class PizzaListResource extends ApiResource
 {
     public function toArray(): array
     {

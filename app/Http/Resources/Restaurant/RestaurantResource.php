@@ -4,15 +4,13 @@ namespace App\Http\Resources\Restaurant;
 
 use Storage;
 use App\Models\User;
-use App\Http\Resources\AbstractApiResource;
-use App\Http\Resources\PizzaFullResource as FullPizza;
-use App\Http\Resources\ReviewResource as FullReview;
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\Restaurant\PizzaFullResource as FullPizza;
 
-class RestaurantResource extends AbstractApiResource
+class RestaurantResource extends ApiResource
 {
     public function toArray(): array
     {
-
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
@@ -24,7 +22,7 @@ class RestaurantResource extends AbstractApiResource
             'created_at' => $this->resource->created_at,
             'owner_id' => User::find($this->resource->owner_id, ['id', 'name']),
             'pizzas' => (new FullPizza)->collect($this->resource->pizzas),
-            'reviews' => (new FullReview)->collect($this->resource->reviews),
+            'review_stars' => $this->resource->getReviewStars(),
         ];
     }
 }

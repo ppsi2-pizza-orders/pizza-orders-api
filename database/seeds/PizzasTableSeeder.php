@@ -35,7 +35,7 @@ class PizzasTableSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'Chicken',
+                'name' => 'Pizza Kurczak',
                 'price' => 22,
                 'image' => 'public/ingredients/noimage.jpg',
             ],

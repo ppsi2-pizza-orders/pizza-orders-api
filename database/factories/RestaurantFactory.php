@@ -5,13 +5,23 @@ use Faker\Generator as Faker;
 use App\Models\Restaurant;
 use App\Models\User;
 
-$factory->define(Restaurant::class, function (Faker $faker) {
+$names = [
+    'Da Grasso', 'Pizza Hut', 'Nocne Gastro', 'Super Pizza', 'Mega Pizza', 'King Pizza', 'Botan Pizza', 'Domowa Pizza',
+    'Pizza u Janusza', 'Polska Pizza', 'Pizzex', 'Pizzapol', 'Pizza u Szwagra', 'Dobra Pizza', 'Pyszna pizza', 'Smaczna Pizza',
+    'Tania Pizza', 'Pizzeria Roma', 'Pizzeria Napoli', 'Crusty Pizza', 'Fajna Pitca', 'Pizza Station', 'Pizza Planet'
+];
+
+$cities = [
+    'Legnica', 'Wrocław', 'Warszawa', 'Sosnowiec', 'Kraków', 'Gdańsk', 'Poznań'
+];
+
+$factory->define(Restaurant::class, function (Faker $faker) use ($names, $cities) {
     return [
-        'name' => $faker->sentence(rand(1, 3)),
-        'city' => $faker->city(),
+        'name' => $names[rand(0, sizeof($names) - 1)],
+        'city' => $cities[rand(0, sizeof($cities) - 1)],
         'address' => $faker->streetAddress(),
         'phone' => $faker->phoneNumber(),
-        'description' => $faker->sentence(rand(10, 20)),
+        'description' => $faker->realText(),
         'owner_id' => User::inRandomOrder()->first()->id,
         'photo' => 'public/restaurants/noimage.jpg',
         'visible' => true,

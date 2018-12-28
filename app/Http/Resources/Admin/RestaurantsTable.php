@@ -22,6 +22,7 @@ class RestaurantsTable extends AbstractAdminTable
     {
         return [
             [ 'name' => 'id', 'label' => __('id'), 'sortable' => true, 'searchable' => false ],
+            [ 'name' => 'token', 'label' => __('token'), 'sortable' => false, 'searchable' => true ],
             [ 'name' => 'name', 'label' => __('name'), 'sortable' => true, 'searchable' => true ],
             [ 'name' => 'city', 'label' => __('city'), 'sortable' => true, 'searchable' => true ],
             [ 'name' => 'address', 'label' => __('address'), 'sortable' => true, 'searchable' => true ],
@@ -36,6 +37,7 @@ class RestaurantsTable extends AbstractAdminTable
     {
         return [
             'id' => $this->resource->id,
+            'token' => $this->resource->token,
             'name' => $this->resource->name,
             'city' => $this->resource->city,
             'address' => $this->resource->address,

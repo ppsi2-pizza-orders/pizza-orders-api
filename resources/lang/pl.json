@@ -11,6 +11,7 @@
     "Token expired": "Token wygasł",
     "Token invalid": "Nieprawidłowy token",
     "Token absent": "Nie znaleziono tokenu",
+    "Token refreshed": "Token odświeżony",
     "Token not expired": "Token jeszcze nie wygasł",
     "User not found": "Użytkownik nie znaleziony",
 
@@ -29,7 +30,15 @@
     "Pizza deleted": "Pizza usunięta",
     "Could not delete pizza": "Pizza nie mogła zostać usunięta",
 
+    "Order placed": "Zamówienie zostało złożone",
+    "Order status changed": "Status zamówienia został zmieniony",
+
     "User added to restaurant": "Użytkownik dodany do restauracji",
     "User role already added": "Taka rola użytkownika jest już ustawiona",
-    "User removed from restaurant": "Użytkownik usunięty z restauracji"
+    "User removed from restaurant": "Użytkownik usunięty z restauracji",
+
+    "Custom Pizza": "Własna Pizza",
+    "Customized": "Zmodyfikowana",
+
+    "restaurant": "re"
 }

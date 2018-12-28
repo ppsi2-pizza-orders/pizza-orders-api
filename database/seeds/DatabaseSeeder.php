@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         factory(Review::class, 400)->create();
 
         $this->call(PizzaRestaurantsTableSeeder::class);
+        $this->call(RestaurantUserTableSeeder::class);
     }
 }

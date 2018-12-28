@@ -2,12 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\User;
-use App\Models\Restaurant;
 
-
-class ReviewResource extends AbstractApiResource
+class ReviewResource extends ApiResource
 {
     public function toArray(): array
     {

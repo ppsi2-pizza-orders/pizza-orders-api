@@ -282,6 +282,55 @@
 
 /**
  * @OA\Get(
+ *      path="/admin/orders",
+ *      tags={"Admin"},
+ *      summary="Orders table",
+ *      description="Returns admin table of orders",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="orderBy",
+ *         in="query",
+ *         description="Orders ascending data set by given column name",
+ *         @OA\Schema(
+ *             type="string",
+ *             example=""
+ *         )
+ *      ),
+ *      @OA\Parameter(
+ *         name="orderByDesc",
+ *         in="query",
+ *         description="Orders descending data set by given column name",
+ *         @OA\Schema(
+ *             type="string",
+ *             example=""
+ *         )
+ *      ),
+ *      @OA\Parameter(
+ *         name="search",
+ *         in="query",
+ *         description="Filters data set by given value",
+ *         @OA\Schema(
+ *             type="string",
+ *             example=""
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                     "data":{{"id":2,"token":"AnUD8OUFXapccnrC","email":"admin@example.com","restaurant":"Smaczna Pizza","city":"Sosnowiec","status":"finished","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","created_at":"2018-12-28 17:26:07","pizzas":{{"price":"15,00","description":"Custom Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"}}},{"id":3,"token":"GlwXpX54kaQr0mrl","email":"admin@example.com","restaurant":"Smaczna Pizza","city":"Sosnowiec","status":"new","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","created_at":"2018-12-28 17:30:35","pizzas":{{"price":"15,00","description":"Custom Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":4,"token":"JAJy13AJ9NCNXNcb","email":"admin@example.com","restaurant":"Smaczna Pizza","city":"Sosnowiec","status":"new","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","created_at":"2018-12-28 17:30:52","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":5,"token":"0By8uAXQJ0tjvoAV","email":"owner@example.com","restaurant":"Smaczna Pizza","city":"Sosnowiec","status":"realization","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","created_at":"2018-12-28 18:04:32","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":6,"token":"Yi6e11jaQA0W5L4X","email":"owner@example.com","restaurant":"Smaczna Pizza","city":"Sosnowiec","status":"new","delivery_address":"Długa 12 Legnica","phone_number":"123341111","created_at":"2018-12-28 18:26:48","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":7,"token":"pb7K1nVx7lRISeYy","email":"client@example.com","restaurant":"Smaczna Pizza","city":"Sosnowiec","status":"new","delivery_address":"Długa 12 Legnica","phone_number":"123341111","created_at":"2018-12-28 18:34:13","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}}},"meta":{"columns":{{"name":"id","label":"id","sortable":true,"searchable":false},{"name":"token","label":"token","sortable":true,"searchable":true},{"name":"email","label":"email","sortable":false,"searchable":false},{"name":"restaurant","label":"re","sortable":false,"searchable":false},{"name":"city","label":"city","sortable":false,"searchable":false},{"name":"status","label":"status","sortable":true,"searchable":true},{"name":"delivery_address","label":"delivery address","sortable":true,"searchable":true},{"name":"phone_number","label":"phone number","sortable":true,"searchable":true},{"name":"created_at","label":"created at","sortable":true,"searchable":false}},"paginator":{"current_page":1,"last_page":1}},"messages":{}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Get(
  *      path="/restaurants",
  *      tags={"Restaurant"},
  *      description="Returns names and cities of registered restaurants",
@@ -806,3 +855,123 @@
  *     ),
  *     )
  */
+
+/**
+ * @OA\Post(
+ *      path="/order",
+ *      tags={"Order"},
+ *      description="Place order",
+ *      security={{"Authorization header": {}}},
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"restaurant_id":1,"delivery_address":"Długa 12 Legnica","phone_number":"123341111","pizzas":{{"ingredients":{1,2,5}},{"id":1},{"id":1,"ingredients":{1,2,5}}}}
+ *             )
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                     "data":{"id":6,"token":"Yi6e11jaQA0W5L4X","status":"new","price":"58,00","delivery_address":"Długa 12 Legnica","phone_number":"123341111","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},"meta":{},"messages":{"Zamówienie zostało złożone"}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Get(
+ *      path="/order/{token}",
+ *      tags={"Order"},
+ *      description="Get order",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="token",
+ *         in="path",
+ *         description="Token of order",
+ *         @OA\Schema(
+ *             type="string",
+ *             example="pb7K1nVx7lRISeYy"
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                      "data":{"id":7,"token":"pb7K1nVx7lRISeYy","status":"new","price":"58,00","delivery_address":"Długa 12 Legnica","phone_number":"123341111","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},"meta":{},"messages":{}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Get(
+ *      path="/restaurant/{id}/orders",
+ *      tags={"Order"},
+ *      description="Get orders in restaurant",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                      "data":{{"id":2,"token":"AnUD8OUFXapccnrC","status":"new","price":"29,00","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","pizzas":{{"price":"15,00","description":"Custom Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"}}},{"id":3,"token":"GlwXpX54kaQr0mrl","status":"new","price":"58,00","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","pizzas":{{"price":"15,00","description":"Custom Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":4,"token":"JAJy13AJ9NCNXNcb","status":"new","price":"58,00","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":5,"token":"0By8uAXQJ0tjvoAV","status":"realization","price":"58,00","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":6,"token":"Yi6e11jaQA0W5L4X","status":"new","price":"58,00","delivery_address":"Długa 12 Legnica","phone_number":"123341111","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}},{"id":7,"token":"pb7K1nVx7lRISeYy","status":"new","price":"58,00","delivery_address":"Długa 12 Legnica","phone_number":"123341111","pizzas":{{"price":"15,00","description":"Własna Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"},{"price":"29,00","description":"Zmodyfikowana 'Margherita': sos pomidorowy, ser + ( sos pomidorowy, ser, szynka )","type":"menu_customized"}}}},"meta":{},"messages":{}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Post(
+ *      path="/order/{token}/status/next",
+ *      tags={"Order"},
+ *      description="Changes order status",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="token",
+ *         in="path",
+ *         description="Token of order",
+ *         @OA\Schema(
+ *             type="string",
+ *             example="AnUD8OUFXapccnrC"
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={
+ *                     "data":{"id":2,"token":"AnUD8OUFXapccnrC","status":"realization","price":"29,00","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","pizzas":{{"price":"15,00","description":"Custom Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"}}},"meta":{},"messages":{"Status zamówienia został zmieniony"}
+ *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+

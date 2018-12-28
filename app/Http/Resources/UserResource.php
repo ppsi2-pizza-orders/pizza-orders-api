@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\Restaurant\RestaurantPermissionsResource as RestaurantPermissions;
 
-class UserResource extends AbstractApiResource
+class UserResource extends ApiResource
 {
     public function toArray(): array
     {

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-
 use Storage;
 use App\Interfaces\ImageUploaderInterface as ImageUploader;
 use App\Interfaces\ApiResourceInterface as ApiResource;

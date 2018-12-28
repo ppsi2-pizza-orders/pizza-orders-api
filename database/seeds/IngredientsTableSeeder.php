@@ -11,17 +11,17 @@ class IngredientsTableSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'name' => 'sauce',
+                'name' => 'sos pomidorowy',
                 'image' => 'public/ingredients/noimage.jpg',
             ],
             [
                 'id' => 2,
-                'name' => 'cheese',
+                'name' => 'ser',
                 'image' => 'public/ingredients/noimage.jpg',
             ],
             [
                 'id' => 3,
-                'name' => 'mushrooms',
+                'name' => 'pieczarki',
                 'image' => 'public/ingredients/noimage.jpg',
             ],
             [
@@ -31,12 +31,12 @@ class IngredientsTableSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'ham',
+                'name' => 'szynka',
                 'image' => 'public/ingredients/noimage.jpg',
             ],
             [
                 'id' => 6,
-                'name' => 'chicken',
+                'name' => 'kurczak',
                 'image' => 'public/ingredients/noimage.jpg',
             ],
         ];

@@ -79,7 +79,7 @@ return [
     */
 
     'locale' => 'pl',
-
+    'faker_locale' => 'pl_PL',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -159,13 +159,14 @@ return [
 
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ObserverServiceProvider::class,
         App\Providers\ApiResourceServiceProvider::class,
+        App\Providers\OrderServiceProvider::class,
         App\Providers\ImageUploaderServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
     ],
 
     /*

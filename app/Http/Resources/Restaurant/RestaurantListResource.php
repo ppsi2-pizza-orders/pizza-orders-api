@@ -2,10 +2,12 @@
 
 namespace App\Http\Resources\Restaurant;
 
-use App\Http\Resources\AbstractApiResource;
-use App\Http\Resources\PizzaListResource as ListPizza;
 
-class RestaurantListResource extends AbstractApiResource
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\Restaurant\PizzaListResource as ListPizza;
+
+
+class RestaurantListResource extends ApiResource
 {
     public function toArray(): array
     {
@@ -14,6 +16,7 @@ class RestaurantListResource extends AbstractApiResource
             'name' => $this->resource->name,
             'city' => $this->resource->city,
             'pizzas' => (new ListPizza)->collect($this->resource->pizzas),
+            'review_stars' => $this->resource->getReviewStars(),
         ];
     }
 }
