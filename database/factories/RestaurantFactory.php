@@ -22,7 +22,7 @@ $factory->define(Restaurant::class, function (Faker $faker) use ($names, $cities
         'address' => $faker->streetAddress(),
         'phone' => $faker->phoneNumber(),
         'description' => $faker->realText(),
-        'owner_id' => User::inRandomOrder()->first()->id,
+        'owner_id' => 2,
         'photo' => 'public/restaurants/noimage.jpg',
         'visible' => true,
         'confirmed' => true,
