@@ -5,19 +5,37 @@ namespace App\Services;
 use Socialite;
 use Exception;
 use Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Laravel\Socialite\Two\User as SocialUser;
 
 use App\Models\User;
-use Laravel\Socialite\Two\User as SocialUser;
 use App\Exceptions\ApiException;
 
 class AuthService
 {
     public function refreshToken(): array
     {
-        $token = JWTAuth::refresh();
-        return compact('token');
+        $apiException = new ApiException;
+        try {
+            JWTAuth::parseToken()->authenticate();
+            throw $apiException
+                ->pushMessage('Token not expired')
+                ->setStatusCode(400);
+        } catch (TokenExpiredException $exception) {
+            $token = JWTAuth::refresh();
+            return compact('token');
+        } catch (TokenInvalidException $exception) {
+            throw $apiException
+                ->pushMessage('Token invalid')
+                ->setStatusCode(401);
+        } catch (JWTException $exception) {
+            throw $apiException
+                ->pushMessage('Token absent')
+                ->setStatusCode(401);
+        }
     }
 
     public function attemptLogin(array $credentials): array

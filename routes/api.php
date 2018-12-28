@@ -4,10 +4,6 @@ header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/debug/check_auth', function () {
-        echo 'Auth works!';
-    });
-
     Route::post('restaurant', 'MainRestaurant\RestaurantController@store');
     Route::patch('restaurant/{id}', 'MainRestaurant\RestaurantController@update');
     Route::delete('restaurant/{id}', 'MainRestaurant\RestaurantController@destroy');
@@ -25,17 +21,23 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/restaurants', 'Admin\RestaurantController@index');
     Route::get('admin/ingredients', 'Admin\IngredientController@index');
     Route::get('admin/users', 'Admin\UserController@index');
-
-    Route::post('auth/refresh', 'Auth\AuthController@refreshToken');
+    Route::get('admin/orders', 'Admin\OrderController@index');
 
     Route::post('order', 'Order\OrderController@placeOrder');
+    Route::get('order/{token}', 'Order\OrderController@show');
     Route::post('order/{token}/status/next', 'Order\OrderController@setNextStatus');
+    Route::get('restaurant/{id}/orders', 'Order\OrderController@restaurantOrders');
+
+    Route::post('restaurant/{id}/grant', 'MainRestaurant\RestaurantOwnerController@grant');
+    Route::delete('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke');
 });
 
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
 Route::post('auth/register', 'Auth\AuthController@register');
 Route::post('auth/login', 'Auth\AuthController@login');
+Route::post('auth/refresh', 'Auth\AuthController@refreshToken');
 
 Route::get('restaurants', 'MainRestaurant\RestaurantController@index');
 Route::post('restaurants', 'MainRestaurant\RestaurantListController@search');
 Route::get('restaurant/{id}', 'MainRestaurant\RestaurantController@show');
+

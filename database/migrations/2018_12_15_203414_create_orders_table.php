@@ -11,7 +11,6 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('token');
-            $table->decimal('price',6,2);
             $table->integer('user_id')->unsigned();
             $table->integer('restaurant_id')->unsigned();
             $table->string('status')->default('new');

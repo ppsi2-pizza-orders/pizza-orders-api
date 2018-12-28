@@ -14,6 +14,9 @@ use App\Http\Resources\Restaurant\RestaurantResource;
 use App\Http\Controllers\MainRestaurant\RestaurantListController;
 use App\Http\Resources\Restaurant\RestaurantListResource;
 
+use App\Http\Controllers\MainRestaurant\RestaurantOwnerController;
+use App\Http\Resources\Restaurant\RestaurantPermissionsResource;
+
 use App\Http\Controllers\Admin\RestaurantController as RestaurantAdminController;
 use App\Http\Resources\Admin\RestaurantsTable;
 
@@ -22,6 +25,9 @@ use App\Http\Resources\Admin\IngredientsTable;
 
 use App\Http\Controllers\Admin\UserController as UserAdminController;
 use App\Http\Resources\Admin\UsersTable;
+
+use App\Http\Controllers\Admin\OrderController as OrderAdminController;
+use App\Http\Resources\Admin\OrdersTable;
 
 use App\Http\Controllers\MainRestaurant\IngredientController;
 use App\Http\Resources\IngredientResource;
@@ -58,6 +64,13 @@ class ApiResourceServiceProvider extends ServiceProvider
             ->needs(ApiResourceInterface::class)
             ->give(function() {
                 return new RestaurantListResource();
+            });
+
+        $this->app
+            ->when(RestaurantOwnerController::class)
+            ->needs(ApiResource::class)
+            ->give(function() {
+                return new RestaurantPermissionsResource();
             });
 
         $this->app
@@ -107,6 +120,13 @@ class ApiResourceServiceProvider extends ServiceProvider
             ->needs(ApiResourceInterface::class)
             ->give(function() {
                 return new OrderResource();
+            });
+
+        $this->app
+            ->when(OrderAdminController::class)
+            ->needs(ApiResourceInterface::class)
+            ->give(function() {
+                return new OrdersTable();
             });
     }
 

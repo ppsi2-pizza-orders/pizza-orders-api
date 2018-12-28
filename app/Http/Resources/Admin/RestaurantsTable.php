@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin;
 
+use Storage;
 use App\Models\Restaurant;
 use App\Models\User;
 
@@ -21,6 +22,7 @@ class RestaurantsTable extends AbstractAdminTable
     {
         return [
             [ 'name' => 'id', 'label' => __('id'), 'sortable' => true, 'searchable' => false ],
+            [ 'name' => 'token', 'label' => __('token'), 'sortable' => false, 'searchable' => true ],
             [ 'name' => 'name', 'label' => __('name'), 'sortable' => true, 'searchable' => true ],
             [ 'name' => 'city', 'label' => __('city'), 'sortable' => true, 'searchable' => true ],
             [ 'name' => 'address', 'label' => __('address'), 'sortable' => true, 'searchable' => true ],
@@ -35,11 +37,12 @@ class RestaurantsTable extends AbstractAdminTable
     {
         return [
             'id' => $this->resource->id,
+            'token' => $this->resource->token,
             'name' => $this->resource->name,
             'city' => $this->resource->city,
             'address' => $this->resource->address,
             'phone' => $this->resource->phone,
-            'photo' => $this->resource->photo,
+            'photo' => asset($this->resource->photo),
             'description' => $this->resource->description,
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
             'owner' => User::find($this->resource->owner_id, ['id', 'name']),

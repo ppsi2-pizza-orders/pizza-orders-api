@@ -7,22 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     protected $fillable = [
-        'name',
-        'city',
-        'address',
-        'phone',
-        'photo',
-        'description'
+        'name', 'city', 'address', 'phone', 'photo', 'description', 'owner_id', 'photo'
     ];
 
     public function reviews()
     {
-        return $this->hasMany('App\Models\Review');
+        return $this->hasMany(Review::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function pizzas()
     {
-        return $this->belongsToMany('App\Models\Pizza');
+        return $this->belongsToMany(Pizza::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient');
     }
 
     public function getReviewStars(): float

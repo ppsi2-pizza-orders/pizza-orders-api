@@ -28,6 +28,6 @@ class OrderPlaced implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('orders');
+        return new PrivateChannel('restaurant.' . $this->channelToken);
     }
 }

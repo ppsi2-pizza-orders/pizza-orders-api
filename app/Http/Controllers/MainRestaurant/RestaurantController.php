@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Tymon\JWTAuth\Facades\JWTAuth;
-
-use App\Http\Controllers\Controller;
+use Storage;
+use JWTAuth;
+use App\Interfaces\ImageUploaderInterface as ImageUploader;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
-use App\Http\Resources\RestaurantResource as FullRestaurant;
-use App\Http\Resources\RestaurantListResource as ListRestaurant;
-
 use App\Http\Controllers\ApiResourceController;
 
 class RestaurantController extends ApiResourceController
 {
+    protected $imageUploader;
+
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    {
+        $this->imageUploader = $imageUploader;
+        parent::__construct($apiResource);
+    }
+
     public function index()
     {
         $restaurants = Restaurant::pluck('name');
@@ -42,20 +46,20 @@ class RestaurantController extends ApiResourceController
 
     public function store(CreateRestaurant $request)
     {
-        $restaurant = new Restaurant();
-        $restaurant->name = $request->input('name');
-        $restaurant->city = $request->input('city');
-        $restaurant->address = $request->input('address');
-        $restaurant->phone = $request->input('phone');
+
+        $restaurant = new Restaurant([
+            'name' => $request->input('name'),
+            'city' => $request->input('city'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'photo' => 'public/restaurants/noimage.jpg',
+            'owner_id' => JWTAuth::user()->id,
+        ]);
 
         if ($request->hasFile('photo')) {
-            $fileNameToStore = $this->uploadFile($request);
-        } else {
-            $fileNameToStore = 'noimage.png';
+            $restaurant->photo = $this->imageUploader->store($request->photo);
         }
 
-        $restaurant->photo = $fileNameToStore;
-        $restaurant->owner_id = JWTAuth::user()->id;
         $restaurant->save();
 
         return $this->apiResource
@@ -67,17 +71,19 @@ class RestaurantController extends ApiResourceController
     public function update(CreateRestaurant $request, $id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        $restaurant->name = $request->input('name');
-        $restaurant->city = $request->input('city');
-        $restaurant->address = $request->input('address');
-        $restaurant->phone = $request->input('phone');
+
+        $restaurant->fill([
+            'name' => $request->input('name'),
+            'city' => $request->input('city'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'description' => $request->input('description'),
+        ]);
 
         if ($request->hasFile('photo')) {
-            $fileNameToStore = $this->uploadFile($request);
-            $restaurant->photo = $fileNameToStore;
+            $restaurant->photo = $this->fileUploader->store($request->photo);
         }
 
-        $restaurant->description = $request->input('description');
         $restaurant->update();
 
         return $this->apiResource
@@ -91,8 +97,8 @@ class RestaurantController extends ApiResourceController
         $restaurant = Restaurant::findOrFail($id);
 
         if ($restaurant->delete()) {
-            if ($restaurant->image != 'noimage.jpg') {
-              Storage::delete('public/restaurant_photos/'.$restaurant->photo);
+            if ($restaurant->image != 'public/restaurants/noimage.jpg') {
+                Storage::delete($restaurant->photo);
             }
 
             return $this->apiResponse
@@ -103,15 +109,5 @@ class RestaurantController extends ApiResourceController
         throw $this->apiException
             ->setStatusCode(400)
             ->pushMessage('Could not delete restaurant');
-    }
-
-    public function uploadFile(Request $request)
-    {
-        $filenameWithExt = $request->file('photo')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('photo')->getClientOriginalExtension();
-        $fileNameToStore = $filename.'_'.time().'_'.$extension;
-        $path = $request->file('photo')->storeAs('public/restaurant_photos', $fileNameToStore);
-        return $fileNameToStore;
     }
 }

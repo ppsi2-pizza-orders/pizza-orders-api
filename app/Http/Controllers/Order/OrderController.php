@@ -10,6 +10,7 @@ use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Interfaces\OrderServiceInterface as OrderService;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\PlaceOrder;
+use App\Models\Restaurant;
 use App\Models\Order;
 
 class OrderController extends ApiResourceController
@@ -29,9 +30,9 @@ class OrderController extends ApiResourceController
         $orderData = [
             'user_id' => JWTAuth::user()->id,
             'restaurant_id' => $request->input('restaurant_id'),
-            'pizzas' => $request->input('pizzas'),
             'delivery_address' => $request->input('delivery_address'),
-            'phone_number' => $request->input('phone_number')
+            'phone_number' => $request->input('phone_number'),
+            'pizzas' => $request->input('pizzas')
         ];
 
         $order = $this->orderService->placeOrder($orderData);
@@ -60,6 +61,24 @@ class OrderController extends ApiResourceController
         return $this->apiResource
             ->resource($order)
             ->pushMessage('Order status changed')
+            ->response();
+    }
+
+    public function show(string $token)
+    {
+        $order = Order::where('token', $token)->firstOrFail();
+
+        return $this->apiResource
+            ->resource($order)
+            ->response();
+    }
+
+    public function restaurantOrders($id)
+    {
+        $restaurant = Restaurant::findOrFail($id);
+
+        return $this->apiResource
+            ->resource($restaurant->orders)
             ->response();
     }
 }

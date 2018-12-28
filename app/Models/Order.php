@@ -13,17 +13,22 @@ class Order extends Model
     CONST STATUS_FINISHED = 'finished';
 
     public $fillable = [
-        'token', 'user_id', 'restaurant_id', 'pizza_id', 'price', 'delivery_address', 'phone_number'
+        'token', 'user_id', 'restaurant_id', 'pizza_id', 'price', 'delivery_address', 'phone_number', 'status'
     ];
 
     public function pizzas()
     {
-        return $this->belongsToMany('App\Models\Pizza', 'pizza_order');
+        return $this->hasMany(OrderPizza::class);
     }
 
     public function restaurant()
     {
-        return $this->belongsTo('App\Models\Restaurant');
+        return $this->belongsTo(Restaurant::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function setNextStatus(): self

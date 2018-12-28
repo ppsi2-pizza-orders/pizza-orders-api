@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Auth;
 
+use JWTAuth;
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
 use App\Services\AuthService;
-use App\Helpers\ApiResponse;
 use App\Http\Requests\RegisterUser;
 use App\Http\Requests\LoginUser;
 use App\Http\Requests\FacebookLoginUser;
 
-class AuthController
+class AuthController extends Controller
 {
     protected $authService;
-    protected $response;
 
-    public function __construct(AuthService $authService, ApiResponse $response)
+    public function __construct(AuthService $authService)
     {
         $this->authService = $authService;
-        $this->response = $response;
+        parent::__construct();
     }
 
     public function login(LoginUser $request)
@@ -25,8 +27,18 @@ class AuthController
 
         $token = $this->authService->attemptLogin($credentials);
 
-        return $this->response
+        return $this->apiResponse
             ->pushMessage('User logged in successfully')
+            ->setData($token)
+            ->response();
+    }
+
+    public function refreshToken(Request $request)
+    {
+        JWTAuth::setRequest($request);
+        $token = $this->authService->refreshToken();
+        return $this->apiResponse
+            ->pushMessage('Token refreshed')
             ->setData($token)
             ->response();
     }
@@ -43,18 +55,8 @@ class AuthController
 
         $token = $this->authService->registerUser($data);
 
-        return $this->response
+        return $this->apiResponse
             ->pushMessage('User successfully registered')
-            ->setData($token)
-            ->response();
-    }
-
-    public function refreshToken()
-    {
-        $token = $this->authService->refreshToken();
-
-        return $this->response
-            ->pushMessage('Token refreshed')
             ->setData($token)
             ->response();
     }
@@ -65,7 +67,7 @@ class AuthController
 
         $response = $this->authService->facebookLogin($fbAccessToken);
 
-        return $this->response
+        return $this->apiResponse
             ->pushMessage('User successfully authenticated through Facebook')
             ->setData($response)
             ->response();

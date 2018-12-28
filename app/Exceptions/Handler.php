@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Broadcasting\BroadcastException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
 use App\Helpers\ApiResponse;
 
@@ -40,7 +41,13 @@ class Handler extends ExceptionHandler
         if($exception instanceof BroadcastException) {
             return $response
                 ->pushMessage('Could not broadcast event')
-                ->setStatusCode(500)
+                ->setStatusCode(500);
+        }
+
+        if ($exception instanceof TokenBlacklistedException) {
+            return $response
+                ->pushMessage('Token blacklisted')
+                ->setStatusCode(401)
                 ->response();
         }
 

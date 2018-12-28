@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin;
 
+use Storage;
 use App\Models\Ingredient;
 
 class IngredientsTable extends AbstractAdminTable
@@ -30,7 +31,7 @@ class IngredientsTable extends AbstractAdminTable
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'image' => $this->resource->image,
+            'image' => url(Storage::url($this->resource->image)),
         ];
     }
 

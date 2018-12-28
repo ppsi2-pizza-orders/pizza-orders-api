@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Restaurant;
 
+use Storage;
 use App\Http\Resources\ApiResource;
 
 class IngredientResource extends ApiResource
@@ -11,7 +12,7 @@ class IngredientResource extends ApiResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'image' => $this->resource->image,
+            'image' => url(Storage::url($this->resource->image)),
         ];
     }
 }

@@ -8,5 +8,5 @@ interface OrderServiceInterface
 {
     public function placeOrder(array $data): Order;
 
-    public function calculatePrice(array $pizzas): float;
+   // public function calculatePrice(array $pizzas): float;
 }
