@@ -68,7 +68,7 @@ class ApiResourceServiceProvider extends ServiceProvider
 
         $this->app
             ->when(RestaurantOwnerController::class)
-            ->needs(ApiResource::class)
+            ->needs(ApiResourceInterface::class)
             ->give(function() {
                 return new RestaurantPermissionsResource();
             });
