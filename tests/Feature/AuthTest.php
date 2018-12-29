@@ -12,7 +12,7 @@ class AuthTest extends TestCase
             'POST',
             '/auth/login',
             [
-                'email' => 'example@example.com',
+                'email' => 'admin@example.com',
                 'password' => 'test123'
             ]
         );
