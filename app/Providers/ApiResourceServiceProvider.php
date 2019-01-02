@@ -30,13 +30,13 @@ use App\Http\Controllers\Admin\OrderController as OrderAdminController;
 use App\Http\Resources\Admin\OrdersTable;
 
 use App\Http\Controllers\MainRestaurant\IngredientController;
-use App\Http\Resources\IngredientResource;
+use App\Http\Resources\Restaurant\IngredientResource;
 
 use App\Http\Controllers\MainRestaurant\ReviewController;
 use App\Http\Resources\ReviewResource;
 
 use App\Http\Controllers\MainRestaurant\PizzaController;
-use App\Http\Resources\PizzaFullResource;
+use App\Http\Resources\Restaurant\PizzaFullResource;
 
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Resources\Order\OrderResource;
