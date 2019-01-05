@@ -2,10 +2,8 @@
 
 namespace App\Http\Resources\Restaurant;
 
-
+use Storage;
 use App\Http\Resources\ApiResource;
-use App\Http\Resources\Restaurant\PizzaListResource as ListPizza;
-
 
 class RestaurantListResource extends ApiResource
 {
