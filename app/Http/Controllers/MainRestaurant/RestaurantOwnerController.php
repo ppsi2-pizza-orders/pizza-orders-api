@@ -17,10 +17,14 @@ class RestaurantOwnerController extends ApiResourceController
 
         $user = User::where('email', 'like', $userEmail)->firstOrFail();
 
-        $userRestaurant = $user->restaurants()->wherePivot('role', $userRole)->first();
+        $userRestaurant = $user->restaurants()
+            ->wherePivot('restaurant_id', $id)
+            ->wherePivot('role', $userRole)
+            ->first();
 
         if ($userRestaurant) {
             throw $this->apiException
+                ->setStatusCode(400)
                 ->pushMessage('User role already added');
         }
 
