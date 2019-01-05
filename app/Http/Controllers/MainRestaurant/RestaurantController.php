@@ -81,7 +81,7 @@ class RestaurantController extends ApiResourceController
         ]);
 
         if ($request->hasFile('photo')) {
-            $restaurant->photo = $this->fileUploader->store($request->photo);
+            $restaurant->photo = $this->imageUploader->store($request->photo);
         }
 
         $restaurant->update();
