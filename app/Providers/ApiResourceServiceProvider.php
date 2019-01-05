@@ -33,7 +33,7 @@ use App\Http\Controllers\MainRestaurant\IngredientController;
 use App\Http\Resources\Restaurant\IngredientResource;
 
 use App\Http\Controllers\MainRestaurant\ReviewController;
-use App\Http\Resources\ReviewResource;
+use App\Http\Resources\Restaurant\ReviewResource;
 
 use App\Http\Controllers\MainRestaurant\PizzaController;
 use App\Http\Resources\Restaurant\PizzaFullResource;

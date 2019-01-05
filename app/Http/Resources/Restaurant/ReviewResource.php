@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Restaurant;
 
 use App\Models\User;
+use App\Http\Resources\ApiResource;
 
 class ReviewResource extends ApiResource
 {
