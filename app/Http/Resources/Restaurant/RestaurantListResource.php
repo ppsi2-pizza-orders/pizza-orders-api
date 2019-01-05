@@ -15,8 +15,8 @@ class RestaurantListResource extends ApiResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'city' => $this->resource->city,
-            'pizzas' => (new ListPizza)->collect($this->resource->pizzas),
             'review_stars' => $this->resource->getReviewStars(),
+            'photo' => url(Storage::url($this->resource->photo)),
         ];
     }
 }
