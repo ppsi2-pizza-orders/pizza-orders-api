@@ -23,6 +23,7 @@ class RestaurantResource extends ApiResource
             'owner_id' => User::find($this->resource->owner_id, ['id', 'name']),
             'pizzas' => (new FullPizza)->collect($this->resource->pizzas),
             'review_stars' => $this->resource->getReviewStars(),
+            'reviews' => (new ReviewResource)->collect($this->resource->reviews)
         ];
     }
 }
