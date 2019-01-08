@@ -855,7 +855,7 @@
                     "Admin"
                 ],
                 "summary": "Orders table",
-                "description": "Returns admin table of ordreds",
+                "description": "Returns admin table of orders",
                 "parameters": [
                     {
                         "name": "orderBy",
@@ -863,7 +863,7 @@
                         "description": "Orders ascending data set by given column name",
                         "schema": {
                             "type": "string",
-                            "example": "name"
+                            "example": ""
                         }
                     },
                     {
@@ -2957,7 +2957,10 @@
                         "application/json": {
                             "schema": {
                                 "example": {
-                                    "name": "Ser"
+                                    "name": "Ser",
+                                    "image": "{layer image file}",
+                                    "thumbnail": "{thumbnail file}",
+                                    "index": "optional layer z-index"
                                 }
                             }
                         }
@@ -2973,7 +2976,9 @@
                                         "data": {
                                             "id": 1,
                                             "name": "Ser",
-                                            "image": "storage/ingredients/noimage.jpg"
+                                            "image": "storage/ingredients/noimage.jpg",
+                                            "thumbnail": "storage/ingredients/noimage.jpg",
+                                            "index": 1
                                         },
                                         "meta": [],
                                         "messages": [

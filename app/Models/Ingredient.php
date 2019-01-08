@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     protected $fillable = [
-        'name', 'image',
+        'name', 'image', 'thumbnail', 'index'
     ];
 
     public function pizzas()

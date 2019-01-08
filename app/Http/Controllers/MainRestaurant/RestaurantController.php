@@ -4,8 +4,8 @@ namespace App\Http\Controllers\MainRestaurant;
 
 use Storage;
 use JWTAuth;
-use App\Interfaces\ImageUploaderInterface as ImageUploader;
 use App\Interfaces\ApiResourceInterface as ApiResource;
+use App\Services\RestaurantImageUploader as ImageUploader;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
 use App\Http\Controllers\ApiResourceController;
