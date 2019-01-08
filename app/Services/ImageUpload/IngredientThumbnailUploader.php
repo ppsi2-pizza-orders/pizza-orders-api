@@ -2,15 +2,15 @@
 
 namespace App\Services;
 
-class IngredientImageUploader extends ImageUploader
+class IngredientThumbnailUploader extends ImageUploader
 {
     protected function getResolution(): ?array
     {
-        return ['540', '540'];
+        return ['200', '200'];
     }
 
     protected function getPath(): string
     {
-        return 'public/ingredients/layers';
+        return 'public/ingredients/thumbnails';
     }
 }

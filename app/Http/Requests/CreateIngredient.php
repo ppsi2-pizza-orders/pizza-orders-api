@@ -8,6 +8,9 @@ class CreateIngredient extends AbstractApiRequest
     {
         return [
             'name' => 'required',
+            'image' => 'required|mimes:jpeg,gif,png',
+            'thumbnail' => 'required|mimes:jpeg,gif,png',
+            'index' => 'integer',
         ];
     }
 }

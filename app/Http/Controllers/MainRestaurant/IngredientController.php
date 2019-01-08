@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\MainRestaurant;
 
 use Storage;
-use App\Interfaces\ImageUploaderInterface as ImageUploader;
 use App\Interfaces\ApiResourceInterface as ApiResource;
+use App\Services\IngredientImageUploader as ImageUploader;
+use App\Services\IngredientThumbnailUploader as ThumbnailUploader;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreateIngredient;
 use App\Models\Ingredient;
 
 class IngredientController extends ApiResourceController
 {
-    protected $imageUploader;
+    protected $imageUploader, $thumbnailUploader;
 
-    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader,  ThumbnailUploader $thumbnailUploader)
     {
         $this->imageUploader = $imageUploader;
+        $this->thumbnailUploader = $thumbnailUploader;
         parent::__construct($apiResource);
     }
 
@@ -23,11 +25,17 @@ class IngredientController extends ApiResourceController
     {
         $ingredient = new Ingredient([
             'name' => $request->input('name'),
-            'image' => 'public/ingredients/noimage.jpg'
+            'image' => 'public/ingredients/noimage.jpg',
+            'thumbnail' => 'public/ingredients/noimage.jpg',
+            'index' => $request->input('index') ?? 0
         ]);
 
         if ($request->hasFile('image')) {
             $ingredient->image = $this->imageUploader->store($request->image);
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $ingredient->thumbnail = $this->thumbnailUploader->store($request->image);
         }
 
         $ingredient->save();
@@ -47,6 +55,10 @@ class IngredientController extends ApiResourceController
             $ingredient->image = $this->imageUploader->store($request->image);
         }
 
+        if ($request->hasFile('thumbnail')) {
+            $ingredient->thumbnail = $this->thumbnailUploader->store($request->image);
+        }
+
         $ingredient->update();
 
         return $this->apiResource
@@ -62,6 +74,10 @@ class IngredientController extends ApiResourceController
         if ($ingredient->delete()) {
             if ($ingredient->image != 'public/ingredients/noimage.jpg') {
                 Storage::delete($ingredient->image);
+            }
+
+            if ($ingredient->thumnbail != 'public/ingredients/noimage.jpg') {
+                Storage::delete($ingredient->thumbnail);
             }
 
             return $this->apiResponse

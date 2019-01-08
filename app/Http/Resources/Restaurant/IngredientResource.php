@@ -13,6 +13,8 @@ class IngredientResource extends ApiResource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'image' => url(Storage::url($this->resource->image)),
+            'thumbnail' => url(Storage::url($this->resource->thumbnail)),
+            'index' => (int)$this->resource->index,
         ];
     }
 }
