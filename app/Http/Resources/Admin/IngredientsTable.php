@@ -23,6 +23,8 @@ class IngredientsTable extends AbstractAdminTable
             [ 'name' => 'id', 'label' => __('id'), 'sortable' => true ],
             [ 'name' => 'name', 'label' => __('name'), 'sortable' => true, 'searchable' => true ],
             [ 'name' => 'image', 'label' => __('image') ],
+            [ 'name' => 'thumbnail', 'label' => __('thumbnail') ],
+            [ 'name' => 'index', 'label' => __('index') ],
         ];
     }
 
@@ -32,6 +34,8 @@ class IngredientsTable extends AbstractAdminTable
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'image' => url(Storage::url($this->resource->image)),
+            'thumbnail' => url(Storage::url($this->resource->thumbnail)),
+            'index' => $this->resource->index,
         ];
     }
 
