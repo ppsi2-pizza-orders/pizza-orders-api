@@ -23,8 +23,6 @@ class RestaurantController extends ApiResourceController
         parent::__construct($apiResource);
     }
 
-
-
     public function index()
     {
         $restaurants = Restaurant::where('confirmed', 'like', 1)->pluck('name');
