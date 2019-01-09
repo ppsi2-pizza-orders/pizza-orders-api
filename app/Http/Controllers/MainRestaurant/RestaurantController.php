@@ -27,12 +27,12 @@ class RestaurantController extends ApiResourceController
 
     public function index()
     {
-        $restaurants = Restaurant::pluck('name');
-        $cities = Restaurant::pluck('city')->unique()->values();
+        $restaurants = Restaurant::where('confirmed', 'like', 1)->pluck('name');
+        $cities = Restaurant::where('confirmed', 'like', 1)->pluck('city')->unique()->values();
 
         $data = [
             'names' => $restaurants,
-            'cities'=> $cities
+            'cities'=> $cities,
         ];
 
         return $this->apiResponse
