@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\MainRestaurant;
 
 use App\Http\Requests\AddUserToRestaurant;
+use App\Http\Requests\PublicRestaurantRequest;
 use App\Http\Controllers\ApiResourceController;
 use App\Models\Restaurant;
 use App\Models\User;
+use App\Services\Publish\CheckRequiredFields;
+use App\Interfaces\ApiResourceInterface as ApiResource;
 
 class RestaurantOwnerController extends ApiResourceController
 {
+    protected $checkFields;
+
+    public function __construct(ApiResource $apiResource, CheckRequiredFields $checkFields)
+    {
+        $this->service = $checkFields;
+        parent::__construct($apiResource);
+    }
+
     public function grant($id, AddUserToRestaurant $request)
     {
         $restaurant = Restaurant::findOrFail($id);
@@ -43,6 +54,29 @@ class RestaurantOwnerController extends ApiResourceController
 
         return $this->apiResponse
             ->pushMessage('User removed from restaurant')
+            ->response();
+    }
+
+    public function request($id)
+    {
+        $ready = $this->service->check($id);
+        if (!$ready) {
+            throw $this->apiException
+                ->setStatusCode(400)
+                ->pushMessage('You need to fill all necessary information before sending a publish request');
+        }
+        Restaurant::where('id', 'like', $id )->update(['visible' => true]);
+        return $this->apiResponse
+            ->pushMessage('Request successfully sent to an admin')
+            ->response();
+    }
+
+    public function cancel($id)
+    {
+        Restaurant::where('id', 'like', $id )->update(['visible' => false, 'confirmed' => false]);
+
+        return $this->apiResponse
+            ->pushMessage('Restaurant status changed to private')
             ->response();
     }
 }
