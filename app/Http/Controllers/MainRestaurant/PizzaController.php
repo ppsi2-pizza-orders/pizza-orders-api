@@ -7,8 +7,10 @@ use App\Interfaces\ImageUploaderInterface as ImageUploader;
 use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreatePizza;
+use App\Http\Requests\AttachIngredientRequest;
 use App\Models\Restaurant;
 use App\Models\Pizza;
+use App\Models\Ingredient;
 
 class PizzaController extends ApiResourceController
 {
@@ -81,5 +83,31 @@ class PizzaController extends ApiResourceController
         throw $this->apiException
             ->setStatusCode(400)
             ->pushMessage('Could not delete pizza');
+    }
+
+    public function attach($pizza_id, AttachIngredientRequest $request)
+    {
+        $pizza = Pizza::findOrFail($pizza_id);
+        $ingredientFind = $request->input('ingredient_id');
+        $ingredient = Ingredient::findOrFail($ingredientFind);
+
+            $ingredient->pizzas()->attach($pizza);
+
+        return $this->apiResponse
+            ->pushMessage('Ingredients saved')
+            ->response();
+    }
+
+    public function detach($pizza_id, AttachIngredientRequest $request)
+    {
+        $pizza = Pizza::findOrFail($pizza_id);
+        $ingredientFind = $request->input('ingredient_id');
+        $ingredient = Ingredient::findOrFail($ingredientFind);
+
+        $ingredient->pizzas()->detach($pizza);
+
+        return $this->apiResponse
+            ->pushMessage('Ingredients saved')
+            ->response();
     }
 }
