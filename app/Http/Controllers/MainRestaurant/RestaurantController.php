@@ -9,16 +9,21 @@ use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
 use App\Http\Controllers\ApiResourceController;
+use App\Services\Publish\CheckRequiredFields;
 
 class RestaurantController extends ApiResourceController
 {
     protected $imageUploader;
+    protected $checkFields;
 
-    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader, CheckRequiredFields $checkFields)
     {
         $this->imageUploader = $imageUploader;
+        $this->service = $checkFields;
         parent::__construct($apiResource);
     }
+
+
 
     public function index()
     {
@@ -85,6 +90,10 @@ class RestaurantController extends ApiResourceController
         }
 
         $restaurant->update();
+        $ready = $this->service->check($id);
+        if (!$ready) {
+            Restaurant::where('id', 'like', $id )->update(['visible' => false, 'confirmed' => false]);
+        }
 
         return $this->apiResource
             ->resource($restaurant)
