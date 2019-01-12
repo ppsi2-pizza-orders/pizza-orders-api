@@ -38,7 +38,7 @@ class OrderController extends ApiResourceController
 
         $order = $this->orderService->placeOrder($orderData);
 
-        Log::channel('order')->notice('Order ' . $order->token . 'was placed by ' . $order->user->name);
+        Log::channel('order')->notice('Order ' . $order->token . ' was placed by ' . $order->user->name);
 
         DB::commit();
 

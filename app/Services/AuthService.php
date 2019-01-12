@@ -55,7 +55,7 @@ class AuthService
                 ->pushMessage('Could not create JWT Token');
         }
 
-        Log::channel('login')->info('SUCCESSFUL - Authentication of user' . $credentials['email']);
+        Log::channel('login')->info('SUCCESSFUL - Authentication of user ' . $credentials['email']);
 
         return compact('token');
     }
