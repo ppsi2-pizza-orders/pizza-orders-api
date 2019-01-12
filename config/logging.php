@@ -35,20 +35,37 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['daily'],
         ],
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/errors/errors.log'),
             'level' => 'debug',
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/errors/errors.log'),
             'level' => 'debug',
-            'days' => 7,
+        ],
+
+        'login' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/login_attempts/login.log'),
+            'level' => 'debug',
+        ],
+
+        'registration' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/registration_attempts/registration.log'),
+            'level' => 'debug',
+        ],
+
+        'order' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/order/orders.log'),
+            'level' => 'debug',
         ],
 
         'slack' => [

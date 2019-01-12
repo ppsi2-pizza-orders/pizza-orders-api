@@ -166,6 +166,7 @@ return [
         App\Providers\ApiResourceServiceProvider::class,
         App\Providers\OrderServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
     /*
