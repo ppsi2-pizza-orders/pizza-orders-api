@@ -32,7 +32,7 @@ class Restaurant extends Model
 
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient');
+        return $this->belongsToMany(Ingredient::class)->withPivot('price', 'available');
     }
 
     public function getReviewStars(): float

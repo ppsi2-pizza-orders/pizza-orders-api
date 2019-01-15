@@ -6,6 +6,7 @@ use Storage;
 use App\Models\User;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\Restaurant\PizzaFullResource as FullPizza;
+use App\Http\Resources\Restaurant\RestaurantIngredientsResource as IngredientsResource;
 
 class RestaurantResource extends ApiResource
 {
@@ -23,7 +24,8 @@ class RestaurantResource extends ApiResource
             'owner_id' => User::find($this->resource->owner_id, ['id', 'name']),
             'pizzas' => (new FullPizza)->collect($this->resource->pizzas),
             'review_stars' => $this->resource->getReviewStars(),
-            'reviews' => (new ReviewResource)->collect($this->resource->reviews)
+            'reviews' => (new ReviewResource)->collect($this->resource->reviews),
+            'ingredients' => (new IngredientsResource)->collect($this->resource->ingredients)
         ];
     }
 }
