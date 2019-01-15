@@ -8,6 +8,7 @@ use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreateIngredient;
 use App\Models\Ingredient;
+use Illuminate\Http\Request;
 
 class IngredientController extends ApiResourceController
 {
@@ -17,6 +18,14 @@ class IngredientController extends ApiResourceController
     {
         $this->imageUploader = $imageUploader;
         parent::__construct($apiResource);
+    }
+
+    public function index()
+    {
+        $data[] = Ingredient::get();
+        return $this->apiResponse
+            ->setData($data)
+            ->response();
     }
 
     public function store(CreateIngredient $request)
@@ -73,4 +82,6 @@ class IngredientController extends ApiResourceController
             ->setStatusCode(400)
             ->pushMessage('Could not delete ingredient');
     }
+
+
 }
