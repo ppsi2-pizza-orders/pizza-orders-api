@@ -330,6 +330,62 @@
  */
 
 /**
+ * @OA\Post(
+ *      path="/admin/restaurant/{id}/publish",
+ *      tags={"Admin"},
+ *      description="Sets restaurant 'confirmed' status to true. Makes it visible for customers.",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"data":{},"meta":{},"messages":{"Status restauracji został pomyślnie zmieniony na publiczny"}}
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Post(
+ *      path="/admin/restaurant/{id}/hide",
+ *      tags={"Admin"},
+ *      description="Sets restaurant 'confirmed' status to false. Makes it invisible for customers.",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"data":{},"meta":{},"messages":{"Status restauracji został pomyślnie zmieniony na niezatwierdzony"}}
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
  * @OA\Get(
  *      path="/restaurants",
  *      tags={"Restaurant"},
@@ -858,6 +914,62 @@
 
 /**
  * @OA\Post(
+ *      path="/restaurant/{id}/publish/request",
+ *      tags={"Owner"},
+ *      description="Sets restaurant 'visible' status to true.",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"data":{},"meta":{},"messages":{"Zapytanie zostało pomyślnie wysłane"}}
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Post(
+ *      path="/restaurant/{id}/publish/cancel",
+ *      tags={"Owner"},
+ *      description="Sets restaurant 'visible' and 'confirmed' status to false. Makes restaurant invisible for customers.",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"data":{},"meta":{},"messages":{"Status został zmieniony na prywatn"}}
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Post(
  *      path="/order",
  *      tags={"Order"},
  *      description="Place order",
@@ -969,6 +1081,42 @@
  *                 example={
  *                     "data":{"id":2,"token":"AnUD8OUFXapccnrC","status":"realization","price":"29,00","delivery_address":"Piastowska 1 Legnica","phone_number":"123456789","pizzas":{{"price":"15,00","description":"Custom Pizza: sos pomidorowy, ser, szynka","type":"custom"},{"price":"14,00","description":"Pizza 'Margherita': sos pomidorowy, ser","type":"menu"}}},"meta":{},"messages":{"Status zamówienia został zmieniony"}
  *                 }
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
+ * @OA\Post(
+ *      path="/restaurant/{id}/manage",
+ *      tags={"Manager"},
+ *      description="Ingredient managing",
+ *      security={{"Authorization header": {}}},
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="id of restaurant",
+ *         @OA\Schema(
+ *             type="string",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"ingredient_id":1,"available":120,"price":4}
+ *             )
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"data":{},"meta":{},"messages":{"Skadnik został zapisany"}}
  *             )
  *         )
  *     ),

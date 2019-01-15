@@ -1133,6 +1133,90 @@
                 ]
             }
         },
+        "/admin/restaurant/{id}/publish": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "description": "Sets restaurant 'confirmed' status to true. Makes it visible for customers.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Status restauracji został pomyślnie zmieniony na publiczny"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
+        "/admin/restaurant/{id}/hide": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "description": "Sets restaurant 'confirmed' status to false. Makes it invisible for customers.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Status restauracji został pomyślnie zmieniony na niezatwierdzony"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
         "/restaurants": {
             "get": {
                 "tags": [
@@ -3312,6 +3396,90 @@
                 ]
             }
         },
+        "/restaurant/{id}/publish/request": {
+            "post": {
+                "tags": [
+                    "Owner"
+                ],
+                "description": "Sets restaurant 'visible' status to true.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Zapytanie zostało pomyślnie wysłane"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
+        "/restaurant/{id}/publish/cancel": {
+            "post": {
+                "tags": [
+                    "Owner"
+                ],
+                "description": "Sets restaurant 'visible' and 'confirmed' status to false. Makes restaurant invisible for customers.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Status został zmieniony na prywatn"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
         "/order": {
             "post": {
                 "tags": [
@@ -3697,6 +3865,61 @@
                                         "meta": [],
                                         "messages": [
                                             "Status zamówienia został zmieniony"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization header": []
+                    }
+                ]
+            }
+        },
+        "/restaurant/{id}/manage": {
+            "post": {
+                "tags": [
+                    "Manager"
+                ],
+                "description": "Ingredient managing",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of restaurant",
+                        "schema": {
+                            "type": "string",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "ingredient_id": 1,
+                                    "available": 120,
+                                    "price": 4
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "data": [],
+                                        "meta": [],
+                                        "messages": [
+                                            "Skadnik został zapisany"
                                         ]
                                     }
                                 }

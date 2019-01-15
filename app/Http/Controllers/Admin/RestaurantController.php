@@ -16,17 +16,20 @@ class RestaurantController extends ApiResourceController
 
     public function publish($id) {
         $restaurant = Restaurant::findOrFail($id);
-        if ($restaurant->visible == 0) {
+
+        if (!$restaurant->visible) {
             throw $this->apiException
                 ->setStatusCode(400)
                 ->pushMessage('Can not confirm restaurant because status is set to private by owner');
         }
-        if ($restaurant->confirmed == 1) {
+
+        if ($restaurant->confirmed) {
             throw $this->apiException
                 ->setStatusCode(400)
                 ->pushMessage('Restaurant already confirmed');
         }
-        Restaurant::where('id', 'like', $id )->update(['confirmed' => true]);
+
+        $restaurant->update(['confirmed' => true]);
 
         return $this->apiResponse
             ->pushMessage('Restaurant status changed to public')
@@ -35,7 +38,7 @@ class RestaurantController extends ApiResourceController
 
     public function hide($id)
     {
-        Restaurant::where('id', 'like', $id )->update(['confirmed' => false]);
+        Restaurant::findOrFail($id)->update(['confirmed' => false]);
 
         return $this->apiResponse
             ->pushMessage('Restaurant status changed to unconfirmed')

@@ -29,7 +29,8 @@
   "Ingredient added": "Składnik został dodany",
   "Ingredient deleted": "Składnik został usunięty",
   "Ingredient updated": "Składnik został zaktualizowany",
-  "Ingredients saved": "Skadniki zostły zapisane",
+  "Ingredients saved": "Skadniki zostały zapisane",
+  "Ingredient saved": "Skadnik został zapisany",
 
   "Pizza added": "Pizza dodana",
   "Pizza updated": "Pizza zaktualizowana",
@@ -41,6 +42,5 @@
   "User role already added": "Taka rola użytkownika jest już ustawiona",
   "User removed from restaurant": "Użytkownik usunięty z restauracji",
   "Custom Pizza": "Własna Pizza",
-  "Customized": "Zmodyfikowana",
-  "restaurant": "re"
+  "Customized": "Zmodyfikowana"
 }

@@ -9,24 +9,30 @@ use App\Services\RestaurantImageUploader as ImageUploader;
 use App\Http\Requests\CreateRestaurant;
 use App\Models\Restaurant;
 use App\Http\Controllers\ApiResourceController;
-use App\Services\Publish\CheckRequiredFields;
 
 class RestaurantController extends ApiResourceController
 {
     protected $imageUploader;
-    protected $checkFields;
 
-    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader, CheckRequiredFields $checkFields)
+    public function __construct(ApiResource $apiResource, ImageUploader $imageUploader)
     {
         $this->imageUploader = $imageUploader;
-        $this->service = $checkFields;
         parent::__construct($apiResource);
     }
 
     public function index()
     {
-        $restaurants = Restaurant::where('confirmed', 'like', 1)->pluck('name');
-        $cities = Restaurant::where('confirmed', 'like', 1)->pluck('city')->unique()->values();
+        $restaurants = Restaurant::where('confirmed', 'like', 1)
+            ->where('confirmed', true)
+            ->pluck('name')
+            ->unique()
+            ->values();
+
+        $cities = Restaurant::where('confirmed', 'like', 1)
+            ->where('confirmed', true)
+            ->pluck('city')
+            ->unique()
+            ->values();
 
         $data = [
             'names' => $restaurants,
@@ -88,9 +94,9 @@ class RestaurantController extends ApiResourceController
         }
 
         $restaurant->update();
-        $ready = $this->service->check($id);
-        if (!$ready) {
-            Restaurant::where('id', 'like', $id )->update(['visible' => false, 'confirmed' => false]);
+
+        if (!$restaurant->isReadyForPublication()) {
+            $restaurant->update(['visible' => false, 'confirmed' => false]);
         }
 
         return $this->apiResource

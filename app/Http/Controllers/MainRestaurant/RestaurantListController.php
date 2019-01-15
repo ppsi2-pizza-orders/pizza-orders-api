@@ -16,7 +16,7 @@ class RestaurantListController extends ApiResourceController
         $restaurants = Restaurant::where([
             ['name', 'like', "%{$restaurantName}%"],
             ['city', 'like', "%{$restaurantCity}%"],
-        ])->get();
+        ])->where('confirmed', true)->get();
 
         return $this->apiResource
             ->resource($restaurants)

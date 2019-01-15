@@ -10,6 +10,7 @@ class ManageIngredientsRequest extends AbstractApiRequest
         return [
             'available' => 'required',
             'price' => 'required',
+            'ingredient_id' => 'required'
         ];
     }
 }

@@ -12,14 +12,14 @@ class RestaurantManagerController extends ApiResourceController
     public function manage($id, ManageIngredientsRequest $request)
     {
         $restaurant = Restaurant::findOrFail($id);
-        $ingredientFind = $request->input('ingredient_id');
+        $ingredientId= $request->input('ingredient_id');
         $ingredientPrice = $request->input('price');
         $ingredientAvailability = $request->input('available');
 
-        $ingredient = Ingredient::findOrFail($ingredientFind);
+        $ingredient = Ingredient::findOrFail($ingredientId);
 
         $ingredientRestaurant = $ingredient->restaurants()
-            ->wherePivot('ingredient_id', $ingredientFind)
+            ->wherePivot('ingredient_id', $ingredientId)
             ->first();
 
         if ($ingredientRestaurant) {

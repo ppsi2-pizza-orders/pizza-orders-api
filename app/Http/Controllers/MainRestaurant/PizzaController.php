@@ -28,14 +28,12 @@ class PizzaController extends ApiResourceController
         $pizza = new Pizza([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
-            'image' => 'public/restaurants/noimage.jpg',
         ]);
 
-        if ($request->hasFile('image')) {
-            $pizza->image = $this->imageUploader->store($request->image);
-        }
-
         $pizza->save();
+
+        $ingredients = $request->input('ingredients');
+        $pizza->attachIngredients($ingredients);
 
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->pizzas()->attach($pizza);
@@ -55,9 +53,8 @@ class PizzaController extends ApiResourceController
             'price' => $request->input('price'),
         ]);
 
-        if ($request->hasFile('image')) {
-            $pizza->image = $this->imageUploader->store($request->image);
-        }
+        $ingredients = $request->input('ingredients');
+        $pizza->attachIngredients($ingredients);
 
         $pizza->update();
 
@@ -72,10 +69,6 @@ class PizzaController extends ApiResourceController
         $pizza = Pizza::findOrFail($id);
 
         if ($pizza->delete()) {
-            if ($pizza->image != 'public/pizzas/noimage.jpg') {
-                Storage::delete($pizza->image);
-            }
-
             return $this->apiResponse
                 ->pushMessage('Pizza deleted')
                 ->response();
@@ -86,29 +79,4 @@ class PizzaController extends ApiResourceController
             ->pushMessage('Could not delete pizza');
     }
 
-    public function attach($pizza_id, AttachIngredientRequest $request)
-    {
-        $pizza = Pizza::findOrFail($pizza_id);
-        $ingredientFind = $request->input('ingredient_id');
-        $ingredient = Ingredient::findOrFail($ingredientFind);
-
-            $ingredient->pizzas()->attach($pizza);
-
-        return $this->apiResponse
-            ->pushMessage('Ingredients saved')
-            ->response();
-    }
-
-    public function detach($pizza_id, AttachIngredientRequest $request)
-    {
-        $pizza = Pizza::findOrFail($pizza_id);
-        $ingredientFind = $request->input('ingredient_id');
-        $ingredient = Ingredient::findOrFail($ingredientFind);
-
-        $ingredient->pizzas()->detach($pizza);
-
-        return $this->apiResponse
-            ->pushMessage('Ingredients saved')
-            ->response();
-    }
 }

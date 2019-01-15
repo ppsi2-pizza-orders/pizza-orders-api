@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     protected $fillable = [
-        'name', 'city', 'address', 'phone', 'photo', 'description', 'owner_id', 'photo'
+        'name', 'city', 'address', 'phone', 'photo', 'description', 'owner_id', 'photo', 'visible', 'confirmed'
     ];
 
     public function reviews()
@@ -38,6 +38,15 @@ class Restaurant extends Model
     public function getReviewStars(): float
     {
        return floor($this->reviews()->avg('average_rating') * 2) / 2;
+    }
+
+    public function isReadyForPublication(): bool
+    {
+        return $this->name &&
+            $this->city &&
+            $this->address &&
+            $this->phone &&
+            $this->description;
     }
 
 }

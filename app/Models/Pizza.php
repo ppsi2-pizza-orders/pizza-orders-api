@@ -24,5 +24,13 @@ class Pizza extends Model
     {
         return $this->belongsToMany(Ingredient::class);
     }
+
+    public function attachIngredients(array $ingredients)
+    {
+        foreach ($ingredients as $ingredientId) {
+            $ingredient = Ingredient::findOrFail($ingredientId);
+            $this->ingredients()->attach($ingredient);
+        }
+    }
 }
 

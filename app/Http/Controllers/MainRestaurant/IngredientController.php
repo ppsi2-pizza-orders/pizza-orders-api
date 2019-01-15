@@ -9,7 +9,6 @@ use App\Services\IngredientThumbnailUploader as ThumbnailUploader;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreateIngredient;
 use App\Models\Ingredient;
-use Illuminate\Http\Request;
 
 class IngredientController extends ApiResourceController
 {
