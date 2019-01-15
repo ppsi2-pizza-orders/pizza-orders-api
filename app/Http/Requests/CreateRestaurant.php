@@ -10,7 +10,7 @@ class CreateRestaurant extends AbstractApiRequest
             'name' => 'required',
             'city' => 'required',
             'address' => 'required',
-            'phone' => 'required|numeric',
+            'phone' => 'required',
         ];
     }
 }

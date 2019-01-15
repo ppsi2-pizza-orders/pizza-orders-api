@@ -27,7 +27,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('restaurant/{id}/review', 'MainRestaurant\ReviewController@store');
     Route::delete('review/{id}', 'MainRestaurant\ReviewController@destroy');
 
-
     Route::post('order', 'Order\OrderController@placeOrder');
     Route::get('order/{token}', 'Order\OrderController@show');
     Route::post('order/{token}/status/next', 'Order\OrderController@setNextStatus');

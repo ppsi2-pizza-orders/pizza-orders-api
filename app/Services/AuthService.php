@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Log;
 use Socialite;
 use Exception;
 use Hash;
@@ -42,6 +43,8 @@ class AuthService
     {
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
+                Log::channel('login')->notice('FAILED - Authentication of user' . $credentials['email']);
+
                 throw (new ApiException())
                     ->setStatusCode(400)
                     ->pushMessage('Invalid login credentials');
@@ -52,6 +55,8 @@ class AuthService
                 ->pushMessage('Could not create JWT Token');
         }
 
+        Log::channel('login')->info('SUCCESSFUL - Authentication of user ' . $credentials['email']);
+
         return compact('token');
     }
 
@@ -61,6 +66,8 @@ class AuthService
         $data['password'] = Hash::make($nonHashedPassword);
         $data['name'] = strstr($data['email'], '@', true);
         $user = User::create($data);
+
+        Log::channel('registration')->info('SUCCESSFUL - registration of ' . $data['email']);
 
         return $this->attemptLogin([
             'email' => $user->email,
@@ -74,6 +81,8 @@ class AuthService
             $fbUser = Socialite::driver('facebook')
                 ->userFromToken($fbAccessToken);
         } catch (Exception $exception) {
+            Log::channel('login')->notice('FAILED - Could not fetch Facebook account');
+
             throw (new ApiException())
                 ->setStatusCode(400)
                 ->pushMessage('Could not fetch Facebook account');
@@ -96,6 +105,7 @@ class AuthService
         $alreadyCreatedUser = User::where('provider_id', $socialUser->id)->first();
 
         if ($alreadyCreatedUser) {
+            Log::channel('login')->info('SUCCESSFUL - Facebook authentication of user ' . $alreadyCreatedUser->email);
             return $alreadyCreatedUser;
         }
 

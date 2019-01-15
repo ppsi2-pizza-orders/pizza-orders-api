@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Contracts\Support\Arrayable;
 
 use App\Helpers\ApiResponse;
@@ -65,7 +66,7 @@ class ApiResource implements ApiResourceInterface
     {
         $data = [];
 
-        if ($this->resource->resource instanceof Collection) {
+        if ($this->resource->resource instanceof Collection || $this->resource->resource instanceof SupportCollection) {
             foreach($this->resource->resource as $resource) {
                 $this->resource->resource = $resource;
                 $data[] = $this->toArray();

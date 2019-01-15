@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\MainRestaurant;
 
 use Storage;
-use App\Interfaces\ImageUploaderInterface as ImageUploader;
+
 use App\Interfaces\ApiResourceInterface as ApiResource;
+use App\Services\PizzaImageUploader as ImageUploader;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreatePizza;
 use App\Http\Requests\AttachIngredientRequest;

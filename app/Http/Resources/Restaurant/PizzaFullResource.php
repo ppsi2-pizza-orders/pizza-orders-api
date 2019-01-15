@@ -14,7 +14,6 @@ class PizzaFullResource extends ApiResource
             'name' => $this->resource->name,
             'price' => number_format($this->resource->price, 2, ',', ''),
             'ingredients' => (new IngredientResource)->collect($this->resource->ingredients),
-            'image' => url(Storage::url($this->resource->image)),
         ];
     }
 }

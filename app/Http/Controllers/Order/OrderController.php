@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Events\OrderStatusChanged;
 use DB;
+use Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 use App\Interfaces\ApiResourceInterface as ApiResource;
@@ -12,6 +12,7 @@ use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\PlaceOrder;
 use App\Models\Restaurant;
 use App\Models\Order;
+use App\Events\OrderStatusChanged;
 
 class OrderController extends ApiResourceController
 {
@@ -36,6 +37,8 @@ class OrderController extends ApiResourceController
         ];
 
         $order = $this->orderService->placeOrder($orderData);
+
+        Log::channel('order')->notice('Order ' . $order->token . ' was placed by ' . $order->user->name);
 
         DB::commit();
 

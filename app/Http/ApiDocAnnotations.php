@@ -623,7 +623,7 @@
  *         @OA\MediaType(
  *             mediaType="application/json",
  *             @OA\Schema(
- *                 example={"name":"Ser"}
+ *                 example={"name":"Ser", "image": "{layer image file}", "thumbnail": "{thumbnail file}", "index": "optional layer z-index"}
  *             )
  *         )
  *      ),
@@ -634,7 +634,7 @@
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 example={
- *                     "data":{"id":1,"name":"Ser","image":"storage/ingredients/noimage.jpg"},"meta":{},"messages":{"Składnik został dodany"}
+ *                     "data":{"id":1,"name":"Ser","image":"storage/ingredients/noimage.jpg","thumbnail":"storage/ingredients/noimage.jpg", "index": 1},"meta":{},"messages":{"Składnik został dodany"}
  *                 }
  *             )
  *         )
