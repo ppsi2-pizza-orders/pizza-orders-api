@@ -28,10 +28,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('order', 'Order\OrderController@placeOrder');
     Route::get('order/{token}', 'Order\OrderController@show');
     Route::post('order/{token}/status/next', 'Order\OrderController@setNextStatus');
-    Route::get('restaurant/{id}/orders', 'Order\OrderController@restaurantOrders'); 
+    Route::get('restaurant/{id}/orders', 'Order\OrderController@restaurantOrders');
 
-    Route::post('restaurant/{id}/grant', 'MainRestaurant\RestaurantOwnerController@grant'); 
-    Route::delete('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke'); 
+    Route::post('restaurant/{id}/grant', 'MainRestaurant\RestaurantOwnerController@grant');
+    Route::delete('restaurant/{id}/revoke/{user_id}', 'MainRestaurant\RestaurantOwnerController@revoke');
     Route::post('restaurant/{id}/publish/request', 'MainRestaurant\RestaurantOwnerController@request');
     Route::post('restaurant/{id}/publish/cancel', 'MainRestaurant\RestaurantOwnerController@cancel');
 

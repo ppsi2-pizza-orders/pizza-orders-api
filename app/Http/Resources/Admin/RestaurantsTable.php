@@ -25,10 +25,12 @@ class RestaurantsTable extends AbstractAdminTable
             [ 'name' => 'token', 'label' => __('token'), 'sortable' => false, 'searchable' => true ],
             [ 'name' => 'name', 'label' => __('name'), 'sortable' => true, 'searchable' => true ],
             [ 'name' => 'city', 'label' => __('city'), 'sortable' => true, 'searchable' => true ],
-            [ 'name' => 'address', 'label' => __('address'), 'sortable' => true, 'searchable' => true ],
-            [ 'name' => 'phone', 'label' => __('phone'), 'searchable' => true ],
-            [ 'name' => 'description', 'label' => __('description'), 'searchable' => true ],
-            [ 'name' => 'created_at', 'label' => __('created_at'), 'sortable' => true ],
+            [ 'name' => 'address', 'label' => __('address'), 'sortable' => false, 'searchable' => true ],
+            [ 'name' => 'phone', 'label' => __('phone'), 'sortable' => false, 'searchable' => true ],
+            [ 'name' => 'description', 'label' => __('description'), 'sortable' => false, 'searchable' => true ],
+            [ 'name' => 'created_at', 'label' => __('created_at'), 'sortable' => true, 'searchable' => false ],
+            [ 'name' => 'visible', 'label' => __('visible'), 'sortable' => false , 'searchable' => false],
+            [ 'name' => 'confirmed', 'label' => __('confirmed'), 'sortable' => false , 'searchable' => false],
             [ 'name' => 'owner', 'label' => __('owner') ],
         ];
     }
@@ -45,6 +47,8 @@ class RestaurantsTable extends AbstractAdminTable
             'photo' => asset($this->resource->photo),
             'description' => $this->resource->description,
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
+            'visible' => (bool)$this->resource->visible,
+            'confirmed' => (bool)$this->resource->confirmed,
             'owner' => User::find($this->resource->owner_id, ['id', 'name']),
         ];
     }

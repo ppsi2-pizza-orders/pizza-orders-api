@@ -567,7 +567,7 @@
  * @OA\Post(
  *      path="/restaurant/{id}/pizza",
  *      tags={"Pizza"},
- *      description="Add pizza to restaurant",
+ *      description="Add pizza to restaurant menu",
  *      security={{"Authorization header": {}}},
  *      @OA\Parameter(
  *         name="id",
@@ -582,7 +582,7 @@
  *         @OA\MediaType(
  *             mediaType="application/json",
  *             @OA\Schema(
- *                 example={"name":"Funghi","price":21}
+ *                 example={"price":30,"name":"Pizza dobra taka nie za słodka","ingredients":{1,2,5}}
  *             )
  *         )
  *      ),
@@ -592,9 +592,7 @@
  *          @OA\MediaType(
  *             mediaType="application/json",
  *             @OA\Schema(
- *                 example={
- *                     "data":{"id":8,"name":"Funghi","price":21,"image":"storage/ingredients/noimage.jpg"},"meta":{},"messages":{"Pizza dodana"}
- *                 }
+ *                 example={"data":{"id":10,"name":"Pizza dobra taka nie za słodka","price":"30,00","ingredients":{{"id":1,"name":"dodatkowy ser","image":"http://pizza-orders-api.test/storage/ingredients/layers/additional_cheese.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/additional_cheese.png","index":1},{"id":2,"name":"szynka","image":"http://pizza-orders-api.test/storage/ingredients/layers/ham.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/ham.png","index":2},{"id":5,"name":"pepperoni","image":"http://pizza-orders-api.test/storage/ingredients/layers/sausage.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/sausage.png","index":5}}},"meta":{},"messages":{"Pizza dodana"}}
  *             )
  *         )
  *     ),
