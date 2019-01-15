@@ -36,7 +36,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('restaurant/{id}/publish/cancel', 'MainRestaurant\RestaurantOwnerController@cancel');
 
     Route::post('restaurant/{id}/manage', 'MainRestaurant\RestaurantManagerController@manage');
+
 });
+
+Route::get('restaurant/{id}/ingredients', 'MainRestaurant\RestaurantManagerController@ingredients');
 
 Route::post('auth/facebook', 'Auth\AuthController@facebookLogin');
 Route::post('auth/register', 'Auth\AuthController@register');

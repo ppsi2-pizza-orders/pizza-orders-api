@@ -33,4 +33,13 @@ class RestaurantManagerController extends ApiResourceController
             ->pushMessage('Ingredient saved')
             ->response();
     }
+
+    public function ingredients($id)
+    {
+        $restaurant = Restaurant::findOrFail($id);
+
+        return $this->apiResource
+            ->resource($restaurant->ingredients)
+            ->response();
+    }
 }
