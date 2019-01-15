@@ -4,12 +4,12 @@ Route::middleware('auth:api')->group(function () {
 
     Route::middleware('admin')->group(function () {
         Route::get('admin/restaurants', 'Admin\RestaurantController@index');
-        Route::get('admin/ingredients', 'Admin\IngredientController@index');
         Route::get('admin/users', 'Admin\UserController@index');
         Route::get('admin/orders', 'Admin\OrderController@index');
         Route::patch('admin/restaurant/{id}/publish', 'Admin\RestaurantController@publish');
         Route::patch('admin/restaurant/{id}/hide', 'Admin\RestaurantController@hide');
     });
+    Route::get('admin/ingredients', 'Admin\IngredientController@index');
 
     Route::post('restaurant', 'MainRestaurant\RestaurantController@store');
     Route::patch('restaurant/{id}', 'MainRestaurant\RestaurantController@update');
@@ -23,7 +23,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('ingredient', 'MainRestaurant\IngredientController@store');
     Route::patch('ingredient/{id}', 'MainRestaurant\IngredientController@update');
     Route::delete('ingredient/{id}', 'MainRestaurant\IngredientController@destroy');
-    Route::get('ingredients', 'MainRestaurant\IngredientController@index');
 
     Route::post('restaurant/{id}/review', 'MainRestaurant\ReviewController@store');
     Route::delete('review/{id}', 'MainRestaurant\ReviewController@destroy');
