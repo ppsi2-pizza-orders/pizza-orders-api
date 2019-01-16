@@ -24,6 +24,7 @@
   "Restaurant already confirmed": "Restauracja została już wcześniej zatwierdzone",
   "Restaurant status changed to public": "Status restauracji został pomyślnie zmieniony na publiczny",
   "Restaurant status changed to unconfirmed": "Status restauracji został pomyślnie zmieniony na niezatwierdzony",
+  "No permission to perform this action": "Brak uprawnień do wykonania tej akcji",
 
   "Review deleted": "Ocena została usunięta",
   "Ingredient added": "Składnik został dodany",
