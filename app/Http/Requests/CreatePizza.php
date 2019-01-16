@@ -8,7 +8,7 @@ class CreatePizza extends AbstractApiRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'ingredients' => 'required|array'
         ];
     }
