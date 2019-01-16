@@ -6,6 +6,7 @@ use Storage;
 use App\Models\User;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\Restaurant\PizzaFullResource as FullPizza;
+use App\Http\Resources\UserPermissions;
 use App\Http\Resources\Restaurant\RestaurantIngredientsResource as IngredientsResource;
 
 class RestaurantResource extends ApiResource
@@ -27,7 +28,8 @@ class RestaurantResource extends ApiResource
             'pizzas' => (new FullPizza)->collect($this->resource->pizzas),
             'review_stars' => $this->resource->getReviewStars(),
             'reviews' => (new ReviewResource)->collect($this->resource->reviews),
-            'ingredients' => (new IngredientsResource)->collect($this->resource->ingredients)
+            'ingredients' => (new IngredientsResource)->collect($this->resource->ingredients),
+            'users' => (new UserPermissions)->collect($this->resource->users),
         ];
     }
 }
