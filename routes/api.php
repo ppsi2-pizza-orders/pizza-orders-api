@@ -16,6 +16,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('restaurant/{id}', 'MainRestaurant\RestaurantController@destroy');
 
     Route::post('restaurant/{id}/pizza', 'MainRestaurant\PizzaController@store');
+    Route::patch('pizza/{id}', 'MainRestaurant\PizzaController@update');
     Route::delete('pizza/{id}', 'MainRestaurant\PizzaController@destroy');
 
     Route::post('ingredient', 'MainRestaurant\IngredientController@store');
