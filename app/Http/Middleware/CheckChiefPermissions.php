@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use JWTAuth;
+use App\Models\User;
 
 class CheckChiefPermissions
 {
