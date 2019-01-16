@@ -54,6 +54,7 @@ class PizzaController extends ApiResourceController
         ]);
 
         $ingredients = $request->input('ingredients');
+        $pizza->ingredients()->detach();
         $pizza->attachIngredients($ingredients);
 
         $pizza->update();
