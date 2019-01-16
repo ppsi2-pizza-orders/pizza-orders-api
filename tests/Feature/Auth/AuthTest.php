@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
-use Tests\TestCase;
+use Tests\Feature\BaseTest;
 
-class AuthTest extends TestCase
+class AuthTest extends BaseTest
 {
     public function testIfLoginSucceedsWithValidData()
     {

@@ -2,14 +2,15 @@
 
 namespace Tests\Feature\Auth;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Feature\BaseTest;
 
-class RegisterTest extends TestCase
+//use Illuminate\Foundation\Testing\WithoutMiddleware;
+//use Illuminate\Foundation\Testing\DatabaseMigrations;
+//use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class RegisterTest extends BaseTest
 {
-	use DatabaseMigrations;
+	//use DatabaseMigrations;
 	
     public function testIfRegisterSucceedsWithUnusedValidData()
     {

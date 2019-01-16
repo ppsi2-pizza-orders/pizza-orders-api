@@ -216,7 +216,7 @@ class RestaurantTest extends BaseTest
     {
         $response = $this->json(
             'DELETE',
-            '/restaurant/999999997',
+            '/restaurant/999',
 			[
                 'Authorization' => 'Bearer ' . $this->getAdminToken()
             ]
