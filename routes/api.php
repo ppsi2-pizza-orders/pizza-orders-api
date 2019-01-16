@@ -24,6 +24,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('restaurant/{id}/publish/cancel', 'MainRestaurant\RestaurantOwnerController@cancel');
         Route::post('restaurant/{id}/pizza', 'MainRestaurant\PizzaController@store');
         Route::delete('pizza/{id}', 'MainRestaurant\PizzaController@destroy');
+        Route::patch('pizza/{id}', 'MainRestaurant\PizzaController@update');
     });
 
     Route::middleware('manager')->group(function () {

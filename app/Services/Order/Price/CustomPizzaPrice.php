@@ -2,13 +2,22 @@
 
 namespace App\Services\Order\Price;
 
-use App\Models\Ingredient;
-
 class CustomPizzaPrice extends OrderPriceCalculator
 {
     public function calculate(array $pizzaOrder): float
     {
-        $ingredients = Ingredient::whereIn('id', $pizzaOrder['ingredients'])->count();
-        return $ingredients * 5; // temp ( every ingredient costs 5 pln)
+        $price = 14;
+        $restaurant = $this->order->restaurant;
+
+        foreach ($pizzaOrder['ingredients'] as $id) {
+            $ingredient = $restaurant->ingredients()
+                ->where('available', true)
+                ->where('ingredient_id', $id)
+                ->firstOrFail();
+
+            $price += $ingredient->pivot->price;
+        }
+
+        return $price;
     }
 }

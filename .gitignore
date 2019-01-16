@@ -4,10 +4,10 @@
 /storage/*.key
 /storage/app/public/ingredients
 /storage/app/public/pizzas
-/storage/app/public/restaurants
+
 !/storage/app/public/ingredients/noimage.jpg
 !/storage/app/public/pizzas/noimage.jpg
-!/storage/app/public/restaurants/noimage.jpg
+
 /vendor
 /.idea
 /.vscode

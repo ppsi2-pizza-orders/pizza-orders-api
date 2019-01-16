@@ -466,6 +466,33 @@
  */
 
 /**
+ * @OA\Get(
+ *      path="/restaurant/{id}/ingredients",
+ *      tags={"Restaurant"},
+ *      description="Returns ingredients in restaurant",
+ *      @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="Id of restaurant",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Response(
+ *          response=200,
+ *          description="success",
+ *          @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"data":{{"id":1,"name":"dodatkowy ser","price":4,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/additional_cheese.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/additional_cheese.png","index":1},{"id":2,"name":"szynka","price":8,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/ham.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/ham.png","index":2},{"id":3,"name":"mozzarella","price":7,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/mozzarella.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/mozzarella.png","index":3},{"id":4,"name":"salami","price":6,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/salami.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/salami.png","index":4},{"id":5,"name":"pepperoni","price":8,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/sausage.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/sausage.png","index":5},{"id":6,"name":"czerwona cebula","price":5,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/red_onion.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/red_onion.png","index":6},{"id":7,"name":"czerwona papryka","price":4,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/red_pepper.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/red_pepper.png","index":7},{"id":8,"name":"pieczarki","price":8,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/mushroom.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/mushroom.png","index":8},{"id":9,"name":"pomidory","price":4,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/tomato.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/tomato.png","index":9},{"id":10,"name":"papryczki chili","price":4,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/chili.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/chili.png","index":10},{"id":11,"name":"oliwki czarne","price":5,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/black_olive.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/black_olive.png","index":11},{"id":12,"name":"oliwki zielone","price":5,"available":true,"image":"http://pizza-orders-api.test/storage/ingredients/layers/green_olive.png","thumbnail":"http://pizza-orders-api.test/storage/ingredients/thumbnails/green_olive.png","index":12}},"meta":{},"messages":{}}
+ *             )
+ *         )
+ *     ),
+ *     )
+ */
+
+/**
  * @OA\Post(
  *      path="/restaurant",
  *      tags={"Restaurant"},

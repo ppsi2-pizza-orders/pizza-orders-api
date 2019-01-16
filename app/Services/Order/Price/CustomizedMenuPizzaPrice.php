@@ -11,9 +11,18 @@ class CustomizedMenuPizzaPrice extends OrderPriceCalculator
             ->pizzas()
             ->findOrFail($pizzaOrder['id']);
 
-        $price =  $pizza->price;
+        $restaurant = $this->order->restaurant;
+        $price = $pizza->price;
 
-        $price += sizeof($pizzaOrder['ingredients']) * 5; // temp ( every ingredient costs 5 pln)
+        foreach ($pizzaOrder['ingredients'] as $id) {
+            $ingredient = $restaurant->ingredients()
+                ->where('available', true)
+                ->where('ingredient_id', $id)
+                ->firstOrFail();
+
+            $price += $ingredient->pivot->price;
+        }
+
         return $price;
     }
 }
