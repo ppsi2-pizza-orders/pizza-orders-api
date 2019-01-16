@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\MainRestaurant;
 
-use Storage;
-
+use JWTAuth;
 use App\Interfaces\ApiResourceInterface as ApiResource;
 use App\Services\PizzaImageUploader as ImageUploader;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Requests\CreatePizza;
-use App\Http\Requests\AttachIngredientRequest;
 use App\Models\Restaurant;
 use App\Models\Pizza;
-use App\Models\Ingredient;
 
 class PizzaController extends ApiResourceController
 {
@@ -44,9 +41,9 @@ class PizzaController extends ApiResourceController
             ->response();
     }
 
-    public function update(CreatePizza $request, $id)
+    public function update(CreatePizza $request, $pizza_id)
     {
-        $pizza = Pizza::findOrFail($id);
+        $pizza = Pizza::findOrFail($pizza_id);
 
         $pizza->fill([
             'name' => $request->input('name'),
@@ -65,9 +62,9 @@ class PizzaController extends ApiResourceController
             ->response();
     }
 
-    public function destroy($id)
+    public function destroy($pizza_id)
     {
-        $pizza = Pizza::findOrFail($id);
+        $pizza = Pizza::findOrFail($pizza_id);
 
         if ($pizza->delete()) {
             return $this->apiResponse

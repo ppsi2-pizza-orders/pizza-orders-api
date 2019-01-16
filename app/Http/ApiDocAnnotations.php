@@ -628,7 +628,7 @@
 
 /**
  * @OA\Patch(
- *      path="/pizza/{id}",
+ *      path="/restaurant/{restaurant_id}/pizza/{id}",
  *      tags={"Pizza"},
  *      description="Edit pizza",
  *      security={{"Authorization header": {}}},
@@ -636,6 +636,15 @@
  *         name="id",
  *         in="path",
  *         description="Id of pizza",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Parameter(
+ *         name="restaurant_id",
+ *         in="path",
+ *         description="Restaurant id",
  *         @OA\Schema(
  *             type="int",
  *             example=1
@@ -666,7 +675,7 @@
 
 /**
  * @OA\Delete(
- *      path="/pizza/{id}",
+ *      path="/restaurant/{restaurant_id}/pizza/{id}",
  *      tags={"Pizza"},
  *      description="Deletes pizza",
  *      security={{"Authorization header": {}}},
@@ -674,6 +683,15 @@
  *         name="id",
  *         in="path",
  *         description="Id of pizza",
+ *         @OA\Schema(
+ *             type="int",
+ *             example=1
+ *         )
+ *      ),
+ *      @OA\Parameter(
+ *         name="restaurant_id",
+ *         in="path",
+ *         description="Restaurant id",
  *         @OA\Schema(
  *             type="int",
  *             example=1

@@ -23,9 +23,11 @@ Route::middleware('auth:api')->group(function () {
         Route::post('restaurant/{id}/publish/request', 'MainRestaurant\RestaurantOwnerController@request');
         Route::post('restaurant/{id}/publish/cancel', 'MainRestaurant\RestaurantOwnerController@cancel');
         Route::post('restaurant/{id}/pizza', 'MainRestaurant\PizzaController@store');
-        Route::delete('pizza/{id}', 'MainRestaurant\PizzaController@destroy');
-        Route::patch('pizza/{id}', 'MainRestaurant\PizzaController@update');
+        Route::delete('restaurant/{id}/pizza/{pizza_id}', 'MainRestaurant\PizzaController@destroy');
+        Route::patch('restaurant/{id}/pizza/{pizza_id}', 'MainRestaurant\PizzaController@update');
     });
+
+
 
     Route::middleware('manager')->group(function () {
         Route::post('restaurant/{id}/manage', 'MainRestaurant\RestaurantManagerController@manage');

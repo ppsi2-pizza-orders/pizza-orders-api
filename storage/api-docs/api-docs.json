@@ -3102,7 +3102,7 @@
                 ]
             }
         },
-        "/pizza/{id}": {
+        "/restaurant/{restaurant_id}/pizza/{id}": {
             "delete": {
                 "tags": [
                     "Pizza"
@@ -3113,6 +3113,15 @@
                         "name": "id",
                         "in": "path",
                         "description": "Id of pizza",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "restaurant_id",
+                        "in": "path",
+                        "description": "Restaurant id",
                         "schema": {
                             "type": "int",
                             "example": 1
@@ -3153,6 +3162,15 @@
                         "name": "id",
                         "in": "path",
                         "description": "Id of pizza",
+                        "schema": {
+                            "type": "int",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "restaurant_id",
+                        "in": "path",
+                        "description": "Restaurant id",
                         "schema": {
                             "type": "int",
                             "example": 1
