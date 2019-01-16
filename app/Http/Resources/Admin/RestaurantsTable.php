@@ -44,7 +44,7 @@ class RestaurantsTable extends AbstractAdminTable
             'city' => $this->resource->city,
             'address' => $this->resource->address,
             'phone' => $this->resource->phone,
-            'photo' => asset($this->resource->photo),
+            'photo' => url(Storage::url($this->resource->photo)),
             'description' => $this->resource->description,
             'created_at' => $this->resource->created_at->format('Y-m-d H:i:s'),
             'visible' => (bool)$this->resource->visible,
