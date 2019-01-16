@@ -10,7 +10,7 @@ class CheckChiefPermissions
     public function handle($request, Closure $next)
     {
         $restaurant = JWTAuth::user()->restaurants->find($request->id);
-        if (!$restaurant || $restaurant->pivot->role != 3){
+        if (!$restaurant || !($restaurant->pivot->role === User::ROLE_CHIEF|| $restaurant->pivot->role === User::ROLE_OWNER)){
             return response(['messages' => "No permission to perform this action"], 403);
         }
 
