@@ -48,7 +48,7 @@ class OrderController extends ApiResourceController
             ->response();
     }
 
-    public function setNextStatus(string $token)
+    public function setNextStatus($id, string $token)
     {
         $order = Order::where('token', $token)->firstOrFail();
 
