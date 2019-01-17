@@ -70,12 +70,6 @@ class OrdersTableTest extends BaseTest
             ]
         );
 			
-        $response
-            ->assertStatus(401)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
+        $response->assertStatus(403);
     }
 }

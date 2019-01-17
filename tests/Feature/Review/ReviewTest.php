@@ -84,49 +84,6 @@ class ReviewTest extends BaseTest
                 'meta'
             ]);
     }
-	
-	/**
-     * @depends testIfAddingFilledReviewsLoggedInSuccess
-     */
-		public function testIfDeletingReviewsLoggedInSuccess($review_id)
-    {	
-	
-		$response = $this->json(
-            'DELETE',
-            '/review/'. $review_id,
-            [
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-        
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
-	
-	/**
-     * @depends testIfAddingFilledReviewsLoggedInSuccess
-     */
-	 
-	public function testIfDeletingReviewsNotLoggedInFails($review_id)
-    {	
-	
-		$response = $this->json(
-            'DELETE',
-            '/review/'. $review_id
-        );
-        
-        $response
-            ->assertStatus(401)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
+
 }
 

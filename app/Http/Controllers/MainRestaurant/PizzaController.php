@@ -41,9 +41,9 @@ class PizzaController extends ApiResourceController
             ->response();
     }
 
-    public function update(CreatePizza $request, $pizza_id)
+    public function update(CreatePizza $request, $restaurantId, $pizzaId)
     {
-        $pizza = Pizza::findOrFail($pizza_id);
+        $pizza = Pizza::findOrFail($pizzaId);
 
         $pizza->fill([
             'name' => $request->input('name'),
@@ -62,9 +62,9 @@ class PizzaController extends ApiResourceController
             ->response();
     }
 
-    public function destroy($pizza_id)
+    public function destroy($restaurantId, $pizzaId)
     {
-        $pizza = Pizza::findOrFail($pizza_id);
+        $pizza = Pizza::findOrFail($pizzaId);
 
         if ($pizza->delete()) {
             return $this->apiResponse

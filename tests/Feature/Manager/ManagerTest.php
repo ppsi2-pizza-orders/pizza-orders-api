@@ -6,34 +6,6 @@ use Tests\Feature\BaseTest;
 
 class ManagerTest extends BaseTest
 {
-	////////////post
-	
-	
-	public function testIfIngredientDetailsAreAddedAuthorised()
-    {
-        $response = $this->json(
-            'POST',
-            '/restaurant/1/manage',
-            [
-                'ingredient_id' => '1',
-				'available' => '120',
-				'price' => '4'
-            ],
-			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-		
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]
-		);
-		
-    }
 	
 	public function testIfIngredientDetailsAreNotAddedInvalidDataAuthorised()
     {
@@ -42,11 +14,11 @@ class ManagerTest extends BaseTest
             '/restaurant/1/manage',
             [
                 'ingredient_id' => '99999',
-				'available' => '',
-				'price' => ''
+				'available' => 0,
+				'price' => 5
             ],
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'manager@example.com', 'password' => 'test123'])
             ]
         );
 		

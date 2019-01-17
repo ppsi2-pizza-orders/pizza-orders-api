@@ -29,31 +29,7 @@ class IngredientsTableTest extends BaseTest
                 'meta'
             ]);
     }
-	
-    public function testIfUsersTableIsNotReturnedForNonAdmin()
-    {
-        $response = $this->json(
-            'GET',
-            '/admin/ingredients',
-			[
-				'orderBy' => '',
-				'orderByDesc' => '',
-				'search' => ''
-			],
-            [
-                'Authorization' => 'Bearer ' . $this->getClientToken()
-            ]
-        );
-			
-        $response
-            ->assertStatus(401)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
-	
+
 	public function testIfUsersTableIsNotReturnedForNotLoggedIn()
     {
         $response = $this->json(

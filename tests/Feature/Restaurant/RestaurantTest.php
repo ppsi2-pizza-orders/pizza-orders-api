@@ -118,7 +118,7 @@ class RestaurantTest extends BaseTest
     {
         $response = $this->json(
             'PATCH',
-            '/restaurant/' .$id,
+            '/restaurant/1',
             [
 				'name' => 'kocham straz miejska',
 				'city' => 'Legnica',
@@ -126,7 +126,7 @@ class RestaurantTest extends BaseTest
 				'phone' => '997'
 			],
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 		
@@ -198,7 +198,7 @@ class RestaurantTest extends BaseTest
             'DELETE',
             '/restaurant/' .$id,
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken()
             ]
         );
 		

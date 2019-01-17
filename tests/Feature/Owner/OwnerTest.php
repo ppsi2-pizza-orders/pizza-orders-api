@@ -8,87 +8,7 @@ class OwnerTest extends BaseTest
 {
 	private $id = "1";
 	private $user_id = "1";
-    public function testIfAddingUserToRestaurantSuccessWithValidDataAuthorized()
-    {
-        $response = $this->json(
-            'POST',
-            '/restaurant/' .$this->id. '/grant',
-            [
-                'email' => 'admin@example.com',
-                'role' => '1'
-            ],
-            [
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
 
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
-	/////
-	
-		public function testIfStatusChangeToVisibleIsSuccessWithValidDataAuthorized()
-    {
-        $response = $this->json(
-            'POST',
-            '/restaurant/' .$this->id. '/publish/request',
-            [
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
-	
-		public function testIfStatusChangeToInvisibleIsSuccessWithValidDataAuthorized()
-    {
-        $response = $this->json(
-            'POST',
-            '/restaurant/' .$this->id. '/publish/cancel',
-            [
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
-	
-	/////
-			public function testIfRemovingUserFromRestaurantSuccessWithValidDataAuthorized()
-    {
-        $response = $this->json(
-            'DELETE',
-            '/restaurant/' .$this->id. '/revoke/' . $this->user_id,
-            [
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
 	
 	    public function testIfAddingUserToRestaurantFailsWithValidDataUnauthorized()
     {
@@ -120,7 +40,7 @@ class OwnerTest extends BaseTest
                 'role' => '1'
             ],
             [
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 

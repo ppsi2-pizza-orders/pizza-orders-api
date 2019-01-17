@@ -12,7 +12,7 @@ class OrderTest extends BaseTest
             'POST',
             '/order',
             [
-                'restaurant_id' => '9999999',
+                'restaurant_id' => '1',
 				'delivery_address' => 'Długa 12 Legnica',
 				'phone_number' => '123341111',
 				'pizzas' => [
@@ -106,7 +106,7 @@ class OrderTest extends BaseTest
     }
 	
 	//////////////// getters
-	
+
 	/**
      * @depends testIfOrdersIsPlacedWithValidDataAuthorized
      */
@@ -161,7 +161,7 @@ class OrderTest extends BaseTest
             'GET',
             '/restaurant/1/orders',
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'chief@example.com', 'password' => 'test123'])
             ]
 		);
 

@@ -82,49 +82,7 @@ class IngredientTest extends BaseTest
                 'meta'
             ]);
     }
-	
-	////////////delete
-	
-	/**
-     * @depends testIfAddingIngredientSuccess
-     */
-	public function testIfDeletingExistingIngredientSuccess($id)
-    {
-        $response = $this->json(
-            'DELETE',
-            '/ingredient/' . $id ,
-			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
 
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
-	
-	public function testIfDeletingNotExistingIngredientFails()
-    {
-        $response = $this->json(
-            'DELETE',
-            '/ingredient/99999999',
-			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-
-        $response
-            ->assertStatus(404)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-    }
 	
 	
 }

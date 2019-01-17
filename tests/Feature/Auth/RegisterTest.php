@@ -10,29 +10,6 @@ use Tests\Feature\BaseTest;
 
 class RegisterTest extends BaseTest
 {
-	//use DatabaseMigrations;
-	
-    public function testIfRegisterSucceedsWithUnusedValidData()
-    {
-        $response = $this->json(
-            'POST',
-            '/auth/register',
-            [
-                'email' => 'todelete@example.com',
-                'password' => 'test123',
-				'password_confirmation' => 'test123'
-            ]
-        );
-			
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]);
-		//$user->delete(); in progress
-    }
 	
 	public function testIfRegisterFailsWithUsedValidData()
     {

@@ -23,7 +23,7 @@ class PizzaTest extends BaseTest
 				]
 			],
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 		
@@ -39,7 +39,7 @@ class PizzaTest extends BaseTest
 	return $response->json('data')['id'];
     }
 	
-		public function testIfAddingPizzaWithValidDataSuccessUnuthorized()
+    public function testIfAddingPizzaWithValidDataSuccessUnuthorized()
     {
         $response = $this->json(
             'POST',
@@ -72,17 +72,17 @@ class PizzaTest extends BaseTest
      */
 	 
 	public function testIfPatchingExistingPizzaSuccess($id)
-    {	
-		echo $id;
+    {
         $response = $this->json(
             'PATCH',
-            '/pizza/' . $id,
+            'restaurant/1/pizza/' . $id,
 			[
 				'name' => 'Smalczyk',
-				'price' => '9999'
+				'price' => '9999',
+                'ingredients' => [5]
 			],
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 
@@ -104,10 +104,11 @@ class PizzaTest extends BaseTest
     {
         $response = $this->json(
             'PATCH',
-            '/pizza/' . $id,
+            'restaurant/1/pizza/' . $id,
 			[
 				'name' => 'Smalczyk',
-				'price' => '9999'
+				'price' => '9999',
+                'ingredients' => [5]
 			]
         );
 
@@ -124,13 +125,14 @@ class PizzaTest extends BaseTest
     {
         $response = $this->json(
             'PATCH',
-            '/pizza/99999999',
+            'restaurant/1/pizza/99999999',
 			[
 				'name' => 'Bigossssssssssss',
-				'price' => '2'
+				'price' => '2',
+                'ingredients' => [5]
 			],
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 
@@ -152,9 +154,9 @@ class PizzaTest extends BaseTest
     {
         $response = $this->json(
             'DELETE',
-            '/pizza/' . $id ,
+            'restaurant/1/pizza/' . $id ,
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 
@@ -174,7 +176,7 @@ class PizzaTest extends BaseTest
     {
         $response = $this->json(
             'DELETE',
-            '/pizza/' . $id 
+            'restaurant/1/pizza/' . $id
         );
 
         $response
@@ -190,9 +192,9 @@ class PizzaTest extends BaseTest
     {
         $response = $this->json(
             'DELETE',
-            '/pizza/99999999',
+            'restaurant/1/pizza/99999999',
 			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
+                'Authorization' => 'Bearer ' . $this->getAuthToken(['email' => 'owner@example.com', 'password' => 'test123'])
             ]
         );
 
@@ -204,6 +206,5 @@ class PizzaTest extends BaseTest
                 'meta'
             ]);
     }
-	
 	
 }

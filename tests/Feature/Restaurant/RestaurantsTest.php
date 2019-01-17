@@ -28,27 +28,7 @@ class RestaurantsTest extends BaseTest
 		);
 		
     }
-	
-	public function testIfRestaurantListIsNotReturnedUnuthorized()
-    {
-        $response = $this->json(
-            'GET',
-            '/restaurants',
-			[
-                'Authorization' => 'Bearer ' . $this->getAdminToken()
-            ]
-        );
-		
-        $response
-            ->assertStatus(401)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]
-		);
-		
-    }
+
 	
 	//post 
 	
@@ -77,26 +57,5 @@ class RestaurantsTest extends BaseTest
 		
     }	
 
-	public function testIfRestaurantListIsNotReturnedWithCriteriaUnuthorized()
-    {
-        $response = $this->json(
-            'POST',
-            '/restaurants',
-			[
-				'searchName' => 'Da Grasso',
-				'searchCity' => 'Legnica'
-			]
-        );
-		
-        $response
-            ->assertStatus(401)
-            ->assertJsonStructure([
-                'data',
-                'messages',
-                'meta'
-            ]
-		);
-		
-    }		
 	
 }

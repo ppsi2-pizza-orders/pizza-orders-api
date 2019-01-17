@@ -6,13 +6,13 @@ Route::middleware('auth:api')->group(function () {
         Route::get('admin/restaurants', 'Admin\RestaurantController@index');
         Route::get('admin/users', 'Admin\UserController@index');
         Route::get('admin/orders', 'Admin\OrderController@index');
-        Route::get('admin/ingredients', 'Admin\IngredientController@index');
         Route::post('admin/restaurant/{id}/publish', 'Admin\RestaurantController@publish');
         Route::post('admin/restaurant/{id}/hide', 'Admin\RestaurantController@hide');
         Route::post('ingredient', 'MainRestaurant\IngredientController@store');
         Route::patch('ingredient/{id}', 'MainRestaurant\IngredientController@update');
         Route::delete('ingredient/{id}', 'MainRestaurant\IngredientController@destroy');
     });
+    Route::get('admin/ingredients', 'Admin\IngredientController@index');
 
     Route::middleware('owner')->group(function () {
         Route::delete('restaurant/{id}', 'MainRestaurant\RestaurantController@destroy');
@@ -26,7 +26,6 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('restaurant/{id}/pizza/{pizza_id}', 'MainRestaurant\PizzaController@destroy');
         Route::patch('restaurant/{id}/pizza/{pizza_id}', 'MainRestaurant\PizzaController@update');
     });
-
 
 
     Route::middleware('manager')->group(function () {
