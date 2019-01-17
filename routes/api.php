@@ -33,7 +33,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::middleware('chief')->group(function () {
-        Route::post('order/{token}/status/next', 'Order\OrderController@setNextStatus');
+        Route::post('restaurant/{id}/order/{token}/status/next', 'Order\OrderController@setNextStatus');
         Route::get('restaurant/{id}/orders', 'Order\OrderController@restaurantOrders');
     });
 
