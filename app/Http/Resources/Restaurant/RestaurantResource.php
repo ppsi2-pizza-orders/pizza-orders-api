@@ -25,11 +25,11 @@ class RestaurantResource extends ApiResource
             'confirmed' => (bool)$this->resource->confirmed,
             'created_at' => $this->resource->created_at,
             'owner_id' => User::find($this->resource->owner_id, ['id', 'name']),
-            'pizzas' => (new FullPizza)->collect($this->resource->pizzas),
+            'pizzas' => (new FullPizza)->collect($this->resource->pizzas->sortBy('price')),
             'review_stars' => $this->resource->getReviewStars(),
             'reviews' => (new ReviewResource)->collect($this->resource->reviews),
             'ingredients' => (new IngredientsResource)->collect($this->resource->ingredients),
-            'users' => (new UserPermissions)->collect($this->resource->users),
+            'users' => (new UserPermissions)->collect($this->resource->users)
         ];
     }
 }

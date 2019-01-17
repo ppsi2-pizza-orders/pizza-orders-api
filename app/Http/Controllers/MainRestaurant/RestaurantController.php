@@ -55,14 +55,14 @@ class RestaurantController extends ApiResourceController
 
     public function store(CreateRestaurant $request)
     {
-
+        $user = JWTAuth::user();
         $restaurant = new Restaurant([
             'name' => $request->input('name'),
             'city' => $request->input('city'),
             'address' => $request->input('address'),
             'phone' => $request->input('phone'),
             'photo' => 'public/restaurants/noimage.jpg',
-            'owner_id' => JWTAuth::user()->id,
+            'owner_id' => $user->id,
         ]);
 
         if ($request->hasFile('photo')) {
@@ -70,6 +70,7 @@ class RestaurantController extends ApiResourceController
         }
 
         $restaurant->save();
+        $user->restaurants()->attach($restaurant, ['role' => 1]);
 
         return $this->apiResource
             ->resource($restaurant)
