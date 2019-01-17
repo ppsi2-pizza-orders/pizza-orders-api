@@ -13,9 +13,6 @@ class RestaurantResource extends ApiResource
 {
     public function toArray(): array
     {
-        $whereData = [
-            ['role', 1]
-        ];
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
